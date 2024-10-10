@@ -1,0 +1,136 @@
+% Latex document @author Clemens Näther, Jakub Kliemann, s85426, s85515
+%--------------------------------------------------------------------
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{mhchem}
+
+\usepackage{biblatex} % Verwende BibLaTeX
+\addbibresource{bibliography.bib} % Deine .bib-Datei
+
+\lstset{ %
+  language=,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray!20},
+  frame=single,
+  columns=fullflexible,
+  breaklines=true,
+  captionpos=b
+}
+
+\geometry{a4paper, top=25mm, left=30mm, right=25mm, bottom=30mm,
+headsep=10mm, footskip=12mm}
+
+\pagestyle{fancy}
+
+\lhead{Dokumentation}
+
+\rhead{Seite \thepage\ von \pageref{LastPage}}
+
+\cfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+
+\includegraphics[height=4cm]{../images/htwd-logo.jpg}\\[1cm]
+
+\textsc{\LARGE Hochschule für Technik und Wirtschaft}\\[1.5cm]
+
+\textsc{\Large Dokumentation}\\[0.5cm]
+
+% Title
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\HRule \\[0.4cm]
+{ \huge \bfseries \textsc{Projektseminar}}\\[0.4cm]
+{ \huge \bfseries \textsc{Optimierung und Unsicherheitsquantifizierung mit Bayesianischer Statistik und MCMC-Methoden}}\\[0.4cm]
+{ \huge \bfseries \textsc{(Prof. Schwarzenberger)}}\\[0.4cm]
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+
+\emph{Clemens Näther, s85426}\\
+\emph{Jakub Kliemann, s85515}\\
+
+\end{flushleft}
+\end{minipage}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Einleitung}
+\newpage
+
+\section{Theoretischer Teil}
+
+\subsection{Grundlagen der bayesianischen Statistik und das Bayes'sche Theorem}
+
+\newpage
+
+\subsection{Binomiale Verteilung und deren bayesianische Interpretation}
+\newpage
+
+\subsection{Markov Chain Monte Carlo (MCMC) Methoden}
+\newpage
+
+\subsection{Konvergenzkriterien und Diagnosewerkzeuge für MCMC-Simulationen}
+\newpage
+
+\section{Praktischer Teil}
+
+\subsection{Implementierung bayesianischer Modelle unter Verwendung in Python}
+\newpage
+
+\subsection{Anwendung der Modelle auf verschiedene Datensätze}
+\newpage
+
+\subsection{Durchführung von MCMC-Simulationen}
+\newpage
+
+\subsection{Interpretation der Ergebnisse}
+\newpage
+
+\subsection{Vergleich mit klassischen Methoden}
+\newpage
+
+\section{Zusammenfassung und Ausblick}
+\newpage
+
+
+\section{Literaturverzeichnis} 
+Hier ist eine Zitation aus einem Buch \cite{BayesStatistik}. \\
+Hier ist eine Zitation aus einem Buch \cite{EinfBayesStatistik}. \\
+Hier ist eine Zitation aus einem Buch \cite{MonteCarloAlgorithmen}. \\
+Hier ist eine Zitation aus einem Buch \cite{StatistikKlassischOderBayes}. \\
+Hier ist eine Zitation aus einem Buch \cite{EinfBayesStatistikOptimalerStichprobenumfang}. \\
+
+\printbibliography 
+\newpage
+
+\section{Selbstständigkeitserklärung}
+
+
+
+\end{document}
+
