@@ -87,28 +87,33 @@ headsep=10mm, footskip=12mm}
 \subsection{Grundlagen der bayesianischen Statistik und das Bayes'sche Theorem}
 \subsubsection{Einführung in die bayesianische Statistik}
 \subsubsection{Das Bayes'sche Theorem und seine Bestandteile}
-%Überschrift%
-\paragraph{Mathematische Formulierung}
-%Text%
-
+Das Bayes'sche Theorem ist ein fundamentales Konzept der bayesianischen Statistik. 
+Es beschreibt, wie man vorhandenes Vorwissen durch neue Daten aktualisiert. \\\\
+Die \textbf{Prioriverteilung} beschreibt die anfänglichen Annahmen oder das Vorwissen über einen 
+Parameter oder ein Ereignis, bevor neue Daten berücksichtigt werden.
+Dabei ``enthält die Priorverteilung eines Parameters $\theta$, ausgedrückt durch f ($ \theta $), 
+was man vor Auswertung der Stichprobe über $\theta$ weiß.'' \parencite[90]{StatistikKlassischOderBayes}. \\
+Als Priori-Wahrscheinlichkeit wird somit die Wahrscheinlichkeit $ P(A) $ bezeichnet. \\\\
+Die \textbf{Posterioriverteilung} beschreibt das Wissen über einen Parameter oder ein Ereignis, nachdem alle 
+vorhandenen Daten berücksichtigt wurden. Durch die neuen Daten, meist einer Stichprobe, wird die 
+anfängliche Annahme, die durch die Prioriverteilung ausgedrückt wird, aktualisiert. 
+Dies führt zu einer neuen Verteilung die widerspiegelt, wie wahrscheinlich verschiedene Werte 
+des Parameters auf Grundlage sowohl des Vorwissens als auch der neuen Informationen sind. \parencite[109]{StatistikKlassischOderBayes}\\
+Die Posteriori-Wahrscheinlichkeit wird somit als $ P(A|B) $ bezeichnet. \\\\
+Die \textbf{Likelihood-Funktion} enthält die Informationen, die die Daten über den Parameter oder das Ereignis liefern.
+Dabei beschreibt die Likelihood die Informationen aus den neuen Daten, die zur Aktualisierung der Prioriverteilung beitragen. \parencite[88]{StatistikKlassischOderBayes}\\
+Die Likelihood-Wahrscheinlichkeit wird somit als $ P(B|A) $ bezeichnet. \\\\
+Die Wahrscheinlichkeit $ P(B) $ wird als Normierungskonstante bezeichnet. Sie sorgt dafür, 
+dass die Posterioriverteilung korrekt normiert ist, das heißt, dass die Summe der 
+Wahrscheinlichkeiten aller möglichen Werte des Parameters 1 ergibt. \parencite[109]{StatistikKlassischOderBayes} \\\\
+Das Bayes'sche Theorem lässt sich somit wie folgt darstellen:
 \begin{equation}
 P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
 \end{equation}
-
-\paragraph{Prior- und Posterior-Verteilung}
-%Text%
-
-\paragraph{Likelihood-Funktion}
-%Text%
-
-\paragraph{Marginale Likelihood}
-%Text%
-
-\paragraph{Kombination von Vorwissen mit neuen Daten}
-%Text%
-
-\paragraph{Bezug zur Unsicherheitsquantifizierung}
-%Text%
+Alternativ kann das Bayes-Theorem ohne die Normierungskonstante $ P(B) $ in folgender proportionaler Form dargestellt werden \parencite[15]{BayesStatistik}:
+\begin{equation}
+P(A|B) \propto P(B|A) \cdot P(A)
+\end{equation} 
 
 
 \subsubsection{Beispiele und praktische Anwendungen}
@@ -157,7 +162,4 @@ Hier ist eine Zitation aus einem Buch \cite{EinfBayesStatistikOptimalerStichprob
 
 \section{Selbstständigkeitserklärung}
 
-
-
 \end{document}
-
