@@ -148,10 +148,9 @@ Als Prioridichte wird die Gleichverteilung verwendet, da es keine Informationen 
     0, & \text{sonst}
   \end{cases}
 \end{equation}
-Da der Term $\binom{n}{k}$ konstant ist, kann dieser bei der Berechnung der Posterioridichte vernachlässigt werden.
 Die Posterioridichte ergibt sich somit zu:
 \begin{equation}
-P(p|n,x) \propto p^x \cdot (1-p)^{n-x}
+P(p|n,x) = \frac{\binom{n}{x}  p^x \cdot (1-p)^{n-x}}{P(n,x)}
 \label{eq:posterior}
 \end{equation}
 Vergleicht man dies mit der Dichtefunktion der Beta-Verteilung, so erkennt man dass die Posterioridichte einer Beta-Verteilung entspricht.
@@ -182,12 +181,12 @@ Stichprobe 1: $n_1 = 10$, $x_1 = 4$, Stichprobe 2: $n_2 = 20$, $x_2 = 6$.
 Daten sind unabhängig voneinander. Die Daten (Posterioriverteilung) der 1. Stichprobe dienen nun
 als Prioridichte für die 2. Stichprobe. Man erhält somit:
 \begin{equation}
-P(p|n_1,x_1,n_2,x_2) \propto P(p|n_1,x_1) \cdot P(p|n_2,x_2)
+P(p|n_1,x_1,n_2,x_2) = \frac{P(p|n_1,x_1) \cdot P(p|n_2,x_2)}{P(n_1,x_1,n_2,x_2)}
 \end{equation}
 Dabei ist die Prioridichte identisch zur Posterioridichte der 1. Stichprobe, siehe Gleichung \eqref{eq:posterior}.
 Die Posterioridichte der 2. Stichprobe ergibt sich somit zu:
 \begin{equation}
-P(p|n_1,x_1,n_2,x_2) \propto p^{x_1} \cdot (1-p)^{n_1-x_1} \cdot p^{x_2} \cdot (1-p)^{n_2-x_2}
+P(p|n_1,x_1,n_2,x_2) = \frac{\binom{n_1+n_2}{x_1+x_2} \cdot p^{x_1} \cdot (1-p)^{n_1-x_1} \cdot p^{x_2} \cdot (1-p)^{n_2-x_2}}{P(n_1,x_1,n_2,x_2)}
 \end{equation}
 Oder mithilfe der Beta-Verteilung:
 \begin{equation}
