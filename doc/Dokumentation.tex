@@ -120,7 +120,14 @@ Alternativ kann das Bayes-Theorem ohne die Normierungskonstante $ P(B) $ in folg
 \begin{equation}
 P(A|B) \propto P(B|A) \cdot P(A)
 \end{equation} 
-
+Die Wahl der Prioriverteilung ist ein wichtiger Aspekt der bayesianischen Statistik. Sie wird immer so gewählt, dass die Entropie maximal ist. Die Entropie ist ein Maß für die Unsicherheit, was bedeutet, dass nur Informationen enthalten sind, die vor der Beobachtung bekannt sind. \parencite[57]{EinfBayesStatistik}. Unter folgenden Bedingungen ist die Prioriverteilung optimal \parencite[59]{EinfBayesStatistik}:
+\begin{itemize}
+  \item Zufallsvariablen, die in [a,b] definiert sind, sind \textbf{gleichverteilt}
+  \item Zufallsvariablen mit gegebenen Mittelwert und Varianz sind \textbf{normalverteilt}
+  \item Zufallsvariablen mit gegebenen Mittelwert sind \textbf{exponentialverteilt}
+  \item Zufallsvariablen mit gegebenen Mittelwert und Varianz im Intervall [0,$\infty$] besitzen eine \textbf{abgeschnittene Normalverteilung}
+\end{itemize}
+Wenn keine Informationen über den Parameter vorliegen, wird eine \textbf{uninformative} Prioriverteilung gewählt. Es handelt sich dabei um eine uneigentliche Verteilung. \parencite[57]{EinfBayesStatistik}.
 
 \subsubsection{Beispiele und praktische Anwendungen}
 \textbf{Beispiel 1}: $m$ gleichgeformte Kugeln, unter denen sich $k$ rote Kugeln und $m-k$ schwarze Kugeln befinden. Eine Kugel wird zufällig gezogen. 
