@@ -123,6 +123,82 @@ P(A|B) \propto P(B|A) \cdot P(A)
 
 
 \subsubsection{Beispiele und praktische Anwendungen}
+\textbf{Beispiel 1}: $m$ gleichgeformte Kugeln, unter denen sich $k$ rote Kugeln und $m-k$ schwarze Kugeln befinden. Eine Kugel wird zufällig gezogen. 
+Die Wahrscheinlichkeit, dass die gezogene Kugel rot ist, beträgt 
+\begin{equation}
+P(A) = \frac{k}{m} = p
+\end{equation}
+Der Versuch wird erweitert, sodass $n$-mal eine Kugel mit Zurücklegen gezogen wird.
+Die Wahrscheinlichkeit, dass $x$-mal eine rote Kugel bie $n$-maligem Ziehen gezogen wird,
+beträgt
+\begin{equation}
+P(x|n,p) = \binom{n}{x} \cdot p^x \cdot (1-p)^{n-x}
+\end{equation}
+Sei nun $p$ unbekannt. Dieses $p$ ist nun zu schätzen.
+Die Binomialverteilung wird nun als Likelihood-Funktion verwendet:
+\begin{equation}
+P(n,x|p) = \binom{n}{x} \cdot p^x \cdot (1-p)^{n-x}
+\end{equation}
+wobei $0 \leq p \geq 1$.
+Als Prioridichte wird die Gleichverteilung verwendet, da es keine Informationen über $p$ gibt.
+\begin{equation}
+  P(p) =
+  \begin{cases}
+    1, & \text{für } 0 \leq p \leq 1 \\
+    0, & \text{sonst}
+  \end{cases}
+\end{equation}
+Die Posterioridichte ergibt sich somit zu:
+\begin{equation}
+P(p|n,x) = \frac{\binom{n}{x}  p^x \cdot (1-p)^{n-x}}{P(n,x)}
+\label{eq:posterior}
+\end{equation}
+Vergleicht man dies mit der Dichtefunktion der Beta-Verteilung, so erkennt man dass die Posterioridichte einer Beta-Verteilung entspricht.
+\begin{equation}
+P(p|n,x) = \frac{(n+1)!}{x!\cdot(n-x)!} \cdot p^x \cdot (1-p)^{n-x}
+= \frac{\Gamma(n+1)}{\Gamma(x+1)\cdot\Gamma(n-x+1)} \cdot p^x \cdot (1-p)^{n-x}
+\end{equation}
+Somit suche nach Maximum der Posterioridichte, um den Schätzer für $p$ zu finden.
+\begin{equation}
+\frac{d}{dp} P(p|n,x) = xp^{x-1} \cdot (1-p)^{n-x} - (n-x)p^x \cdot (1-p)^{n-x-1} = 0
+\end{equation}
+\begin{equation}
+\Rightarrow xp^{x-1} \cdot (1-p)^{n-x} = (n-x)p^x \cdot (1-p)^{n-x-1}
+\end{equation}
+Vereinfacht ergibt sich:
+\begin{equation}
+\Rightarrow x(1-p) = (n-x)p
+\end{equation}
+\begin{equation}  
+\Rightarrow \frac{x}{p} - \frac{n-x}{1-p} = 0
+\end{equation}
+\begin{equation}
+\Rightarrow p = \frac{x}{n}
+\end{equation}
+Der Schätzer für $p$ ist somit der relative Anteil der roten Kugeln an der Gesamtanzahl der Kugeln. \\\\
+\textbf{Beispiel 2}: Beispiel 1 wird erweitert. Es wird nun eine zweite Stichprobe gezogen. 
+Stichprobe 1: $n_1 = 10$, $x_1 = 4$, Stichprobe 2: $n_2 = 20$, $x_2 = 6$.
+Daten sind unabhängig voneinander. Die Daten (Posterioriverteilung) der 1. Stichprobe dienen nun
+als Prioridichte für die 2. Stichprobe. Man erhält somit:
+\begin{equation}
+P(p|n_1,x_1,n_2,x_2) = \frac{P(p|n_1,x_1) \cdot P(p|n_2,x_2)}{P(n_1,x_1,n_2,x_2)}
+\end{equation}
+Dabei ist die Prioridichte identisch zur Posterioridichte der 1. Stichprobe, siehe Gleichung \eqref{eq:posterior}.
+Die Posterioridichte der 2. Stichprobe ergibt sich somit zu:
+\begin{equation}
+P(p|n_1,x_1,n_2,x_2) = \frac{\binom{n_1+n_2}{x_1+x_2} \cdot p^{x_1} \cdot (1-p)^{n_1-x_1} \cdot p^{x_2} \cdot (1-p)^{n_2-x_2}}{P(n_1,x_1,n_2,x_2)}
+\end{equation}
+Oder mithilfe der Beta-Verteilung:
+\begin{equation}
+  P(p|n_1,x_1,n_2,x_2) = \frac{\Gamma(n_1+n_2+1)}{\Gamma(x_1+x_2+1)\cdot\Gamma(n_1+n_2-x_1-x_2+1)} \cdot p^{x_1+x_2} \cdot (1-p)^{n_1+n_2-x_1-x_2}
+\end{equation}
+Die Daten der 1. und 2. Stichprobe könnnen somit kombiniert werden.
+Für die Daten $n_1 = 10$, $x_1 = 4$, $n_2 = 20$, $x_2 = 6$:
+\begin{equation}
+P(p|10,4,20,6) = 931 395 465p^{10} \cdot (1-p)^{20}
+\end{equation}
+
+
 
 \newpage
 
