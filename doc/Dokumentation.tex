@@ -116,7 +116,7 @@ Das Bayes'sche Theorem lässt sich somit wie folgt darstellen:
 \begin{equation}
 P(A|B) = \frac{P(A) \cdot P(B|A)}{P(B)}
 \end{equation}
-Das Bayes'sche Theorem lässt sich auch rekursiv anwenden. \\
+Das Bayes'sche Theorem lässt sich auch rekursiv anwenden \parencite[17]{EinfBayesStatistik}. \\
 Gegeben sei das Ereignis $A$ sowie die Teilergebnisse $B_1, B_2, ..., B_n$. Dann ergibt sich die Wahrscheinlichkeit $P(A|B_1)$ zu:
 \begin{equation}
 P(A|B_1) = \frac{P(A) \cdot P(B_1|A)}{P(B_1)}
@@ -219,9 +219,26 @@ P(p|10,4,20,6) = 931 395 465p^{10} \cdot (1-p)^{20}
 \end{equation}
 
 \subsubsection{Punktschätzer in der bayesianischen Statistik}
-
-
-
+Im folgenden wird die Schätzung eines Parameters mithilfe der Bayes-Strategie erläutert. \\
+Die möglichen Schätzwerte der Parameter $x$ werden als $\hat{x}$ bezeichnet. Die wahren Parameter werden als $x$ bezeichnet. \\
+Es wird eine Kostenfunktion $L(\hat{x},x)$ definiert, die die Kosten für die Schätzung $\hat{x}$ des wahren Parameters $x$ angibt.
+Dies bedeutet, dass die Kostenfunktion die Differenz zwischen dem wahren Parameter $x$ und der Schätzung $\hat{x}$ angibt.
+Dabei gibt es verschiedene Kostenfunktionen, die verwendet werden können. \parencite[65]{EinfBayesStatistik} \\\\
+Die \textbf{quadratische Kostenfunktion} ist definiert als: $L(x-\hat{x}) = (x-\hat{x})\Sigma^{-1}(x-\hat{x})$. \\
+Diese gibt den quadratischen Abstand zwischen dem wahren Parameter $x$ und der Schätzung $\hat{x}$ an.
+Die zu erwartenden Kosten werden berechnet mit dem Erwartungswert der Kostenfunktion.
+Diese Schätzung führt zu dem Erwartungswert von $x$, das heißt $\hat{x} = E(x)$. \parencite[65-66]{EinfBayesStatistik} \\\\
+Die \textbf{Kostenfunktion der absoluten Fehler} ist definiert als: $L(x,\hat{x}) = |x-\hat{x}|$.
+Diese gibt den absoluten Abstand zwischen $x$ und $\hat{x}$ an.
+Die Schätzung mit dem absoluten Fehler ergibt den Median der Verteilung, das heißt $F(\hat{x}_med) = 0.5$ \parencite[67-68]{EinfBayesStatistik} \\\\
+Die \textbf{Null-Eins-Kostenfunktion} bedeutet, dass es entweder Kosten oder keine Kosten gibt.
+Diese ist definiert durch: $L(x-\hat{x}) = 
+\begin{cases}
+  0 & \text{für } |x-\hat{x}| < b \\
+  a & \text{für } |x-\hat{x}| \geq b
+\end{cases}$,\\
+wobei $a$ und $b$ als Konstaten angenommen werden. Wenn der Fall $b \to 0$ betrachtet wird,
+ergibt sich als Schätzer das Argument des Maximums der Posterioriverteilung, das heißt $\hat{x}_M = \arg \max \; p(x|y)$. \parencite[68-69]{EinfBayesStatistik}
 
 
 \newpage
