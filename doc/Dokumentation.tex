@@ -114,15 +114,28 @@ dass die Posterioriverteilung korrekt normiert ist, das heißt, dass die Summe d
 Wahrscheinlichkeiten aller möglichen Werte des Parameters 1 ergibt. \parencite[109]{StatistikKlassischOderBayes} \\\\
 Das Bayes'sche Theorem lässt sich somit wie folgt darstellen:
 \begin{equation}
-P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+P(A|B) = \frac{P(A) \cdot P(B|A)}{P(B)}
 \end{equation}
-Alternativ kann das Bayes-Theorem ohne die Normierungskonstante $ P(B) $ in folgender proportionaler Form dargestellt werden \parencite[15]{BayesStatistik}:
+Das Bayes'sche Theorem lässt sich auch rekursiv anwenden. \\
+Gegeben sei das Ereignis $A$ sowie die Teilergebnisse $B_1, B_2, ..., B_n$. Dann ergibt sich die Wahrscheinlichkeit $P(A|B_1)$ zu:
 \begin{equation}
-P(A|B) \propto P(B|A) \cdot P(A)
-\end{equation} 
+P(A|B_1) = \frac{P(A) \cdot P(B_1|A)}{P(B_1)}
+\end{equation}
+Nun wird die Information $B_2$ hinzugefügt. Die Wahrscheinlichkeit $P(A|B_1, B_2)$ ergibt sich bei Unabhängigkeit von den Teilereignissen $B_1, B_2, ..., B_n$ zu:
+\begin{equation}
+P(A|B_1, B_2) = \frac{P(A) \cdot P(B_1|A) \cdot P(B_2|A)}{P(B_1) \cdot P(B_2)}
+\end{equation}
+Weiterhin lässt sich diese Formel umstellen, wodurch deutlich wird, dass beim Hinzufügen von neuen Informationen die Posterioriverteilung aktualisiert wird:
+\begin{equation}
+P(A|B_1, B_2) = \frac{P(A) \cdot P(B_1|A) \cdot P(B_2|A)}{P(B_1) \cdot P(B_2)} = P(A|B_1) \cdot \frac{P(B_2|A)}{P(B_2)}
+\end{equation}
+Dies lässt sich allgemein formulieren für:
+\begin{equation}
+P(A|B_1, B_2, ..., B_n) = P(A|B_1, B_2, ..., B_{n-1}) \cdot \frac{P(B_n|A)}{P(B_n)}
+\end{equation}
 Die Wahl der Prioriverteilung ist ein wichtiger Aspekt der bayesianischen Statistik. Sie wird immer so gewählt, dass die Entropie maximal ist. Die Entropie ist ein Maß für die Unsicherheit, was bedeutet, dass nur Informationen enthalten sind, die vor der Beobachtung bekannt sind. \parencite[57]{EinfBayesStatistik}. Unter folgenden Bedingungen ist die Prioriverteilung optimal \parencite[59]{EinfBayesStatistik}:
 \begin{itemize}
-  \item Zufallsvariablen, die in [a,b] definiert sind, sind \textbf{gleichverteilt}
+  \item Zufallsvariablen, die in $[a,b]$ definiert sind, sind \textbf{gleichverteilt}
   \item Zufallsvariablen mit gegebenen Mittelwert und Varianz sind \textbf{normalverteilt}
   \item Zufallsvariablen mit gegebenen Mittelwert sind \textbf{exponentialverteilt}
   \item Zufallsvariablen mit gegebenen Mittelwert und Varianz im Intervall [0,$\infty$] besitzen eine \textbf{abgeschnittene Normalverteilung}
@@ -204,6 +217,10 @@ Für die Daten $n_1 = 10$, $x_1 = 4$, $n_2 = 20$, $x_2 = 6$:
 \begin{equation}
 P(p|10,4,20,6) = 931 395 465p^{10} \cdot (1-p)^{20}
 \end{equation}
+
+\subsubsection{Punktschätzer in der bayesianischen Statistik}
+
+
 
 
 
