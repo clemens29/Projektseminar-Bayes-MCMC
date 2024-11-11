@@ -263,6 +263,31 @@ Die MCMC-Methoden nutzen die Monte Carlo-Methoden, um eine Markov-Kette zu simul
 Im folgenden wird der Metropolis-Hastings-Algorithmus erläutert, der eine der bekanntesten MCMC-Methoden ist.
 \newpage
 
+\subsubsection{Der Metropolis-Hastings-Algorithmus}
+Der Metropolis-Hastings-Algorithmus erstellt eine Markov-Kette, die eine Posterioriverteilung f(x) approximiert. f(x) besteht aus einer bekannten Funktion p(x), die sich aus der Likelihood-Funktion und der Prioriverteilung zusammensetzt und aus einer unbekannten Normierungskonstante. Für die Berechnung wird eine Hilfsfunktion q(y$|$x) benötigt, welche die Übergangswahrscheinlichkeit von einem Zustand $x_t$ zum nächsten Zustand $x_{\text{t+1}}$ angibt und ähnlich wie die Posterioriverteilung ist. Oftmals wird dafür die Normalverteilung gewählt sodass q(y$|$x) = N(x,$\sigma^2$), wobei $\sigma$ beeinflusst dabei die Schrittweite, die die Markov-Kette macht. \parencite[226f.]{HandbookMonteCarloMethods} \\\\ 
+Der Algorithmus besteht aus folgenden Schritten:
+\begin{enumerate}
+  \item Wähle einen Startwert $x_0$
+  \item Wähle einen neuen Wert y aus der Hilfsfunktion q(y$|x_t$) im Fall einer Normalverteilung N($x_t$,$\sigma^2$) wird ein zufälliger Wert aus der Normalverteilung gezogen
+  \item Berechne die Akzeptanzwahrscheinlichkeit $\alpha$:
+  \begin{equation}
+    \alpha = min{\{1,\frac{p(y) \cdot q(x_t|y)}{p(x_t) \cdot q(y|x_t)}\}}
+  \end{equation}
+  Diese gibt an, wie wahrscheinlich der neue Wert $x_{\text{t+1}}$ akzeptiert wird.
+  \item Ziehe eine Zufallszahl u aus einer Gleichverteilung U(0,1)
+  \item Wähle den nächsten Wert $x_{\text{t+1}}$:
+  \begin{equation}
+    x_{t+1} = 
+    \begin{cases}
+      y, & \text{wenn u}< \alpha \\
+      x_t, & \text{sonst}
+    \end{cases}
+  \end{equation}
+  \item Wiederhole die Schritte 2-5 bis die Stichprobe die gewünschte Verteilung genau genug approximiert
+\end{enumerate}
+Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen q(y$|$x) funktioniert. Bei einer symmetrischen Hilfsfunktion ist q(y|$x_t$) = q($x_t$|y) und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
+Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welche verworfen wird, weil sich die Kette erst an die Zielverteilung anpassen muss. Der restliche Teil wird als \textbf{Sampling-Phase} bezeichnet, welche dann die Verteilung simuliert. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
+
 \subsection{Konvergenzkriterien und Diagnosewerkzeuge für MCMC-Simulationen}
 \newpage
 
