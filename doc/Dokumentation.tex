@@ -247,6 +247,20 @@ ergibt sich als Schätzer das Argument des Maximums der Posterioriverteilung, da
 \newpage
 
 \subsection{Markov Chain Monte Carlo (MCMC) Methoden}
+\subsubsection{Einführung in MCMC-Methoden}
+Bei einer direkten Simulation wird vorrausgesetzt, dass die Verteilung der Zufallsvariablen bekannt ist.
+Dies ist jedoch in der Praxis nicht immer gegeben.
+Die Berechnung der Posterioriverteilung ist analytisch oft nicht möglich, vor allem bei komplexen Modellen oder hohen Dimensionen. \\\\
+Die Markov Chain Monte Carlo (MCMC) Methoden sind eine Klasse von Algorithmen, die es ermöglichen, eine Stichprobe aus einer Verteilung zu ziehen, ohne die Verteilung zu kennen. \parencite[179]{MonteCarloAlgorithmen} \\
+Diese Methoden verwenden zwei Konzepte: Markov-Ketten und Monte Carlo-Methoden. \\
+Eine Markov-Kette ist eine Folge von Zufallsvariablen, die die Markov-Eigenschaft erfüllen. 
+Die Markov-Eigenschaft sagt aus, dass die nächste Zufallsvariable nicht von den vorherigen Zufallsvariablen, sondern nur von der letzten Zufallsvariable abhängt. 
+Das bedeutet, dass die Wahrscheinlichkeit, im nächsten Zustand $X_n+1$ zu landen, nur von $X_n$ abhängt. 
+Die Übergangswahrscheinlichkeit zwischen den Zuständen kann in einer Übergangsmatrix dargestellt werden. \parencite[188f.]{MonteCarloAlgorithmen} \\
+Die Monte Carlo-Methoden sind eine Gruppe von Algorithmen, die es ermöglichen, Zufallsvariablen zu schätzen, indem Zufallszahlen generiert werden. 
+Sie erzeugen zufällige Stichproben, um eine Näherung der Verteilung zu erhalten. \parencite[14f.]{MonteCarloAlgorithmen} \\\\
+Die MCMC-Methoden nutzen die Monte Carlo-Methoden, um eine Markov-Kette zu simulieren. Diese Technik ist besonders nützlich, um eine Posterioriverteilung zu schätzen, wenn direkte Berechnungen nicht möglich sind. \parencite[179]{MonteCarloAlgorithmen} \\
+Im folgenden wird der Metropolis-Hastings-Algorithmus erläutert, der eine der bekanntesten MCMC-Methoden ist.
 \newpage
 
 \subsection{Konvergenzkriterien und Diagnosewerkzeuge für MCMC-Simulationen}
