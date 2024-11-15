@@ -34,7 +34,7 @@ def metropolis_hastings(n_samples, burn_in, proposal_sigma=1.0):
     return np.array(samples)
 
 # Parameter
-n_samples = 10000  # Anzahl der Proben nach der Burn-in-Phase
+n_samples = 100000  # Anzahl der Proben nach der Burn-in-Phase
 burn_in = 2000     # Burn-in Phase (erste 2000 Schritte werden verworfen)
 proposal_sigma = 1.0  # Standardabweichung der Vorschlagsverteilung
 
