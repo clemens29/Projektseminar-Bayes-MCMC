@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+# kaggle
 
 # Definiere die Likelihood für eine Binomialverteilung
 def likelihood(p, x, n):
