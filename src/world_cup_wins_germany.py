@@ -4,7 +4,7 @@ def count_germany_matches_and_wins(csv_file):
     germany_matches = 0
     germany_wins = 0
 
-    germany = ['Germany', 'West Germany', 'Germany DR']
+    germany = ['Germany', 'West Germany']
 
     with open(csv_file, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
