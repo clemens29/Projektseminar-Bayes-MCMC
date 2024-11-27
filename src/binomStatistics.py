@@ -12,9 +12,7 @@ def likelihood(p, x, n):
 
 # Definiere die Prior (Gleichverteilung zwischen 0 und 1)
 def prior(p):
-    if 0 <= p <= 1:
-        return 1
-    return 0
+    return stats.norm.pdf(p, 0.5, 0.1)
 
 # Definiere die Posteriorverteilung (Likelihood * Prior)
 def posterior(p, x, n):
@@ -43,7 +41,7 @@ def metropolis_hastings(x, n, n_samples=10000, start=0.5, proposal_width=0.1):
 x = int(argv[2])
 n = int(argv[1])
 sp_p = x / n
-n_samples = 100_000
+n_samples = 100_00
 
 # Sampling aus der Posteriorverteilung
 samples = metropolis_hastings(x, n, n_samples=n_samples, start=0.5, proposal_width=0.1)
@@ -82,9 +80,10 @@ def norm_binomial(x, n, p):
 
 p_values = np.linspace(0, 1, 100)
 norm_binom = [norm_binomial(x, n, p) for p in p_values]
-
+priori = [prior(p) for p in p_values]
 # Posterior Histogramm und berechnete Binomialverteilung plotten
-plt.plot(p_values, norm_binom, label='Normierte Binomialverteilung', color='orange')
+#plt.plot(p_values, norm_binom, label='Normierte Binomialverteilung', color='orange')
+plt.plot(p_values, priori, label='Prior', color='green')
 plt.hist(samples, bins=50, density=True, label='Posterior Samples', color='skyblue', edgecolor='black')
 plt.xlabel('p (Wahrscheinlichkeit, dass Deutschland ein WM Spiel gewinnt)')
 plt.ylabel('Verteilung (nicht normaiert)')
