@@ -74,6 +74,8 @@ def update(frame):
         bar.set_height(h)
 # Animation erstellen
 ani = FuncAnimation(fig, update, frames=len(n_values), interval=1000, repeat=False)
+# Speichern der Animation
+ani.save('binomStatisticsAnimated.gif', writer='ffmpeg', fps=1)
 
 # Animation anzeigen
 plt.show()
