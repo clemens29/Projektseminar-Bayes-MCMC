@@ -401,9 +401,69 @@ Da $\hat{\delta} = 0.0656 > \delta_+ = 0.0052$ können wir die Nullhypothese $H_
 
 \subsubsection{Berechnung mit bayesianischer Statistik}
 Bei der bayesianischen Statistik können wir Priors definieren und die Wahrscheinlichkeit der 
-Sterblichkeitsraten unter Berücksichtigung von Vorwissen berechnen. 
-Beispielsweise könnten wir ein Beta-Verteilung als Prior für die Sterblichkeitsraten verwenden und die Daten nutzen, 
-um Posterior-Wahrscheinlichkeiten für die Sterblichkeitsraten zu berechnen.
+Sterblichkeitsraten unter Berücksichtigung von Vorwissen berechnen. \\
+Es werden die Wahrscheinlichkeiten für $\Pi_X > \Pi_Y$ und $\Pi_X \leq \Pi_Y$ ermittelt. \\\\
+Vorwissen für Sterblichkeitsrate mit und ohne Chlorwaschung:
+\begin{itemize}
+    \item wahrscheinlichste Sterblichkeitsrate: 0.021
+    \item halb so wahrscheinlich: 0.030
+\end{itemize}
+
+Parameter $a'$ und $b'$ für die Beta-Verteilung:\\
+\begin{equation}
+  m = 0.021
+\end{equation}
+\begin{equation}
+  v = 0.030
+\end{equation}
+\begin{equation}
+  \frac{f(v)}{f(m)} = 0.5
+\end{equation}
+\begin{equation}
+  a' = \frac{\ln\frac{f(v)}{f(m)}}{\ln\frac{v}{m}+\frac{1-m}{m}\ln\frac{1-v}{1-m}} + 1
+\end{equation}
+\begin{equation}
+  a' = \frac{\ln0.5}{\ln\frac{0.030}{0.021}+\frac{1-0.021}{0.021}\ln\frac{1-0.030}{1-0.021}} + 1
+\end{equation}
+\begin{equation}
+  a' = 10
+\end{equation}
+\begin{equation}
+  b' = \frac{\ln\frac{f(v)}{f(m)}}{\ln\frac{v}{m}+\frac{1-m}{m}\ln\frac{1-v}{1-m}}\cdot\frac{1-m}{m} + 1
+\end{equation}
+\begin{equation}
+  b' = 9 \cdot \frac{1-0.021}{0.021} + 1
+\end{equation}
+\begin{equation}
+  b' = 438
+\end{equation}
+
+Parameter der Posterioriverteilungen von $\Pi_X$ und $\Pi_Y$:
+\begin{equation}
+  a_X = a' + x = 10 + 1989 = 1999
+\end{equation}
+\begin{equation}
+  b_X = b' + n_x - x = 438 + 20042 - 1989 = 18491
+\end{equation}
+\begin{equation}
+  a_Y = a' + y = 10 + 1883 = 1893
+\end{equation}
+\begin{equation}
+  b_Y = b' + n_y - y = 438 + 56104 - 1883 = 54659
+\end{equation}
+
+Die Posteriors für $\Pi_X$ und $\Pi_Y$ sind Beta-verteilte Zufallsvariablen:
+\begin{equation}
+  \Pi_X \sim Beta(1999, 18491)
+\end{equation}
+\begin{equation}
+  \Pi_Y \sim Beta(1893, 54659)
+\end{equation}
+
+\begin{center}
+  \includegraphics[width=0.85\textwidth]{../images/semmelweis.png}
+\end{center}
+
 
 
 \subsubsection{Vergleich der Ergebnisse}
