@@ -305,58 +305,7 @@ Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welc
 \subsection{Interpretation der Ergebnisse}
 \newpage
 
-\subsection{Vergleich mit klassischen Methoden}
-\subsubsection{Vergleich der klassischen und bayesianischen Statistik}
-
-\begin{table}[h!]
-  \centering
-  \begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
-    \hline
-    \textbf{} & \textbf{Klassische Statistik} & \textbf{Bayesianische Statistik} \\ \hline
-    Bevorzugte Verwendung & Human- und Sozialwissenschaften, Wirtschaftswissenschaften, Biologie & Technik und Künstliche Intelligenz \\ 
-    \hline
-    Schätzen von Parametern, Testen von Hypothesen & nur Stichprobe wird betrachtet & Stichprobe und Vorwissen wird betrachtet \\
-    \hline
-
-    \hline
-  \end{tabular}
-  \caption{Vergleich der klassischen und bayesianischen Statistik}
-  \label{tab:vergleich_verwendung}
-\end{table}
-
-\begin{table}[h!]
-  \centering
-  \begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
-  \hline
-  \textbf{Statistikmethode} & \textbf{Vorteile} & \textbf{Nachteile} \\ \hline
-  \textbf{Klassische Statistik} & 
-  \begin{itemize}
-      \item Einfachheit und breite Akzeptanz in der Wissenschaft.
-      \item Gut für große Datensätze und standardisierte Testverfahren.
-      \item Benötigt keine subjektiven Annahmen über Wahrscheinlichkeiten.
-  \end{itemize} & 
-  \begin{itemize}
-      \item Abhängig von großen Stichproben.
-      \item Unflexibel gegenüber neuen Daten und Modellen.
-      \item Ergebnisse oft schwer zu interpretieren bei komplexen Datenstrukturen.
-  \end{itemize} \\ \hline
-  \textbf{Bayesianische Statistik} & 
-  \begin{itemize}
-      \item Flexibel und anpassbar an komplexe Modelle.
-      \item Ermöglicht die Einbeziehung von Vorwissen (Priors).
-      \item Liefert direkte Wahrscheinlichkeiten für Parameter und Modelle.
-  \end{itemize} & 
-  \begin{itemize}
-      \item Subjektivität bei der Wahl der Priors.
-      \item Rechenintensiv, besonders bei großen Datensätzen.
-      \item Oft weniger bekannt und akzeptiert in konservativen Disziplinen.
-  \end{itemize} \\ \hline
-  \end{tabular}
-  \caption{Vergleich der Vor- und Nachteile der klassischen und bayesianischen Statistik.}
-  \label{tab:vergleich_vor_nachteile}
-\end{table}
-
-\subsection{Semmelweis' Vermutung zum Kindbettfieber}
+\subsection{Vergleich mit klassischen Methoden am Beispiel}
 
 \subsubsection{Einleitung}
 Semmelweis' Vermutung zum Kindbettfieber basiert auf seiner Beobachtung, dass der Sterberate von Frauen bei der Geburt 
@@ -364,6 +313,7 @@ in einer Klinik stark variierte, je nachdem, ob die Geburtshelfer ihre Hände vo
 Er vermutete, dass das Kindbettfieber, das häufig tödlich endete, durch eine Infektion verursacht wurde, 
 die durch nicht desinfizierte Hände von Ärzten übertragen wurde. Diese Vermutung führte zu einer 
 drastischen Senkung der Sterblichkeit in den Kliniken, in denen sie umgesetzt wurde.
+\parencite[3]{StatistikKlassischOderBayes} \\\\
 
 \subsubsection{Datensatz}
 Der Datensatz, den Semmelweis zur Untermauerung seiner Theorie verwendete, umfasst zwei Zeiträume: 
@@ -374,9 +324,7 @@ Der Datensatz, den Semmelweis zur Untermauerung seiner Theorie verwendete, umfas
 \end{itemize}
 
 \subsubsection{Berechnung mit klassischer Statistik}
-Mit der klassischen Statistik könne wir die Vermutung überprüfen, indem wir einen Hypothesentest durchführen. \\
-Wir testen $H_0 : \pi_X \leq \pi_Y $ oder auch $H_0 : \pi_X - \pi_Y \leq 0$ gegen $H_1 : \pi_X - \pi_Y > 0$ \\
-Dabei sind $\pi_X$ und $\pi_Y$ die Sterblichkeitsraten vor und nach der Chlorwaschung.
+\textbf{Punktschätzer:} 
 \begin{align}
   \hat{\delta} &= \hat{\pi}_X - \hat{\pi}_Y \\
   &= \frac{x}{n_x} - \frac{y}{n_y} \\
@@ -385,6 +333,41 @@ Dabei sind $\pi_X$ und $\pi_Y$ die Sterblichkeitsraten vor und nach der Chlorwas
   &= 0.0656
 \end{align}
 
+\textbf{Konfidenzintervall:} \\
+Für $\alpha = 0.01$ beidseitige Konfidenzintervalle für $\pi_X$ und $\pi_Y$: \\
+$x = 1989, n_x = 20.042, y = 1883, n_y = 56.104$, $z_{\alpha/2} = 2.576$ \\
+
+\begin{equation}
+  I_X = \left[\hat{\pi}_X - z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x}}, \, 
+  \hat{\pi}_X + z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x}}\right]
+\end{equation}
+
+\begin{equation}
+  I_X = \left[0.0992 - 2.576 \cdot \sqrt{\frac{0.0992 \cdot (1-0.0992)}{20.042}}, \, 
+  0.0992 + 2.576 \cdot \sqrt{\frac{0.0992 \cdot (1-0.0992)}{20.042}}\right]
+\end{equation}
+
+\[
+I_X = [0.0938, 0.1046]
+\]
+
+\begin{equation}
+  I_Y = \left[\hat{\pi}_Y - z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}, \, 
+  \hat{\pi}_Y + z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}\right]
+\end{equation}
+
+\begin{equation}
+  I_Y = \left[0.0336 - 2.576 \cdot \sqrt{\frac{0.0336 \cdot (1-0.0336)}{56.104}}, \, 
+  0.0336 + 2.576 \cdot \sqrt{\frac{0.0336 \cdot (1-0.0336)}{56.104}}\right]
+\end{equation}
+
+\[
+I_Y = [0.0316, 0.0356]
+\]
+
+\textbf{Hypothesentest:} \\
+Es wird $H_0 : \pi_X \leq \pi_Y $ oder auch $H_0 : \pi_X - \pi_Y \leq 0$ gegen $H_1 : \pi_X - \pi_Y > 0$ getestet\\
+Dafür wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
 \begin{equation}
   \delta_+ = z_{\alpha} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x} + \frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}
 \end{equation}
@@ -452,6 +435,18 @@ Parameter der Posterioriverteilungen von $\Pi_X$ und $\Pi_Y$:
   b_Y = b' + n_y - y = 438 + 56104 - 1883 = 54659
 \end{equation}
 
+\textbf{Median der Posterioriverteilung:}
+
+\begin{equation}
+  \hat{\pi}_X = \frac{a_X - 1/3}{a_X + b_X - 2/3} = \frac{1999 - 1/3}{1999 + 18491 - 2/3} = 0.0975
+\end{equation}
+\begin{equation}
+  \hat{\pi}_Y = \frac{a_Y - 1/3}{a_Y + b_Y - 2/3} = \frac{1893 - 1/3}{1893 + 54659 - 2/3} = 0.0336
+\end{equation}
+
+\textbf{Intervallschätzung:} \\ %TODO Seite 123%
+
+
 Die Posteriors für $\Pi_X$ und $\Pi_Y$ sind Beta-verteilte Zufallsvariablen:
 \begin{equation}
   \Pi_X \sim Beta(1999, 18491)
@@ -474,14 +469,65 @@ Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert
     \item Die bayesianische Statistik berücksichtigt zusätzlich Vorwissen und liefert eine schätzungsweise Wahrscheinlichkeitsverteilung 
     der Sterblichkeitsraten, was eine flexiblere Modellierung und Unsicherheitsabschätzung ermöglicht.
 \end{itemize}
+\newpage
 
+\subsubsection{Vergleich der klassischen und bayesianischen Statistik}
 
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|p{3cm}|p{5cm}|p{6cm}|}
+    \hline
+    \textbf{} & \textbf{Klassische Statistik} & \textbf{Bayesianische Statistik} \\ \hline
+    \textbf{Bevorzugte Verwendung} & Human- und Sozialwissenschaften, Wirtschaftswissenschaften, Biologie & Technik und Künstliche Intelligenz \\ 
+    \hline
+    \textbf{Schätzen von Parametern, Testen von Hypothesen} & nur Stichprobe wird betrachtet & Stichprobe und Vorwissen wird betrachtet \\
+    \hline
+    \textbf{Ergebnis beim Schätzen} & Punkt- oder Intervallschätzer, z. B. Konfidenzintervall & Wahrscheinlichkeitsverteilung für den Parameter (Posterior) 
+    \\ \hline
+  \textbf{Ergebnis beim Testen} & \(p\)-Wert; Entscheidung basierend auf Signifikanzniveau, wird angenommen oder abgelehnt & Posterior-Wahrscheinlichkeit für Hypothesen; Bayes-Faktor \\ 
+  \hline
+  \end{tabular}
+  \caption{Vergleich der klassischen und bayesianischen Statistik}
+  \label{tab:vergleich_verwendung}
+\end{table}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+  \hline
+  \textbf{Statistikmethode} & \textbf{Vorteile} & \textbf{Nachteile} \\ \hline
+  \textbf{Klassische Statistik} & 
+  \begin{itemize}
+      \item Einfachheit und breite Akzeptanz in der Wissenschaft.
+      \item Gut für große Datensätze und standardisierte Testverfahren.
+      \item Benötigt keine subjektiven Annahmen über Wahrscheinlichkeiten.
+  \end{itemize} & 
+  \begin{itemize}
+      \item Abhängig von großen Stichproben.
+      \item Unflexibel gegenüber neuen Daten und Modellen.
+      \item Ergebnisse oft schwer zu interpretieren bei komplexen Datenstrukturen.
+  \end{itemize} \\ \hline
+  \textbf{Bayesianische Statistik} & 
+  \begin{itemize}
+      \item Flexibel und anpassbar an komplexe Modelle.
+      \item Ermöglicht die Einbeziehung von Vorwissen (Priors).
+      \item Liefert direkte Wahrscheinlichkeiten für Parameter und Modelle.
+  \end{itemize} & 
+  \begin{itemize}
+      \item Subjektivität bei der Wahl der Priors.
+      \item Rechenintensiv, besonders bei großen Datensätzen.
+      \item Oft weniger bekannt und akzeptiert in konservativen Disziplinen.
+  \end{itemize} \\ \hline
+  \end{tabular}
+  \caption{Vergleich der Vor- und Nachteile der klassischen und bayesianischen Statistik.}
+  \label{tab:vergleich_vor_nachteile}
+\end{table}
 
 \newpage
 
 \section{Zusammenfassung und Ausblick}
-\newpage
 
+\newpage
 
 \section{Literaturverzeichnis} 
 
