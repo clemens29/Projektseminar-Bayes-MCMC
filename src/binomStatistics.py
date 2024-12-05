@@ -25,6 +25,8 @@ def metropolis_hastings(x, n, n_samples=10000, start=0.5, proposal_width=0.1):
     for _ in range(n_samples):
         # Vorschlag für einen neuen Wert aus der Normalverteilung
         proposed_p = np.random.normal(current_p, proposal_width)
+        if proposed_p < 0 or proposed_p > 1:
+            continue
         
         current_posterior = posterior(current_p, x, n)
         proposed_posterior = posterior(proposed_p, x, n)
