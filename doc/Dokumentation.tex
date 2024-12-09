@@ -15,6 +15,7 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{mhchem}
+\usepackage{comment}
 
 \usepackage{biblatex} % Verwende BibLaTeX
 \addbibresource{bibliography.bib} % Deine .bib-Datei
@@ -313,7 +314,7 @@ in einer Klinik stark variierte, je nachdem, ob die Geburtshelfer ihre Hände vo
 Er vermutete, dass das Kindbettfieber, das häufig tödlich endete, durch eine Infektion verursacht wurde, 
 die durch nicht desinfizierte Hände von Ärzten übertragen wurde. Diese Vermutung führte zu einer 
 drastischen Senkung der Sterblichkeit in den Kliniken, in denen sie umgesetzt wurde.
-\parencite[3]{StatistikKlassischOderBayes} \\\\
+\parencite[3]{StatistikKlassischOderBayes}
 
 \subsubsection{Datensatz}
 Der Datensatz, den Semmelweis zur Untermauerung seiner Theorie verwendete, umfasst zwei Zeiträume: 
@@ -397,29 +398,56 @@ Parameter $a'$ und $b'$ für die Beta-Verteilung:\\
   m = 0.021
 \end{equation}
 \begin{equation}
-  v = 0.030
+  \pi_v = 0.03
 \end{equation}
 \begin{equation}
   \frac{f(v)}{f(m)} = 0.5
 \end{equation}
-\begin{equation}
-  a' = \frac{\ln\frac{f(v)}{f(m)}}{\ln\frac{v}{m}+\frac{1-m}{m}\ln\frac{1-v}{1-m}} + 1
-\end{equation}
-\begin{equation}
-  a' = \frac{\ln0.5}{\ln\frac{0.030}{0.021}+\frac{1-0.021}{0.021}\ln\frac{1-0.030}{1-0.021}} + 1
-\end{equation}
-\begin{equation}
-  a' = 10
-\end{equation}
-\begin{equation}
-  b' = \frac{\ln\frac{f(v)}{f(m)}}{\ln\frac{v}{m}+\frac{1-m}{m}\ln\frac{1-v}{1-m}}\cdot\frac{1-m}{m} + 1
-\end{equation}
-\begin{equation}
-  b' = 9 \cdot \frac{1-0.021}{0.021} + 1
-\end{equation}
-\begin{equation}
-  b' = 438
-\end{equation}
+
+Die Beta-Verteilung hat die Dichtefunktion:
+\[
+f(p; a', b') = \frac{1}{B(a', b')} p^{a'-1} (1-p)^{b'-1},
+\]
+wobei \( B(a', b') \) die Beta-Funktion ist:
+\[
+B(a', b') = \frac{\Gamma(a') \Gamma(b')}{\Gamma(a' + b')}.
+\]
+
+Der Modus \( m \) der Verteilung ist definiert als:
+\[
+m = \frac{a'-1}{a' + b' - 2}.
+\]
+
+Das Verhältnis der Wahrscheinlichkeiten bei \( \pi_v \) und \( m \) ist:
+\[
+\frac{f(\pi_v)}{f(m)} = \frac{\frac{1}{B(a', b')} \pi_v^{a'-1} (1-\pi_v)^{b'-1}}{\frac{1}{B(a', b')} m^{a'-1} (1-m)^{b'-1}} = \left( \frac{\pi_v}{m} \right)^{a'-1} \left( \frac{1-\pi_v}{1-m} \right)^{b'-1}.
+\]
+
+Daraus ergibt sich:
+\[
+\frac{f(\pi_v)}{f(m)} = \left( \frac{\pi_v}{m} \right)^{a'-1} \left( \frac{1-\pi_v}{1-m} \right)^{b'-1}.
+\]
+
+Umstellen führt zu den folgenden Formeln für die Parameter \( a' \) und \( b' \):
+\[
+a' = \frac{\ln \frac{f(\pi_v)}{f(m)}}{\ln \frac{\pi_v}{m} + \frac{1-m}{m} \ln \frac{1-\pi_v}{1-m}} + 1,
+\]
+\[
+b' = \frac{\ln \frac{f(\pi_v)}{f(m)}}{\ln \frac{\pi_v}{m} + \frac{1-m}{m} \ln \frac{1-\pi_v}{1-m}} \cdot \frac{1-m}{m} + 1.
+\]
+
+Setzen wir die bekannten Werte ein:
+\[
+m = 0.021, \quad \pi_v = 0.03, \quad \ln \frac{f(\pi_v)}{f(m)} = \ln(0.5) \approx -0.693,
+\]
+
+erhalten wir:
+\[
+a' = \frac{-0.693}{\ln \frac{0.03}{0.021} + \frac{1-0.021}{0.021} \ln \frac{1-0.03}{1-0.021}} + 1 = 9.38 + 1 \approx 10,
+\]
+\[
+b' = \frac{-0.693}{\ln \frac{0.03}{0.021} + \frac{1-0.021}{0.021} \ln \frac{1-0.03}{1-0.021}} \cdot \frac{1-0.021}{0.021} + 1 = 9.38 \cdot 46.62 + 1 \approx 438.
+\]
 
 Parameter der Posterioriverteilungen von $\Pi_X$ und $\Pi_Y$:
 \begin{equation}
@@ -441,11 +469,10 @@ Parameter der Posterioriverteilungen von $\Pi_X$ und $\Pi_Y$:
   \hat{\pi}_X = \frac{a_X - 1/3}{a_X + b_X - 2/3} = \frac{1999 - 1/3}{1999 + 18491 - 2/3} = 0.0975
 \end{equation}
 \begin{equation}
-  \hat{\pi}_Y = \frac{a_Y - 1/3}{a_Y + b_Y - 2/3} = \frac{1893 - 1/3}{1893 + 54659 - 2/3} = 0.0336
-\end{equation}
+  \hat{\pi}_Y = \frac{a_Y - 1/3}{a_Y + b_Y - 2/3} = \frac{1893 - 1/3}{1893 + 54659 - 2/3} = 0.0335
+\end{equation} 
 
-\textbf{Intervallschätzung:} \\ %TODO Seite 123%
-
+\textbf{Intervallschätzung:}
 
 Die Posteriors für $\Pi_X$ und $\Pi_Y$ sind Beta-verteilte Zufallsvariablen:
 \begin{equation}
@@ -459,7 +486,11 @@ Die Posteriors für $\Pi_X$ und $\Pi_Y$ sind Beta-verteilte Zufallsvariablen:
   \includegraphics[width=0.85\textwidth]{../images/semmelweis.png}
 \end{center}
 
-
+Für $\alpha = 0.01$ beidseitige Konfidenzintervalle für $\Pi_X$ und $\Pi_Y$:
+\begin{equation}
+  I_X = [0.0927, 0.1034] \\
+  I_Y = [0.0316, 0.0355]
+\end{equation}
 
 \subsubsection{Vergleich der Ergebnisse}
 Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert uns unterschiedliche Perspektiven:
