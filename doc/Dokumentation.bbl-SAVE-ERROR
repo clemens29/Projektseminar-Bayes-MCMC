@@ -57,6 +57,104 @@
       \endverb
       \keyw{Bayesian statistical decision theory,Einführung,Bayes-Entscheidungstheorie,Parameterschätzung,Multivariate Wahrscheinlichkeitsverteilung,Kalman-Filter}
     \endentry
+    \entry{HandbookMonteCarloMethods}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=bdeae732a8a2bf629098c06d021dceb5}{%
+           family={Kroese},
+           familyi={K\bibinitperiod},
+           given={Dirk\bibnamedelima P.},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=7fc8456199d7cba505b3b67f7fda2d03}{%
+           family={Taimre},
+           familyi={T\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=fb86f6c50dd80dc9e65a02cf893d286d}{%
+           family={Botev},
+           familyi={B\bibinitperiod},
+           given={Zdravko\bibnamedelima I.},
+           giveni={Z\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hoboken, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{67a7027970f0800471eaf5b89f630139}
+      \strng{fullhash}{67a7027970f0800471eaf5b89f630139}
+      \strng{fullhashraw}{67a7027970f0800471eaf5b89f630139}
+      \strng{bibnamehash}{67a7027970f0800471eaf5b89f630139}
+      \strng{authorbibnamehash}{67a7027970f0800471eaf5b89f630139}
+      \strng{authornamehash}{67a7027970f0800471eaf5b89f630139}
+      \strng{authorfullhash}{67a7027970f0800471eaf5b89f630139}
+      \strng{authorfullhashraw}{67a7027970f0800471eaf5b89f630139}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A comprehensive resource on Monte Carlo methods covering theory, methodology, and practical applications.}
+      \field{isbn}{9780470177938}
+      \field{series}{Wiley Series in Probability and Statistics}
+      \field{title}{Handbook of Monte Carlo Methods}
+      \field{year}{2011}
+      \verb{urlraw}
+      \verb https://www.wiley.com/en-us/Handbook+of+Monte+Carlo+Methods-p-9780470177938
+      \endverb
+      \verb{url}
+      \verb https://www.wiley.com/en-us/Handbook+of+Monte+Carlo+Methods-p-9780470177938
+      \endverb
+      \keyw{Monte Carlo simulation,Stochastic methods,Numerical analysis}
+    \endentry
+    \entry{MonteCarloAlgorithmen}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=4313b53595be7a5cd69daa525cdbb232}{%
+           family={Müller-Gronbach},
+           familyi={M\bibinithyphendelim G\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=b921f8d0f55cbd9ffb8bc589460082f9}{%
+           family={Novak},
+           familyi={N\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod}}}%
+        {{hash=c4ada04a4ca5499333195c24dfce4878}{%
+           family={Ritter},
+           familyi={R\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{fullhash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{fullhashraw}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{bibnamehash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{authorbibnamehash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{authornamehash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{authorfullhash}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \strng{authorfullhashraw}{9c8f87870ce45ebcdd57c5de071eaecc}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Literaturverz. S. 311 - 318}
+      \field{booktitle}{Springer-Lehrbuch}
+      \field{isbn}{9783540891406}
+      \field{title}{Monte Carlo-Algorithmen}
+      \field{year}{2012}
+      \verb{urlraw}
+      \verb https://katalog.slub-dresden.de/id/0-618339728
+      \endverb
+      \verb{url}
+      \verb https://katalog.slub-dresden.de/id/0-618339728
+      \endverb
+      \keyw{|a|Monte Carlo simulation,Monte-Carlo-Simulation,Stochastik}
+    \endentry
     \entry{StatistikKlassischOderBayes}{book}{}{}
       \name{author}{1}{}{%
         {{hash=4e640aacdcb0272fbbedd376b08fa73d}{%
