@@ -16,6 +16,11 @@ n_x = 20042
 y = 1883
 n_y = 56104
 
+x = round(x/100)
+n_x = round(n_x/100)
+y = round(y/100)
+n_y = round(n_y/100)
+
 # Priorparameter
 a_prior = ln_f_v_m / (ln_ratio_v_m + factor * ln_ratio_1_v_1_m) + 1
 b_prior = (a_prior-1) * factor + 1

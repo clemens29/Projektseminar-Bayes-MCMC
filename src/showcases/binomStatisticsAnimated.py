@@ -24,6 +24,8 @@ def metropolis_hastings(x, n, n_samples=10000, start=0.5, proposal_width=0.1):
     for _ in range(n_samples):
         # Vorschlag für einen neuen Wert aus der Normalverteilung
         proposed_p = np.random.normal(current_p, proposal_width)
+        if proposed_p < 0 or proposed_p > 1:
+            continue
         
         current_posterior = posterior(current_p, x, n)
         proposed_posterior = posterior(proposed_p, x, n)
@@ -43,7 +45,7 @@ n_samples = 10_000
 p_values = np.linspace(0, 1, 100)
 priori = [prior(p) for p in p_values]
 
-n_values = [10, 30, 50, 100, 200]
+n_values = [2, 10, 30, 50, 100, 200]
 posterior_data = []
 for n in n_values:
     x = int(sp_p * n)
@@ -73,7 +75,7 @@ def update(frame):
     for bar, h in zip(bars, hist_data):
         bar.set_height(h)
 # Animation erstellen
-ani = FuncAnimation(fig, update, frames=len(n_values), interval=1000, repeat=False)
+ani = FuncAnimation(fig, update, frames=len(n_values), interval=1000, repeat=True)
 # Speichern der Animation
 ani.save('binomStatisticsAnimated.gif', writer='ffmpeg', fps=1)
 

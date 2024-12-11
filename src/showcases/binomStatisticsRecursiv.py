@@ -46,7 +46,7 @@ n_samples = 100_00
 
 def prioriSamples(p,samples):
     samples = np.array(samples)
-    delta = 1e-5
+    delta = 1e-3
     count = np.sum(np.abs(samples - p) < delta)
     return count / len(samples)
 
