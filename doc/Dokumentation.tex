@@ -592,14 +592,14 @@ I_E = [0.4330, 0.6746]
 I_{\neg E} = \left[ 0.7659 - 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}}, \, 0.7659 + 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}} \right]
 \]
 \[
-I_{\neg E} = [0.7100, 0.8218]
+I_{\neg E} = [0.6448, 0.8870]
 \]
 
 \[
 I_G = \left[ 0.6429 - 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}}, \, 0.6429 + 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}} \right]
 \]
 \[
-I_G = [0.5565, 0.7293]
+I_G = [0.5542, 0.7316]
 \]
 
 \textbf{Hypothesentest:} \\
@@ -608,17 +608,17 @@ Dafür wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
 
 Wir berechnen den Standardfehler für den Unterschied der Anteile:
 \[
-SE = \sqrt{\hat{\pi}_G(1 - \hat{\pi}_G) \left(\frac{1}{65} + \frac{1}{47}\right)} = \sqrt{0.6429 \cdot (1 - 0.6429) \left(\frac{1}{65} + \frac{1}{47}\right)} \approx 0.0975
+SE = \sqrt{\hat{\pi}_G(1 - \hat{\pi}_G) \left(\frac{1}{65} + \frac{1}{47}\right)} = \sqrt{0.6429 \cdot (1 - 0.6429) \left(\frac{1}{65} + \frac{1}{47}\right)} \approx 0.0917
 \]
 Berechnung des z-Werts:
 \[
-z = \frac{\hat{\pi}_E - \hat{\pi}_{\neg E}}{SE} = \frac{0.5538 - 0.7659}{0.0975} \approx -2.17
+z = \frac{\hat{\pi}_E - \hat{\pi}_{\neg E}}{SE} = \frac{0.5538 - 0.7659}{0.0917} \approx -2.31
 \]
 Für ein Signifikanzniveau von \( \alpha = 0.05 \) und einen einseitigen Test ist der kritische z-Wert:
 \[
 z_{\text{kritisch}} = -1.645
 \]
-Da der berechnete z-Wert von \(-2.17\) kleiner als der kritische z-Wert von \(-1.645\) ist, können wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) ablehnen.
+Da der berechnete z-Wert von \(-2.31\) kleiner als der kritische z-Wert von \(-1.645\) ist, können wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) ablehnen.
 Interpretation: Die Siegrate der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
 
 \subsubsection{Berechnung mit bayesianischer Statistik}
