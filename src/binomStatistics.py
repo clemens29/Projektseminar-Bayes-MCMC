@@ -4,40 +4,43 @@ from scipy.special import gamma
 from sys import argv
 import scipy.stats as stats
 
-# kaggle
-
-# Definiere die Likelihood für eine Binomialverteilung
+# Binomialverteilung
 def likelihood(p, x, n):
     return (p**x) * ((1 - p)**(n - x))
 
-# Definiere die Prior (Gleichverteilung zwischen 0 und 1)
+# Normalverteilung N(0.5, 0.1)
 def prior(p):
     return stats.norm.pdf(p, 0.5, 0.1)
 
-# Definiere die Posteriorverteilung (Likelihood * Prior)
+# Posteriorverteilung ohne Normalisierungskonstante
 def posterior(p, x, n):
     return likelihood(p, x, n) * prior(p)
 
 # Metropolis-Hastings Algorithmus zum Sampling der Posteriorverteilung
-def metropolis_hastings(x, n, n_samples=10000, start=0.5, proposal_width=0.1):
-    samples = []
-    current_p = start
+def metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1):
+    
+    samples = [] # Markov-Kette
+    current_p = start # Startwert - vorheriger Wert
+    
     for _ in range(n_samples):
-        # Vorschlag für einen neuen Wert aus der Normalverteilung
+        
+        # Vorschlag für einen neuen Wert aus der Normalverteilung um den vorherigen Wert
         proposed_p = np.random.normal(current_p, proposal_width)
+        
+        # Ablehnung, wenn der Vorschlag außerhalb des Wertebereichs liegt
         if proposed_p < 0 or proposed_p > 1:
             continue
         
+        # Berechnung der Akzeptanzwahrscheinlichkeit
         current_posterior = posterior(current_p, x, n)
         proposed_posterior = posterior(proposed_p, x, n)
-        # Berechne Akzeptanzwahrscheinlichkeit
         acceptance_ratio = proposed_posterior / current_posterior
         if np.random.rand() < acceptance_ratio:
             current_p = proposed_p  # Akzeptiere den Vorschlag
         
         samples.append(current_p)
     
-    return samples
+    return samples[1000:]  # Burn-in entfernen
 
 # Parameter für das Problem
 x = int(argv[2])
@@ -46,7 +49,7 @@ sp_p = x / n
 n_samples = 100_00
 
 # Sampling aus der Posteriorverteilung
-samples = metropolis_hastings(x, n, n_samples=n_samples, start=0.5, proposal_width=0.1)
+samples = metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1)
 
 #Bayes'sche Schätzung und Konfidenzintervall für p
 mean_bayes = np.mean(samples)
