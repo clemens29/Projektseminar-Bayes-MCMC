@@ -613,7 +613,7 @@ Daten:
 \hat{\pi}_G = \frac{72}{112} = 0.6429
 \]
 
-\textbf{Intervallschätzer:}
+\textbf{Konfidenzintervall:}
 Für \(\alpha = 0.05\) beidseitige Konfidenzintervalle:
 
 \[
@@ -678,9 +678,9 @@ Für die bayesianische Analyse nehmen wir als Prior-Verteilungen Beta-Verteilung
 \textbf{Likelihood-Verteilung:} \\
 Für die gesamte Siegquote (Likelihood) wird ebenfalls eine Beta-Verteilung verwendet, basierend auf den gesamten Spielen der deutschen Nationalmannschaft:
 \[
-\alpha_{\text{total}} = 73 + 1 = 74, \quad \beta_{\text{total}} = 41 + 1 = 42
+\alpha_{\text{total}} = 72 + 1 = 73, \quad \beta_{\text{total}} = 40 + 1 = 41
 \]
-Die Likelihood-Verteilung ist daher: \( \text{Beta}(74, 42) \).
+Die Likelihood-Verteilung ist daher: \( \text{Beta}(73, 41) \).
 
 Die Posterior-Verteilung kann als Produkt von Prior und Likelihood berechnet werden. Sie wird durch Normierung auf den gesamten Bereich der Siegquote \( p \) bestimmt.
 
@@ -694,10 +694,10 @@ Die Verteilungen für die Prior-, Likelihood- und Posterior-Verteilungen werden 
 \begin{itemize}
   \item Prior für europäische Teams: \( \text{Beta}(37, 30) \)
   \item Prior für nicht-europäische Teams: \( \text{Beta}(37, 12) \)
-  \item Likelihood für alle Spiele: \( \text{Beta}(74, 42) \)
+  \item Likelihood für alle Spiele: \( \text{Beta}(73, 41) \)
 \end{itemize}
 
-Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden durch das Produkt der Prior- und Likelihood-Verteilungen berechnet. Das Ergebnis wird dann normalisiert.
+Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden durch das Produkt der Prior- und Likelihood-Verteilungen berechnet.
 
 \begin{figure}[htbp]
   \centering
@@ -712,52 +712,42 @@ E = \frac{\alpha_{\text{posterior}}}{\alpha_{\text{posterior}} + \beta_{\text{po
 \]
 Für europäische Teams ist der Erwartungswert:
 \[
-E_E = \frac{37 + 36}{37 + 36 + 30 + 29} = \frac{73}{132} \approx 0.5523
+E_E = \frac{37 + 73}{37 + 73 + 30 + 41} = \frac{110}{181} \approx 0.6077
 \]
 Für nicht-europäische Teams ist der Erwartungswert:
 \[
-E_{\neg E}= \frac{37 + 36}{37 + 36 + 12 + 11} = \frac{73}{96} \approx 0.7604
+E_{\neg E}= \frac{37 + 73}{37 + 36 + 12 + 41} = \frac{110}{163} \approx 0.6748
 \]
 
 \textbf{Konfidenzintervall:} \\
-Das 95\%-Konfidenzintervall für die Posterior-Verteilung wird durch die Quantilfunktion der Beta-Verteilung berechnet. Wir verwenden das 2.5%- und 97.5%-Quantil, um das 95\%-Konfidenzintervall zu bestimmen.
-
+Das 95\%-Konfidenzintervall für die Posterior-Verteilung wird durch die Quantilfunktion der Beta-Verteilung berechnet. Wir verwenden das 2.5\%- und 97.5\%-Quantil.
+Dies wurde mithilfe des Programms \texttt{world\_cup\_bayes.py} durchgeführt. \\
 Für europäische Teams:
-\[
-I_E= \left[ \text{Beta}^{-1}(0.025, 37 + 36, 30 + 29), \text{Beta}^{-1}(0.975, 37 + 36, 30 + 29) \right]
-\]
-\[
-I_E = [0.4684, 0.6393]
-\]
 
+\[
+I_E = [0.5358, 0.6775]
+\]
 Für nicht-europäische Teams:
 \[
-I_{\neg E} = \left[ \text{Beta}^{-1}(0.025, 37 + 36, 12 + 11), \text{Beta}^{-1}(0.975, 37 + 36, 12 + 11) \right]
-\]
-\[
-I_{\neg E} = [0.6785, 0.8356]
+I_{\neg E} = [0.6012, 0.7444]
 \]
 
 \textbf{Hypothesentest:} \\
+Wir testen die Hypothese, dass die Siegquote der deutschen Nationalmannschaft gegen europäische Teams niedriger ist als gegen nicht-europäische Teams.
+Dafür definieren wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) und die Alternative \( H_1 : \pi_E < \pi_{\neg E} \).
+Um die Hypothese zu testen, dass die Siegquote gegen europäische Teams niedriger ist als gegen nicht-europäische Teams, wurden Monte-Carlo-Simulationen verwendet:
 
-Der Hypothesentest basiert auf dem Vergleich der Posterior-Verteilungen der Siegquoten von europäischen und nicht-europäischen Teams. Die Nullhypothese (\( H_0 \)) ist, dass es keinen Unterschied in den Siegquoten gibt, d. h. die Differenz zwischen den Siegquoten \( D = \pi_E - \pi_{\neg E} \) gleich null ist.
+\begin{itemize}
+    \item Aus den Posterior-Verteilungen wurden \( 100{.}000 \) Zufallswerte (Samples) gezogen.
+    \item Die Wahrscheinlichkeit \( P(H_1) = P(\pi_E < \pi_{\neg E}) \) wurde als der Anteil der Simulationen berechnet, bei denen \( \pi_E < \pi_{\neg E} \).
+    \item Die Wahrscheinlichkeit \( P(H_0) = 1 - P(H_1) \) wurde ebenfalls berechnet.
+    \item Je nachdem, welche Wahrscheinlichkeit größer ist, wurde entschieden, ob \( H_0 \) (Nullhypothese) oder \( H_1 \) (Alternativhypothese) akzeptiert wird.
+\end{itemize}
 
-Um den Test durchzuführen, wird die Differenz der Posterior-Verteilungen \( D = \pi_E - \pi_{\neg E} \) berechnet. Hierfür werden zufällige Stichproben aus den beiden Posterior-Verteilungen für europäische und nicht-europäische Teams gezogen. Diese Stichproben werden dann zur Berechnung der Verteilung der Differenz \( D \) verwendet.
-
-Die Nullhypothese wird anhand der Posterior-Verteilung der Differenz getestet:
-- Wenn der 95\%-Konfidenzintervall der Differenz \( D \) die Null enthält, kann die Nullhypothese nicht abgelehnt werden, was darauf hinweist, dass es keinen signifikanten Unterschied gibt.
-- Wenn die Null nicht im 95\%-Konfidenzintervall enthalten ist, wird die Nullhypothese abgelehnt und ein signifikantes Ergebnis gezeigt.
-
-In unserem Beispiel ist die Differenz der Posterior-Verteilungen und das resultierende Konfidenzintervall für die Differenz wie folgt:
-
-\[
-D = E[\pi_E] - E[\pi_{\neg E}] \quad \text{mit} \quad D = 0.5523 - 0.7604 = -0.2081
-\]
-\[
-I_D = [I_E[0] - I_{\neg E}[1], I_E[1] - I_{\neg E}[0]] = [-0.3711, -0.0401]
-\]
-Da der Nullpunkt nicht im Konfidenzintervall enthalten ist, wird die Nullhypothese abgelehnt, was darauf hindeutet, dass es einen signifikanten Unterschied in den Siegquoten der deutschen Nationalmannschaft gegen europäische und nicht-europäische Teams gibt.
-
+\textbf{Ergebnisse:} \\
+\( P(H_0) = 0.0972 \) und \( P(H_1) = 0.9028 \) \\
+Da \( P(H_1) > P(H_0) \), wird die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) abgelehnt. \\
+Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
 
 
 \newpage
