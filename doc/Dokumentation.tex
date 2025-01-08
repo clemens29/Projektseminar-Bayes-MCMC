@@ -81,6 +81,10 @@ headsep=10mm, footskip=12mm}
 \newpage
 
 \section{Einleitung}
+Die Statistik ist ein wesentlicher Bestandteil der Wissenschaft. Sie ermöglicht es, aus Daten Informationen zu gewinnen und aus diesen Schlussfolgerungen zu ziehen. Es exsistieren dabei aber zwei verschiedene Ansätze, die klassische und die bayesianische Statistik. Beide bieten unterschiedliche Perspektiven und Werkzeuge zur Analyse und Interpretation von Unsicherheiten, und die Entscheidung für eine Methode kann erhebliche Auswirkungen auf die Schlussfolgerungen einer Studie haben.\\\\
+In dieser Arbeit liegt der Fokus auf der bayesianischen Statistik, einem Ansatz, der die Wahrscheinlichkeit als subjektives Maß für die Unsicherheit interpretiert und es ermöglicht, Vorwissen systematisch in den Analyseprozess einzubringen. Der Vergleich mit der klassischen Statistik, die auf der relativen Häufigkeit basiert, zeigt, wie unterschiedlich die Ansätze sowohl in der Theorie als auch in der Praxis sind.\\\\
+Ein zentraler Schwerpunkt der Arbeit liegt darin die theoretischen Grundlagen der bayesianischen Statistik zu erläutern und den Prinzipien der klassischen Statistik gegen-überzustellen. Dabei soll insbesondere auf die Markov Chain Monte Carlo (MCMC) Methoden eingegangen werden, die es ermöglichen, komplexe Modelle zu schätzen und zu simulieren. Inbesondere wird der Metropolis-Hastings-Algorithmus, einer der bekanntesten Algorithmen zur Erstellung von Markovketten vorgestellt.\\\\
+Anschließend wird im zweiten Teil der Arbeit die praktische Anwendung der bayesianischen Statistik und der MCMC-Methoden anhand von Beispielen und Datensätzen in Python demonstriert. Dabei wird gezeigt, wie bayesianische Modelle implementiert und auf verschiedene Datensätze angewendet werden können. Die Ergebnisse werden interpretiert und mit klassischen Methoden verglichen.\\\\
 \newpage
 
 \section{Theoretischer Teil}
@@ -160,7 +164,7 @@ Die Binomialverteilung wird nun als Likelihood-Funktion verwendet:
 \begin{equation}
 P(n,x|p) = \binom{n}{x} \cdot p^x \cdot (1-p)^{n-x}
 \end{equation}
-wobei $0 \leq p \geq 1$.
+wobei $0 \leq p \leq 1$.
 Als Prioridichte wird die Gleichverteilung verwendet, da es keine Informationen über $p$ gibt.
 \begin{equation}
   P(p) =
@@ -219,7 +223,8 @@ Für die Daten $n_1 = 10$, $x_1 = 4$, $n_2 = 20$, $x_2 = 6$:
 P(p|10,4,20,6) = 931 395 465p^{10} \cdot (1-p)^{20}
 \end{equation}
 
-\subsubsection{Punktschätzer in der bayesianischen Statistik}
+\subsubsection{Punktschätzer, Konfidenzintervalle und Hypothesenprüfung in der bayesianischen Statistik}
+\subsection*{\underline{Punktschätzer}}
 Im folgenden wird die Schätzung eines Parameters mithilfe der Bayes-Strategie erläutert. \\
 Die möglichen Schätzwerte der Parameter $x$ werden als $\hat{x}$ bezeichnet. Die wahren Parameter werden als $x$ bezeichnet. \\
 Es wird eine Kostenfunktion $L(\hat{x},x)$ definiert, die die Kosten für die Schätzung $\hat{x}$ des wahren Parameters $x$ angibt.
@@ -231,7 +236,7 @@ Die zu erwartenden Kosten werden berechnet mit dem Erwartungswert der Kostenfunk
 Diese Schätzung führt zu dem Erwartungswert von $x$, das heißt $\hat{x} = E(x)$. \parencite[65-66]{EinfBayesStatistik} \\\\
 Die \textbf{Kostenfunktion der absoluten Fehler} ist definiert als: $L(x,\hat{x}) = |x-\hat{x}|$.
 Diese gibt den absoluten Abstand zwischen $x$ und $\hat{x}$ an.
-Die Schätzung mit dem absoluten Fehler ergibt den Median der Verteilung, das heißt $F(\hat{x}_med) = 0.5$ \parencite[67-68]{EinfBayesStatistik} \\\\
+Die Schätzung mit dem absoluten Fehler ergibt den Median der Verteilung, das heißt $F(\hat{x}_{med}) = 0.5$ \parencite[67-68]{EinfBayesStatistik} \\\\\\\\
 Die \textbf{Null-Eins-Kostenfunktion} bedeutet, dass es entweder Kosten oder keine Kosten gibt.
 Diese ist definiert durch: $L(x-\hat{x}) = 
 \begin{cases}
@@ -239,12 +244,37 @@ Diese ist definiert durch: $L(x-\hat{x}) =
   a & \text{für } |x-\hat{x}| \geq b
 \end{cases}$,\\
 wobei $a$ und $b$ als Konstaten angenommen werden. Wenn der Fall $b \to 0$ betrachtet wird,
-ergibt sich als Schätzer das Argument des Maximums der Posterioriverteilung, das heißt $\hat{x}_M = \arg \max \; p(x|y)$. \parencite[68-69]{EinfBayesStatistik}
+ergibt sich als Schätzer das Argument des Maximums der Posterioriverteilung, das heißt $\hat{x}_M = \arg \max \; p(x|y)$. \parencite[68-69]{EinfBayesStatistik}\\\\
+Es ist so ersichtlich, dass es verschiedene Punktschätzer in der bayesianischen Statistik gibt:
+\begin{itemize}
+  \item \textbf{Erwartungswert} $\hat{x} = E(x)$
+  \item \textbf{Median} $\hat{x} = x_{0.5}$
+  \item \textbf{Maximum der Posterioriverteilung} $\hat{x} = \arg \max \; p(x|y)$
+\end{itemize}
+Die Wahl zwischen den Schätzern hängt so von der Problemstellung ab.
 
+\subsection*{\underline{Konfidenzintervalle}}
+Um Unsicherheiten bei Schätzungen zu quantifizieren werden oftmals \textbf{Konfidenzintervall} verwendet. Konfidenzintervalle geben einen Bereich an, in dem ein unbekannter Parameter mit einer bestimmten Wahrscheinlichkeit liegt. In der Bayes Statistik kann eine Bereichschätzung unmittelbar aus der Posterioriverteilung abgeleitet werden. \parencite[71]{EinfBayesStatistik} \\\\
+Wenn P(x$|$y) die Posterioridichte für den Parameter x ist, ist das Konfidenzintervall mit Konfidenzniveau 1-$\alpha$ definiert als:
+\begin{equation}
+  P(x \in X_u|y) = \int_{X_u} P(x|y) dx = 1-\alpha
+\end{equation}
+Wobei für alle $x_1 \in X_u, x_2 \not\in X_u$ gilt $P(x_1|y) \geq P(x_2|y)$; Xu ist dabei ein Unterraum auf dem Parameterraum \parencite[71]{EinfBayesStatistik}. Meist wird für $\alpha$ 0.1, 0.05 oder 0.01 gewählt. Höhere Konfidenzniveaus führen zu größeren Intervallen, da mehr Unsicherheit abgedeckt wird, während niedrigere Konfidenzniveaus kleinere Intervalle liefern, die jedoch ein höheres Risiko haben, den wahren Parameter nicht einzuschließen. \\\\
+Falls die Posterioriverteilung P(x$|$y) beispielsweise der Normalverteilung N($\mu,\sigma^2$) ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} * \sigma$ und $\mu + z_{1-\alpha/2} * \sigma$ bestimmen.\\\\
+Da die Konfidenzintervalle in der bayesianischen Statistik auf der Posterioriverteilung basieren, unterscheiden sich die Ergebnisse von denen der klassischen Statistik, da diese auf einer anderen Grundlage definiert sind.
 
 \newpage
+\subsection*{\underline{Hypothesenprüfung}}
+Hypothesenprüfung ist eine Methode, mit der man Annahmen über unbekannte Parameter überprüft. Dabei wird entschieden, ob solche Annahmen akzeptiert oder abgelehnt werden sollen. \parencite[74]{EinfBayesStatistik}. Man unterscheidet zwischen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$. Die Nullhypothese ist die Annahme, die überprüft wird, während die Alternativhypothese die Annahme ist, die akzeptiert wird, wenn die Nullhypothese abgelehnt wird. \\\\
+In der bayesianischen Statistik werden Hypothesen durch Unterräume des Parameterraums definiert. Seien $X_1$ und $X_2$ disjunkte Unterräume des Parameterraums, so lauten die Hypothesen $H_0: x \in X_1$ und $H_1: x \in X_2$. Die Wahrscheinlichkeiten für diese Hypothesen ergeben sich direkt aus der Posterior-Dichte. Die Wahrscheinlichkeit, dass die Nullhypothese wahr ist, lautet:
+\begin{equation}
+  P(H_0|y) = \int_{X_1} P(x|y) dx
+\end{equation}
+Analog gilt dies für $P(H_1|y)$ \parencite[74]{EinfBayesStatistik}. Ist jetzt $P(H_0|y) > P(H_1|y)$ rsp. $\frac{P(H_0|y)}{P(H_1|y)}>1$, so wird die Nullhypothese akzeptiert, andernfalls die Alternativhypothese. \parencite[77]{EinfBayesStatistik}. \\\\
+Bei einer Punkthypothese $H_0: x = x_0$ ergibt sich $P(H_0|y) = 0$, da die Posterior-Dichte kontinuierlich ist und ein einzelner Punkt daher keine Wahrscheinlichkeit besitzt. In solchen Fällen greift man beispielsweise auf Konfidenzintervalle zurück: Liegt der Wert $x_0$ innerhalb des Konfidenzintervalls, wird die Nullhypothese akzeptiert, andernfalls abgelehnt \parencite[84]{EinfBayesStatistik}. \\\\
+Ein wesentlicher Unterschied zur klassischen Statistik besteht darin, dass in der traditionellen Hypothesenprüfung die Nullhypothese solange als gültig angesehen wird, bis genügend Beweise dagegen vorliegen (Prinzip des Zweifelns). In der bayesianischen Statistik hingegen werden die Wahrscheinlichkeiten beider Hypothesen direkt geschätzt, wodurch beide Hypothesen von Anfang an gleichberechtigt betrachtet werden. \parencite[83]{EinfBayesStatistik}.
 
-\subsection{Binomiale Verteilung und deren bayesianische Interpretation}
+
 \newpage
 
 \subsection{Markov Chain Monte Carlo (MCMC) Methoden}
@@ -289,22 +319,27 @@ Der Algorithmus besteht aus folgenden Schritten:
 Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen q(y$|$x) funktioniert. Bei einer symmetrischen Hilfsfunktion ist q(y|$x_t$) = q($x_t$|y) und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welche verworfen wird, weil sich die Kette erst an die Zielverteilung anpassen muss. Der restliche Teil wird als \textbf{Sampling-Phase} bezeichnet, welche dann die Verteilung simuliert. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 
-\subsection{Konvergenzkriterien und Diagnosewerkzeuge für MCMC-Simulationen}
+\subsubsection{Konvergenzkriterien für MCMC-Simulationen}
 \newpage
 
 \section{Praktischer Teil}
 
-\subsection{Implementierung bayesianischer Modelle unter Verwendung in Python}
+\subsection{Implementierung des Metropolis-Hastings-Algorithmus in Python}
 \newpage
 
-\subsection{Anwendung der Modelle auf verschiedene Datensätze}
+\subsection{Anwendung der bayesianischen Statistik am Beispiel}
 \newpage
 
-\subsection{Durchführung von MCMC-Simulationen}
+\subsubsection{Überblick und Aufbereitung des Datensatzes}
 \newpage
 
-\subsection{Interpretation der Ergebnisse}
+\subsubsection{Anwendung der bayesianischen Statistik}
 \newpage
+
+\subsubsection{Rekursives Einbeziehen von neuen Daten}
+\newpage
+
+\subsubsection{Vergleich mit traditioneller Statistik}
 
 \subsection{Vergleich mit klassischen Methoden am Beispiel}
 
