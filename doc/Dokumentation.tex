@@ -12,7 +12,6 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{geometry}
-\usepackage{listings}
 \usepackage{xcolor}
 \usepackage{mhchem}
 \usepackage{comment}
@@ -28,6 +27,17 @@
   columns=fullflexible,
   breaklines=true,
   captionpos=b
+}
+
+\lstset{ 
+  language=Python, 
+  basicstyle=\ttfamily, 
+  numbers=left, 
+  frame=single, 
+  breaklines=true, 
+  aboveskip=10pt,   
+  xleftmargin=20pt, 
+  belowskip=20pt    
 }
 
 \geometry{a4paper, top=25mm, left=30mm, right=25mm, bottom=30mm,
@@ -325,11 +335,14 @@ Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welc
 \section{Praktischer Teil}
 
 \subsection{Implementierung des Metropolis-Hastings-Algorithmus in Python}
+In unserem Beispiel nutzen wir als Likelihood-Funktion die Binomialverteilung und als Prioriverteilung die Normalverteilung mit den Parametern $\mu = 0.5$ und $\sigma^2 = 0.1$. Dadurch ergibt sich die Posteriorifunktion aus der Multiplikation dieser Funktionen und einer unbekannten Normierungskonstante, welche durch den Metropolis-Hastings-Algorithmus approximiert werden soll. Dadurch ergeben sich folgende Python Funktionen, welche die Wahrscheinlichkeit für einen gegebenen Wert liefern.\\ 
+\lstinputlisting[firstline=7,lastline=17]{../src/binomStatistics.py} 
+Mit Hilfe der Posteriorifunktion erstellt nun der Metropolis Hastings Algorithmus eine Markov-Kette. Dafür wird die Normalverteilung als Hilfsfunktion verwendet, da sie ähnlich der Posteriorifunktion ist. Als $\mu$ wird der aktuelle Wert verwendet und als $\sigma^2$ wird 0.1 gewählt. Das $\sigma$ beeinflusst die Schrittweite, ist es hoch werden mit höherer Wahrscheinlichkeit vom aktuellen Wert weiter entfernte Werte gewählt. Da eine Wahrscheinlichkeit geschätzt wird muss beachtet werden, dass neue Werte immer zwischen 0 und 1 liegen. Der folgende Python Code zeigt die Implementierung des Metropolis-Hastings-Algorithmus. 
+\newpage 
+\lstinputlisting[firstline=19,lastline=43]{../src/binomStatistics.py} 
 \newpage
 
 \subsection{Anwendung der bayesianischen Statistik am Beispiel}
-\newpage
-
 \subsubsection{Überblick und Aufbereitung des Datensatzes}
 \newpage
 

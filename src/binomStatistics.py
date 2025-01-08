@@ -24,10 +24,10 @@ def metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1):
     
     for _ in range(n_samples):
         
-        # Vorschlag für einen neuen Wert aus der Normalverteilung um den vorherigen Wert
+        # Vorschlag fuer einen neuen Wert aus der Normalverteilung um den vorherigen Wert
         proposed_p = np.random.normal(current_p, proposal_width)
         
-        # Ablehnung, wenn der Vorschlag außerhalb des Wertebereichs liegt
+        # Ablehnung, wenn der Vorschlag ausserhalb des Wertebereichs liegt
         if proposed_p < 0 or proposed_p > 1:
             continue
         
