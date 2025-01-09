@@ -416,9 +416,27 @@ wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden 
 Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
 
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
+Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posterioriverteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prioiriverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
+\lstinputlisting[firstline=47,lastline=51]{../src/showcases/binomStatisticsRecursiv.py}
 \newpage
+\noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
+\begin{figure}[h]
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../images/framesAnimatedRecursive/frame1.png}
+    \caption{Posteriori als Priori}
+    \label{fig:bild5}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../images/framesAnimatedRecursive/frame2.png}
+    \caption{Zusammengefasste Stichprobe}
+    \label{fig:bild6}
+  \end{subfigure}
 
-\subsubsection{Vergleich mit traditioneller Statistik}
+  \caption{Vergleich der 2 Varianten}
+  \label{fig:mainfig}
+\end{figure}
+\newpage
 
 \subsection{Vergleich mit klassischen Methoden am Beispiel}
 
