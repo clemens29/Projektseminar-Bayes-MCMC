@@ -39,21 +39,21 @@ def metropolis_hastings(x, n, n_samples=10000, start=0.5, proposal_width=0.1, pr
     return samples
 
 # Parameter für das Problem
-x = 5
-n = 10
+x = 72
+n = 112
 sp_p = x / n
 n_samples = 100_00
 
 def prioriSamples(p,samples):
-    samples = np.array(samples)
     delta = 1e-3
-    count = np.sum(np.abs(samples - p) < delta)
-    return count / len(samples)
+    samples = np.asarray(samples)
+    close_values = np.abs(samples - p) < delta
+    return np.mean(close_values)
 
 # Sampling aus der Posteriorverteilung
-samples = metropolis_hastings(x, n, n_samples=n_samples, start=0.5, proposal_width=0.1)
-samplesR = metropolis_hastings(35, 100, n_samples=n_samples, start=0.5, proposal_width=0.1, prior=prioriSamples, samplesP=samples)
-samplesRT = metropolis_hastings(x+35, n+100, n_samples=n_samples, start=0.5, proposal_width=0.1)
+samples = metropolis_hastings(x//4, n//4, n_samples=n_samples, start=0.5, proposal_width=0.1)
+samplesR = metropolis_hastings(3*x//4, 3*n//4, n_samples=n_samples, start=0.5, proposal_width=0.1, prior=prioriSamples, samplesP=samples)
+samplesRT = metropolis_hastings(x, n, n_samples=n_samples, start=0.5, proposal_width=0.1)
 
 p_values = np.linspace(0, 1, 100)
 priori = [prior(p,None) for p in p_values]
@@ -73,19 +73,18 @@ def update(frame):
     if frame % 2 == 0:
         data = samplesR
         color = 'red'
-        label = 'Rekursiv'
     else:
         data = samplesRT
         color = 'green'
-        label = 'Zusammengefasst'
     
     # Histogramme zeichnen
-    ax.hist(samples, bins=bins, density=True, label='Posterior Samples', color='skyblue', edgecolor='black', alpha=0.5)
-    ax.hist(data, bins=bins, density=True, label=label, color=color, edgecolor='black', alpha=0.7)
+    ax.hist(samples, bins=bins, density=True, label='Posterior 1', color='skyblue', edgecolor='black', alpha=0.5)
+    ax.hist(data, bins=bins, density=True, label='Posterior 2', color=color, edgecolor='black', alpha=0.7)
+    ax.plot(p_values, priori, label='Prior', color='green')
     
     # Achsentitel und Details
     ax.set_xlabel('p (Wahrscheinlichkeit, dass Deutschland ein WM Spiel gewinnt)')
-    ax.set_ylabel('Verteilung (nicht normiert)')
+    ax.set_ylabel('Verteilung')
     ax.set_title('Posterior für p')
     ax.legend()
     
