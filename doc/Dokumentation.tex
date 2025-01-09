@@ -14,6 +14,7 @@
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{mhchem}
+\usepackage{subcaption}
 \usepackage{comment}
 
 \usepackage{biblatex} % Verwende BibLaTeX
@@ -360,7 +361,60 @@ Um nun den Normierungsfaktor P(n,x) der Posterioriverteilung zu berechnen zu kö
 \begin{equation}
   P(n,x) = \int_{0}^{1} (p^x(1-p)^{n-x}) \cdot \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{(p-\mu)^2}{2\sigma^2}\right)} dp
 \end{equation}
-Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropolis-Hastings-Algorithmus aus 3.1 verwenden, um eine Markovkette zu erstellen, die die Posterioriverteilung approximiert. \\\\
+Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropolis-Hastings-Algorithmus aus 3.1 verwenden, um eine Markovkette zu erstellen, die die Posterioriverteilung approximiert. Starten wir nun den Algorithums mit den Werten n = 112, x = 72 so erhalten wir folgende Posterioriverteilung:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../images/world_cup_germany.png}
+  \caption{Posterioriverteilung der Siegesquote der deutschen Nationalmannschaft}
+\end{figure}
+\noindent In der Grafik sieht man, die zuvor angenommene Prioriverteilung und die Posterioriverteilung welche eine geringere Varianz besitzt und um einiges weiter rechts liegt als die Prioriverteilung. Es ist deutlich zu erkennen, dass die Siegesquote deutlich höher als die zuvor angenommenen 50\% liegt. Der Erwartungswert der Posterioriverteilung beträgt ungefähr 0.615.
+\newpage
+\noindent Wie stark die Posterioriverteilung nach rechts verschoben wird und wie stark die Varianz abnimmt, hängt von der Größe der Stichprobe ab. Je größer die Stichprobe, desto stärker wird die Posterioriverteilung verschoben und desto geringer wird die Varianz. Diesen Prozess haben wir durch \url{../src/showcases/binomStatisticsAnimated.py} simuliert und im Ergebniss ist die erwartete Verschiebung deutlich zu erkennen:
+\begin{figure}[h]
+  \centering
+  % Erste Zeile mit zwei Bildern
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame1.png}
+      \caption{n=2}
+      \label{fig:bild1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame2.png}
+      \caption{n=10}
+      \label{fig:bild2}
+  \end{subfigure}
+  
+  \vspace{0.5cm}
+  
+  % Zweite Zeile mit zwei Bildern
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame3.png}
+      \caption{n=50}
+      \label{fig:bild3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame4.png}
+      \caption{n=200}
+      \label{fig:bild4}
+  \end{subfigure}
+  
+  \caption{Posterioriverteilung für verschiedene Stichprobengrößen}
+  \label{fig:mainfig}
+\end{figure}
+
+\noindent Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik vergleichen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
+\begin{equation}
+  I_e = \left[\frac{S_nF_1}{n-S_n+1+S_nF_1} , \frac{(S_n+1)F_2}{n-S_n+(S_n+1)F_2}\right]
+\end{equation}
+wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden $2S_n$ und $2(n-S_n+1)$ ist und $F_2$ das Quantil der F-Verteilung mit 1-$\alpha/2$ und den Freiheitsgraden $2(S_n+1)$ und $2(n-S_n)$ ist. Sn ist dabei die Anzahl der gewonnenen Spiele. Für die Berechnung haben wir das folgende Python-Programm geschrieben:
+\newpage
+\lstinputlisting[firstline=54,lastline=64]{../src/binomStatistics.py}
+
+\noindent Dieses liefert den Punktschätzer 0.617 und das Konfidenzintervall [0.532, 0.7] mit der bayesianischen Statistik und 0.643 und [0.547,731] für die klassische Statistik. \\\\
+Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
+
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
 \newpage
 
