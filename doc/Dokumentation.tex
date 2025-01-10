@@ -438,6 +438,168 @@ Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen untersc
 \end{figure}
 \newpage
 
+\subsubsection{Berechnungen für den Vergleich der Siegesrate gegen europäische und nicht-europäische Teams}
+Nachfolgend wollen wir die Siegesrate der deutschen Nationalmannschaft gegen europäische Teams mit der gegen nicht-europäische Teams vergleichen.
+Insbesondere wollen wir die Frage beantworten, ob die Siegesrate gegen europäische Teams signifikant niedriger ist als gegen nicht-europäische Teams.
+Für die nachfolgenden Berechnungen definieren wir somit:
+\begin{itemize}
+  \item \( \pi_E \) als die Siegesrate der deutschen Nationalmannschaft gegen europäische Teams
+  \item \( \pi_{\neg E} \) als die Siegesrate der deutschen Nationalmannschaft gegen nicht-europäische Teams
+  \item \( \pi_G \) als die Siegesrate der deutschen Nationalmannschaft insgesamt
+  \item \( H_0 : \pi_E \geq \pi_{\neg E} \) gegen \( H_1 : \pi_E < \pi_{\neg E} \)
+\end{itemize}
+Dabei gehen wir die Fragestellung mit klassischer sowie mit bayesianischer Statistik an. \\
+
+Daten:
+\begin{itemize}
+  \item Gegen europäische Teams wurden 65 Spiele gespielt, davon 36 gewonnen.
+  \item Gegen nicht-europäische Teamsn wurden 47 Spiele gespielt, davon 36 gewonnen.
+  \item Insgesamt wurden 112 Spiele gespielt, davon 72 gewonnen.
+\end{itemize}
+
+\paragraph{Berechnung mit klassischer Statistik}\leavevmode\newline
+
+\textbf{Punktschätzer:}
+\[
+\hat{\pi}_E = \frac{36}{65} = 0.5538
+\]
+\[
+\hat{\pi}_{\neg E} = \frac{36}{47} = 0.7659
+\]
+\[
+\hat{\pi}_G = \frac{72}{112} = 0.6429
+\]
+
+\textbf{Konfidenzintervall:}
+Für \(\alpha = 0.05\) beidseitige Konfidenzintervalle:
+
+\[
+I_E = \left[ 0.5538 - 1.96 \cdot \sqrt{\frac{0.5538 \cdot (1-0.5538)}{65}}, \, 0.5538 + 1.96 \cdot \sqrt{\frac{0.5538 \cdot (1-0.5538)}{65}} \right]
+\]
+\[
+I_E = [0.4330, 0.6746]
+\]
+
+\[
+I_{\neg E} = \left[ 0.7659 - 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}}, \, 0.7659 + 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}} \right]
+\]
+\[
+I_{\neg E} = [0.6448, 0.8870]
+\]
+
+\[
+I_G = \left[ 0.6429 - 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}}, \, 0.6429 + 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}} \right]
+\]
+\[
+I_G = [0.5542, 0.7316]
+\]
+
+\textbf{Hypothesentest:} \\
+Es wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
+
+Wir berechnen den Standardfehler für den Unterschied der Anteile:
+\[
+SE = \sqrt{\hat{\pi}_G(1 - \hat{\pi}_G) \left(\frac{1}{65} + \frac{1}{47}\right)} = \sqrt{0.6429 \cdot (1 - 0.6429) \left(\frac{1}{65} + \frac{1}{47}\right)} \approx 0.0917
+\]
+Berechnung des z-Werts:
+\[
+z = \frac{\hat{\pi}_E - \hat{\pi}_{\neg E}}{SE} = \frac{0.5538 - 0.7659}{0.0917} \approx -2.31
+\]
+Für ein Signifikanzniveau von \( \alpha = 0.05 \) und einen einseitigen Test ist der kritische z-Wert:
+\[
+z_{\text{kritisch}} = -1.645
+\]
+Da der berechnete z-Wert von \(-2.31\) kleiner als der kritische z-Wert von \(-1.645\) ist, können wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) ablehnen.\\
+Interpretation: Die Siegrate der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
+
+\paragraph{Berechnung mit bayesianischer Statistik}\leavevmode\newline
+
+\textbf{Vorwissen:}
+Für die bayesianische Analyse nehmen wir als Prior-Verteilungen Beta-Verteilungen für die Siegquote der deutschen Nationalmannschaft gegen europäische und nicht-europäische Teams an. Die Parameter dieser Verteilungen basieren auf den beobachteten Daten.
+
+\begin{itemize}
+  \item Für europäische Teams:
+    \[
+    \alpha_E = 36 + 1 = 37, \quad \beta_E = 29 + 1 = 30
+    \]
+    Somit ist die Prior-Verteilung: \( \text{Beta}(37, 30) \).
+
+  \item Für nicht-europäische Teams:
+    \[
+    \alpha_{\neg E} = 36 + 1 = 37, \quad \beta_{\neg E} = 11 + 1 = 12
+    \]
+    Somit ist die Prior-Verteilung: \( \text{Beta}(37, 12) \).
+\end{itemize}
+
+\textbf{Likelihood-Verteilung:} \\
+Für die gesamte Siegquote (Likelihood) wird ebenfalls eine Beta-Verteilung verwendet, basierend auf den gesamten Spielen der deutschen Nationalmannschaft:
+\[
+\alpha_{\text{total}} = 72 + 1 = 73, \quad \beta_{\text{total}} = 40 + 1 = 41
+\]
+Die Likelihood-Verteilung ist daher: \( \text{Beta}(73, 41) \).
+
+Die Posterior-Verteilung kann als Produkt von Prior und Likelihood berechnet werden. Sie wird durch Normierung auf den gesamten Bereich der Siegquote \( p \) bestimmt.
+
+\textbf{Posterior-Verteilung:} \\
+Die Verteilungen für die Prior-, Likelihood- und Posterior-Verteilungen werden wie folgt dargestellt:
+
+\begin{itemize}
+  \item Prior für europäische Teams: \( \text{Beta}(37, 30) \)
+  \item Prior für nicht-europäische Teams: \( \text{Beta}(37, 12) \)
+  \item Likelihood für alle Spiele: \( \text{Beta}(73, 41) \)
+\end{itemize}
+
+Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden durch das Produkt der Prior- und Likelihood-Verteilungen berechnet.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../images/world_cup.png}
+  \caption{Prior-, Likelihood- und Posterior-Verteilungen der Siegquote der deutschen Nationalmannschaft}
+\end{figure}
+
+\textbf{Punktschätzer:} \\
+Der Erwartungswert der Posterior-Verteilung ist der Mittelwert der Beta-Verteilung, der mit folgender Formel berechnet wird:
+\[
+E = \frac{\alpha_{\text{posterior}}}{\alpha_{\text{posterior}} + \beta_{\text{posterior}}}
+\]
+Für europäische Teams ist der Erwartungswert:
+\[
+E_E = \frac{37 + 73}{37 + 73 + 30 + 41} = \frac{110}{181} \approx 0.6077
+\]
+Für nicht-europäische Teams ist der Erwartungswert:
+\[
+E_{\neg E}= \frac{37 + 73}{37 + 36 + 12 + 41} = \frac{110}{163} \approx 0.6748
+\]
+
+\textbf{Konfidenzintervall:} \\
+Das 95\%-Konfidenzintervall für die Posterior-Verteilung wird durch die Quantilfunktion der Beta-Verteilung berechnet. Wir verwenden das 2.5\%- und 97.5\%-Quantil.
+Dies wurde mithilfe des Programms \texttt{world\_cup\_bayes.py} durchgeführt. \\
+Für europäische Teams:
+
+\[
+I_E = [0.5358, 0.6775]
+\]
+Für nicht-europäische Teams:
+\[
+I_{\neg E} = [0.6012, 0.7444]
+\]
+
+\textbf{Hypothesentest:} \\
+Um die Hypothese \(H_0\) zu testen, dass die Siegquote gegen europäische Teams niedriger ist als gegen nicht-europäische Teams, wurden Monte-Carlo-Simulationen verwendet:
+
+\begin{itemize}
+    \item Aus den Posterior-Verteilungen wurden \( 100{.}000 \) Zufallswerte (Samples) gezogen.
+    \item Die Wahrscheinlichkeit \( P(H_1) = P(\pi_E < \pi_{\neg E}) \) wurde als der Anteil der Simulationen berechnet, bei denen \( \pi_E < \pi_{\neg E} \).
+    \item Die Wahrscheinlichkeit \( P(H_0) = 1 - P(H_1) \) wurde ebenfalls berechnet.
+    \item Je nachdem, welche Wahrscheinlichkeit größer ist, wurde entschieden, ob \( H_0 \) (Nullhypothese) oder \( H_1 \) (Alternativhypothese) akzeptiert wird.
+\end{itemize}
+
+\textbf{Ergebnisse:} \\
+\( P(H_0) = 0.0972 \) und \( P(H_1) = 0.9028 \) \\
+Da \( P(H_1) > P(H_0) \), wird die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) abgelehnt. \\
+Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
+\newpage
+
 \subsection{Vergleich von klassischer vs. bayesianischer Statistik}
 Semmelweis' Vermutung zum Kindbettfieber basiert auf seiner Beobachtung, dass der Sterberate von Frauen bei der Geburt 
 in einer Klinik stark variierte, je nachdem, ob die Geburtshelfer ihre Hände vor der Entbindung in einer Chlorlösung wuschen. 
@@ -621,16 +783,6 @@ Für $\alpha = 0.01$ beidseitige Konfidenzintervalle für $\Pi_X$ und $\Pi_Y$:
   I_Y = [0.0316, 0.0355]
 \end{equation}
 
-\subsubsection{Vergleich der Ergebnisse}
-Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert uns unterschiedliche Perspektiven:
-
-\begin{itemize}
-    \item Mit der klassischen Statistik haben wir die Sterblichkeitsraten für beide Perioden direkt berechnet und den Unterschied gemessen.
-    \item Die bayesianische Statistik berücksichtigt zusätzlich Vorwissen und liefert eine schätzungsweise Wahrscheinlichkeitsverteilung 
-    der Sterblichkeitsraten, was eine flexiblere Modellierung und Unsicherheitsabschätzung ermöglicht.
-\end{itemize}
-\newpage
-
 \subsubsection{Vergleich der klassischen und bayesianischen Statistik}
 
 \begin{table}[h!]
@@ -684,167 +836,12 @@ Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert
   \label{tab:vergleich_vor_nachteile}
 \end{table}
 
-\subsection{Vergleich anhand gewählter Datensätze - Fussball WM}
-Alle WM-Spiele und Siege der deutschen Nationalmannschaft wurden analysiert. (siehe oben)
-Besonderes Augenmerk lag auf der Siegrate gegen europäische und nicht-europäische Gegner. \\
-
-Daten:
-\begin{itemize}
-  \item Gegen europäische Teams wurden 65 Spiele gespielt, davon 36 gewonnen.
-  \item Gegen nicht-europäische Teamsn wurden 47 Spiele gespielt, davon 36 gewonnen.
-  \item Insgesamt wurden 112 Spiele gespielt, davon 72 gewonnen.
-\end{itemize}
-
-\subsubsection{Berechnung mit klassischer Statistik}
-\textbf{Punktschätzer:}
-\[
-\hat{\pi}_E = \frac{36}{65} = 0.5538
-\]
-\[
-\hat{\pi}_{\neg E} = \frac{36}{47} = 0.7659
-\]
-\[
-\hat{\pi}_G = \frac{72}{112} = 0.6429
-\]
-
-\textbf{Konfidenzintervall:}
-Für \(\alpha = 0.05\) beidseitige Konfidenzintervalle:
-
-\[
-I_E = \left[ 0.5538 - 1.96 \cdot \sqrt{\frac{0.5538 \cdot (1-0.5538)}{65}}, \, 0.5538 + 1.96 \cdot \sqrt{\frac{0.5538 \cdot (1-0.5538)}{65}} \right]
-\]
-\[
-I_E = [0.4330, 0.6746]
-\]
-
-\[
-I_{\neg E} = \left[ 0.7659 - 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}}, \, 0.7659 + 1.96 \cdot \sqrt{\frac{0.7659 \cdot (1-0.7659)}{47}} \right]
-\]
-\[
-I_{\neg E} = [0.6448, 0.8870]
-\]
-
-\[
-I_G = \left[ 0.6429 - 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}}, \, 0.6429 + 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}} \right]
-\]
-\[
-I_G = [0.5542, 0.7316]
-\]
-
-\textbf{Hypothesentest:} \\
-Es wird \(H_0 : \pi_E \geq \pi_{\neg E}\) oder auch \(H_0 : \pi_E - \pi_{\neg E} \geq 0\) gegen \(H_1 : \pi_E - \pi_{\neg E} < 0\) getestet. \\
-Dafür wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
-
-Wir berechnen den Standardfehler für den Unterschied der Anteile:
-\[
-SE = \sqrt{\hat{\pi}_G(1 - \hat{\pi}_G) \left(\frac{1}{65} + \frac{1}{47}\right)} = \sqrt{0.6429 \cdot (1 - 0.6429) \left(\frac{1}{65} + \frac{1}{47}\right)} \approx 0.0917
-\]
-Berechnung des z-Werts:
-\[
-z = \frac{\hat{\pi}_E - \hat{\pi}_{\neg E}}{SE} = \frac{0.5538 - 0.7659}{0.0917} \approx -2.31
-\]
-Für ein Signifikanzniveau von \( \alpha = 0.05 \) und einen einseitigen Test ist der kritische z-Wert:
-\[
-z_{\text{kritisch}} = -1.645
-\]
-Da der berechnete z-Wert von \(-2.31\) kleiner als der kritische z-Wert von \(-1.645\) ist, können wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) ablehnen.
-Interpretation: Die Siegrate der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
-
-\subsubsection{Berechnung mit bayesianischer Statistik}
-
-\textbf{Vorwissen:} \\
-Für die bayesianische Analyse nehmen wir als Prior-Verteilungen Beta-Verteilungen für die Siegquote der deutschen Nationalmannschaft gegen europäische und nicht-europäische Teams an. Die Parameter dieser Verteilungen basieren auf den beobachteten Daten.
+Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert uns unterschiedliche Perspektiven:
 
 \begin{itemize}
-  \item Für europäische Teams:
-    \[
-    \alpha_E = 36 + 1 = 37, \quad \beta_E = 29 + 1 = 30
-    \]
-    Somit ist die Prior-Verteilung: \( \text{Beta}(37, 30) \).
-
-  \item Für nicht-europäische Teams:
-    \[
-    \alpha_{\neg E} = 36 + 1 = 37, \quad \beta_{\neg E} = 11 + 1 = 12
-    \]
-    Somit ist die Prior-Verteilung: \( \text{Beta}(37, 12) \).
+  \item Die klassische Statistik ermöglicht direkte Berechnungen und Vergleiche basierend auf Stichprobendaten, ohne dass Vorwissen berücksichtigt werden muss. Dies führt zu klaren und standardisierten Ergebnissen.
+  \item Die bayesianische Statistik bietet durch die Einbeziehung von Vorwissen (Priors) eine flexiblere Modellierung. Sie liefert Wahrscheinlichkeitsverteilungen (Posterior) für Parameter und berücksichtigt Unsicherheiten umfassender.
 \end{itemize}
-
-\textbf{Likelihood-Verteilung:} \\
-Für die gesamte Siegquote (Likelihood) wird ebenfalls eine Beta-Verteilung verwendet, basierend auf den gesamten Spielen der deutschen Nationalmannschaft:
-\[
-\alpha_{\text{total}} = 72 + 1 = 73, \quad \beta_{\text{total}} = 40 + 1 = 41
-\]
-Die Likelihood-Verteilung ist daher: \( \text{Beta}(73, 41) \).
-
-Die Posterior-Verteilung kann als Produkt von Prior und Likelihood berechnet werden. Sie wird durch Normierung auf den gesamten Bereich der Siegquote \( p \) bestimmt.
-
-\textbf{Posterior-Verteilung:} \\
-Der Posterior wird durch die folgende Gleichung berechnet:
-\[
-\text{Posterior}(p) \propto \text{Prior}(p) \cdot \text{Likelihood}(p)
-\]
-Die Verteilungen für die Prior-, Likelihood- und Posterior-Verteilungen werden wie folgt dargestellt:
-
-\begin{itemize}
-  \item Prior für europäische Teams: \( \text{Beta}(37, 30) \)
-  \item Prior für nicht-europäische Teams: \( \text{Beta}(37, 12) \)
-  \item Likelihood für alle Spiele: \( \text{Beta}(73, 41) \)
-\end{itemize}
-
-Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden durch das Produkt der Prior- und Likelihood-Verteilungen berechnet.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{../images/world_cup.png}
-  \caption{Prior-, Likelihood- und Posterior-Verteilungen der Siegquote der deutschen Nationalmannschaft}
-\end{figure}
-
-\textbf{Punktschätzer:} \\
-Der Erwartungswert der Posterior-Verteilung ist der Mittelwert der Beta-Verteilung, der mit folgender Formel berechnet wird:
-\[
-E = \frac{\alpha_{\text{posterior}}}{\alpha_{\text{posterior}} + \beta_{\text{posterior}}}
-\]
-Für europäische Teams ist der Erwartungswert:
-\[
-E_E = \frac{37 + 73}{37 + 73 + 30 + 41} = \frac{110}{181} \approx 0.6077
-\]
-Für nicht-europäische Teams ist der Erwartungswert:
-\[
-E_{\neg E}= \frac{37 + 73}{37 + 36 + 12 + 41} = \frac{110}{163} \approx 0.6748
-\]
-
-\textbf{Konfidenzintervall:} \\
-Das 95\%-Konfidenzintervall für die Posterior-Verteilung wird durch die Quantilfunktion der Beta-Verteilung berechnet. Wir verwenden das 2.5\%- und 97.5\%-Quantil.
-Dies wurde mithilfe des Programms \texttt{world\_cup\_bayes.py} durchgeführt. \\
-Für europäische Teams:
-
-\[
-I_E = [0.5358, 0.6775]
-\]
-Für nicht-europäische Teams:
-\[
-I_{\neg E} = [0.6012, 0.7444]
-\]
-
-\textbf{Hypothesentest:} \\
-Wir testen die Hypothese, dass die Siegquote der deutschen Nationalmannschaft gegen europäische Teams niedriger ist als gegen nicht-europäische Teams.
-Dafür definieren wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) und die Alternative \( H_1 : \pi_E < \pi_{\neg E} \).
-Um die Hypothese zu testen, dass die Siegquote gegen europäische Teams niedriger ist als gegen nicht-europäische Teams, wurden Monte-Carlo-Simulationen verwendet:
-
-\begin{itemize}
-    \item Aus den Posterior-Verteilungen wurden \( 100{.}000 \) Zufallswerte (Samples) gezogen.
-    \item Die Wahrscheinlichkeit \( P(H_1) = P(\pi_E < \pi_{\neg E}) \) wurde als der Anteil der Simulationen berechnet, bei denen \( \pi_E < \pi_{\neg E} \).
-    \item Die Wahrscheinlichkeit \( P(H_0) = 1 - P(H_1) \) wurde ebenfalls berechnet.
-    \item Je nachdem, welche Wahrscheinlichkeit größer ist, wurde entschieden, ob \( H_0 \) (Nullhypothese) oder \( H_1 \) (Alternativhypothese) akzeptiert wird.
-\end{itemize}
-
-\textbf{Ergebnisse:} \\
-\( P(H_0) = 0.0972 \) und \( P(H_1) = 0.9028 \) \\
-Da \( P(H_1) > P(H_0) \), wird die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) abgelehnt. \\
-Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
-
-\subsubsection{Vergleich der Ergebnisse}
-Die klassische und bayesianische Statistik liefern unterschiedliche Perspektiven auf die Siegquote der deutschen Nationalmannschaft gegen europäische und nicht-europäische Teams:
 
 \newpage
 
