@@ -12,9 +12,9 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{geometry}
-\usepackage{listings}
 \usepackage{xcolor}
 \usepackage{mhchem}
+\usepackage{subcaption}
 \usepackage{comment}
 
 \usepackage{biblatex} % Verwende BibLaTeX
@@ -28,6 +28,17 @@
   columns=fullflexible,
   breaklines=true,
   captionpos=b
+}
+
+\lstset{ 
+  language=Python, 
+  basicstyle=\ttfamily, 
+  numbers=left, 
+  frame=single, 
+  breaklines=true, 
+  aboveskip=10pt,   
+  xleftmargin=20pt, 
+  belowskip=20pt    
 }
 
 \geometry{a4paper, top=25mm, left=30mm, right=25mm, bottom=30mm,
@@ -260,7 +271,7 @@ Wenn P(x$|$y) die Posterioridichte für den Parameter x ist, ist das Konfidenzin
   P(x \in X_u|y) = \int_{X_u} P(x|y) dx = 1-\alpha
 \end{equation}
 Wobei für alle $x_1 \in X_u, x_2 \not\in X_u$ gilt $P(x_1|y) \geq P(x_2|y)$; Xu ist dabei ein Unterraum auf dem Parameterraum \parencite[71]{EinfBayesStatistik}. Meist wird für $\alpha$ 0.1, 0.05 oder 0.01 gewählt. Höhere Konfidenzniveaus führen zu größeren Intervallen, da mehr Unsicherheit abgedeckt wird, während niedrigere Konfidenzniveaus kleinere Intervalle liefern, die jedoch ein höheres Risiko haben, den wahren Parameter nicht einzuschließen. \\\\
-Falls die Posterioriverteilung P(x$|$y) beispielsweise der Normalverteilung N($\mu,\sigma^2$) ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} * \sigma$ und $\mu + z_{1-\alpha/2} * \sigma$ bestimmen.\\\\
+Falls die Posterioriverteilung P(x$|$y) beispielsweise der Normalverteilung N($\mu,\sigma^2$) ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} \cdot \sigma$ und $\mu + z_{1-\alpha/2} \cdot \sigma$ bestimmen.\\\\
 Da die Konfidenzintervalle in der bayesianischen Statistik auf der Posterioriverteilung basieren, unterscheiden sich die Ergebnisse von denen der klassischen Statistik, da diese auf einer anderen Grundlage definiert sind.
 
 \newpage
@@ -316,7 +327,7 @@ Der Algorithmus besteht aus folgenden Schritten:
   \end{equation}
   \item Wiederhole die Schritte 2-5 bis die Stichprobe die gewünschte Verteilung genau genug approximiert
 \end{enumerate}
-Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen q(y$|$x) funktioniert. Bei einer symmetrischen Hilfsfunktion ist q(y|$x_t$) = q($x_t$|y) und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
+Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen q(y$|$x) funktioniert. Bei einer symmetrischen Hilfsfunktion ist q(y$|x_t$) = q($x_t|$y) und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welche verworfen wird, weil sich die Kette erst an die Zielverteilung anpassen muss. Der restliche Teil wird als \textbf{Sampling-Phase} bezeichnet, welche dann die Verteilung simuliert. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 
 \subsubsection{Konvergenzkriterien für MCMC-Simulationen}
@@ -325,21 +336,107 @@ Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welc
 \section{Praktischer Teil}
 
 \subsection{Implementierung des Metropolis-Hastings-Algorithmus in Python}
+Der Metropolis-Hasting-Algorithmus erstellt mit Hilfe der Posteriorifunktion eine Markov-Kette. Dafür wird die Normalverteilung als Hilfsfunktion verwendet, da sie ähnlich der Posteriorifunktion ist, welche in unserem Beispiel verwendet wird. Als $\mu$ wird der aktuelle Wert verwendet und als $\sigma^2$ wird 0.1 gewählt. Das $\sigma$ beeinflusst die Schrittweite, ist es hoch werden mit höherer Wahrscheinlichkeit vom aktuellen Wert weiter entfernte Werte gewählt. Da in unserem Beispiel eine Wahrscheinlichkeit geschätzt wird muss beachtet werden, dass neue Werte immer zwischen 0 und 1 liegen. Der folgende Python Code zeigt die Implementierung des Metropolis-Hastings-Algorithmus. 
+\lstinputlisting[firstline=19,lastline=43]{../src/binomStatistics.py} 
 \newpage
 
 \subsection{Anwendung der bayesianischen Statistik am Beispiel}
-\newpage
-
 \subsubsection{Überblick und Aufbereitung des Datensatzes}
-\newpage
+Für den praktischen Teil der Arbeit nutzen wir einen CSV-Datensatz mit detatailierten Informationen zu Weltmeisterschaft-Fußballspielen. Der Datensatz enthält alle WM-Spiele zwischen 1930 und 2022 mit Informationen über die Manschaften, Ergebnisse, Austragungsorte, Spielereignisse (Auswächslungen etc.), Schiedrichterdaten und so weiter. Im ersten Teil wollen wir aber nur die Siegesquote der deutschen Nationalmannschaft analysieren. Dafür haben wir in \url{../src/world_cup_wins_germany.py} berechnet, wie viele Spiele die deutsche Nationalmannschaft gespielt und wie viele davon gewonnen hat. Die Anzahl gewonnener Spiele beträgt dabei 72 von insgesamt 112 Spielen. \\\\
+Im späteren Verlauf unserer Untersuchungen wollen wir auch die Siegesquoten gegen europäische Teams mit denen gegen nicht-europäische Teams vergleichen. Dafür haben wir auch die Anzahl der gewonnenen Spiele gegen europäische und nicht-europäische Teams berechnet. Die Anzahl der gewonnenen Spiele gegen europäische Teams beträgt dabei 36 von insgesamt 65 Spielen und die Anzahl der gewonnenen Spiele gegen nicht-europäische Teams beträgt 36 von insgesamt 47 Spielen. \\\\
 
 \subsubsection{Anwendung der bayesianischen Statistik}
+Zuerst wollen wir die Siegesquote der deutschen Nationalmannschaft mit Hilfe des Metropolis-Hastings-Algorithmus schätzen. Als Vorwissen gehen wir dabei von einer um $\mu = 0.5$ normalverteilten Siegesquote mit einer Varianz von $\sigma^2 = 0.1$ aus, was somit unsere Prioiriverteilung ist. In die Likelihood Funktion fließt jetzt der gegebene Datensatz ein. Die Likelihood-Funktion ist somit eine Binomialverteilung mit den Parametern $x = 72$ und $n = 112$ ohne den Normierungsfaktor $\binom{n}{x}$. Die Posteriorifunktion ergibt sich aus der Multiplikation der Likelihood-Funktion und der Prioriverteilung. Dadurch ergeben sich folgende Python Funktionen, welche die Wahrscheinlichkeit für einen gegebenen Wert liefern.\\ 
+\lstinputlisting[firstline=7,lastline=17]{../src/binomStatistics.py} 
 \newpage
+\noindent Ist n die Gesamtanzahl an Spielen und x die Anzahl an Siegen ist die Prioriverteilung $P(p)$ somit mathematisch definiert als:
+\begin{equation}
+  P(p) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{(p-\mu)^2}{2\sigma^2}\right)}
+\end{equation}
+Und die Likelihood-Funktion $P(n,x|p)$ als:
+\begin{equation}
+  P(n,x|p) = p^x(1-p)^{n-x}
+\end{equation}
+Um nun den Normierungsfaktor P(n,x) der Posterioriverteilung zu berechnen zu können müsste man folgendes Integral berechnen:
+\begin{equation}
+  P(n,x) = \int_{0}^{1} (p^x(1-p)^{n-x}) \cdot \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left(-\frac{(p-\mu)^2}{2\sigma^2}\right)} dp
+\end{equation}
+Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropolis-Hastings-Algorithmus aus 3.1 verwenden, um eine Markovkette zu erstellen, die die Posterioriverteilung approximiert. Starten wir nun den Algorithums mit den Werten n = 112, x = 72 so erhalten wir folgende Posterioriverteilung:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../images/world_cup_germany.png}
+  \caption{Posterioriverteilung der Siegesquote der deutschen Nationalmannschaft}
+\end{figure}
+\noindent In der Grafik sieht man, die zuvor angenommene Prioriverteilung und die Posterioriverteilung welche eine geringere Varianz besitzt und um einiges weiter rechts liegt als die Prioriverteilung. Es ist deutlich zu erkennen, dass die Siegesquote deutlich höher als die zuvor angenommenen 50\% liegt. Der Erwartungswert der Posterioriverteilung beträgt ungefähr 0.615.
+\newpage
+\noindent Wie stark die Posterioriverteilung nach rechts verschoben wird und wie stark die Varianz abnimmt, hängt von der Größe der Stichprobe ab. Je größer die Stichprobe, desto stärker wird die Posterioriverteilung verschoben und desto geringer wird die Varianz. Diesen Prozess haben wir durch \url{../src/showcases/binomStatisticsAnimated.py} simuliert und im Ergebniss ist die erwartete Verschiebung deutlich zu erkennen:
+\begin{figure}[h]
+  \centering
+  % Erste Zeile mit zwei Bildern
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame1.png}
+      \caption{n=2}
+      \label{fig:bild1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame2.png}
+      \caption{n=10}
+      \label{fig:bild2}
+  \end{subfigure}
+  
+  \vspace{0.5cm}
+  
+  % Zweite Zeile mit zwei Bildern
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame3.png}
+      \caption{n=50}
+      \label{fig:bild3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSize/frame4.png}
+      \caption{n=200}
+      \label{fig:bild4}
+  \end{subfigure}
+  
+  \caption{Posterioriverteilung für verschiedene Stichprobengrößen}
+  \label{fig:mainfig}
+\end{figure}
+
+\noindent Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik vergleichen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
+\begin{equation}
+  I_e = \left[\frac{S_nF_1}{n-S_n+1+S_nF_1} , \frac{(S_n+1)F_2}{n-S_n+(S_n+1)F_2}\right]
+\end{equation}
+wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden $2S_n$ und $2(n-S_n+1)$ ist und $F_2$ das Quantil der F-Verteilung mit 1-$\alpha/2$ und den Freiheitsgraden $2(S_n+1)$ und $2(n-S_n)$ ist. Sn ist dabei die Anzahl der gewonnenen Spiele. Für die Berechnung haben wir das folgende Python-Programm geschrieben:
+\newpage
+\lstinputlisting[firstline=54,lastline=64]{../src/binomStatistics.py}
+
+\noindent Dieses liefert den Punktschätzer 0.617 und das Konfidenzintervall [0.532, 0.7] mit der bayesianischen Statistik und 0.643 und [0.547,731] für die klassische Statistik. \\\\
+Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
 
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
+Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posterioriverteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prioiriverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
+\lstinputlisting[firstline=47,lastline=51]{../src/showcases/binomStatisticsRecursiv.py}
 \newpage
+\noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
+\begin{figure}[h]
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../images/framesAnimatedRecursive/frame1.png}
+    \caption{Posteriori als Priori}
+    \label{fig:bild5}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../images/framesAnimatedRecursive/frame2.png}
+    \caption{Zusammengefasste Stichprobe}
+    \label{fig:bild6}
+  \end{subfigure}
 
-\subsubsection{Vergleich mit traditioneller Statistik}
+  \caption{Vergleich der 2 Varianten}
+  \label{fig:mainfig}
+\end{figure}
+\newpage
 
 \subsection{Vergleich von klassischer vs. bayesianischer Statistik}
 Semmelweis' Vermutung zum Kindbettfieber basiert auf seiner Beobachtung, dass der Sterberate von Frauen bei der Geburt 
