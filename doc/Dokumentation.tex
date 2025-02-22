@@ -337,7 +337,7 @@ Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welc
 
 \subsection{Implementierung des Metropolis-Hastings-Algorithmus in Python}
 Der Metropolis-Hasting-Algorithmus erstellt mit Hilfe der Posteriorifunktion eine Markov-Kette. Dafür wird die Normalverteilung als Hilfsfunktion verwendet, da sie ähnlich der Posteriorifunktion ist, welche in unserem Beispiel verwendet wird. Als $\mu$ wird der aktuelle Wert verwendet und als $\sigma^2$ wird 0.1 gewählt. Das $\sigma$ beeinflusst die Schrittweite, ist es hoch werden mit höherer Wahrscheinlichkeit vom aktuellen Wert weiter entfernte Werte gewählt. Da in unserem Beispiel eine Wahrscheinlichkeit geschätzt wird muss beachtet werden, dass neue Werte immer zwischen 0 und 1 liegen. Der folgende Python Code zeigt die Implementierung des Metropolis-Hastings-Algorithmus. 
-\lstinputlisting[firstline=19,lastline=43]{../src/binomStatistics.py} 
+\lstinputlisting[linerange={41-41,53-76}]{../src/binomStatistics.py}
 \newpage
 
 \subsection{Anwendung der bayesianischen Statistik am Beispiel}
@@ -347,7 +347,7 @@ Im späteren Verlauf unserer Untersuchungen wollen wir auch die Siegesquoten geg
 
 \subsubsection{Anwendung der bayesianischen Statistik}
 Zuerst wollen wir die Siegesquote der deutschen Nationalmannschaft mit Hilfe des Metropolis-Hastings-Algorithmus schätzen. Als Vorwissen gehen wir dabei von einer um $\mu = 0.5$ normalverteilten Siegesquote mit einer Varianz von $\sigma^2 = 0.1$ aus, was somit unsere Prioiriverteilung ist. In die Likelihood Funktion fließt jetzt der gegebene Datensatz ein. Die Likelihood-Funktion ist somit eine Binomialverteilung mit den Parametern $x = 72$ und $n = 112$ ohne den Normierungsfaktor $\binom{n}{x}$. Die Posteriorifunktion ergibt sich aus der Multiplikation der Likelihood-Funktion und der Prioriverteilung. Dadurch ergeben sich folgende Python Funktionen, welche die Wahrscheinlichkeit für einen gegebenen Wert liefern.\\ 
-\lstinputlisting[firstline=7,lastline=17]{../src/binomStatistics.py} 
+\lstinputlisting[linerange={7-7,17-17,19-19,27-27,29-29,39-39}]{../src/binomStatistics.py}
 \newpage
 \noindent Ist n die Gesamtanzahl an Spielen und x die Anzahl an Siegen ist die Prioriverteilung $P(p)$ somit mathematisch definiert als:
 \begin{equation}
@@ -410,14 +410,14 @@ Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropol
 \end{equation}
 wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden $2S_n$ und $2(n-S_n+1)$ ist und $F_2$ das Quantil der F-Verteilung mit 1-$\alpha/2$ und den Freiheitsgraden $2(S_n+1)$ und $2(n-S_n)$ ist. Sn ist dabei die Anzahl der gewonnenen Spiele. Für die Berechnung haben wir das folgende Python-Programm geschrieben:
 \newpage
-\lstinputlisting[firstline=54,lastline=64]{../src/binomStatistics.py}
+\lstinputlisting[firstline=87,lastline=97]{../src/binomStatistics.py}
 
 \noindent Dieses liefert den Punktschätzer 0.617 und das Konfidenzintervall [0.532, 0.7] mit der bayesianischen Statistik und 0.643 und [0.547,731] für die klassische Statistik. \\\\
 Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
 
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
 Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posterioriverteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prioiriverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
-\lstinputlisting[firstline=47,lastline=51]{../src/showcases/binomStatisticsRecursiv.py}
+\lstinputlisting[linerange={83-83,92-95}]{../src/showcases/binomStatisticsRecursiv.py}
 \newpage
 \noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
 \begin{figure}[h]
