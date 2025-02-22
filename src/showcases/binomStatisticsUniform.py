@@ -57,7 +57,7 @@ def metropolis_hastings(x: int, n: int, n_samples: int = 10000, start: float = 0
     for _ in range(n_samples):
         
         # Vorschlag fuer einen neuen Wert basierend auf einer Normalverteilung um den aktuellen Wert
-        proposed_p = np.random.normal(current_p, proposal_width)
+        proposed_p = proposed_p = current_p + np.random.uniform(-proposal_width, proposal_width)
         
         # Ablehnung des Vorschlags, falls er ausserhalb des Wertebereichs [0,1] liegt
         if proposed_p < 0 or proposed_p > 1:

@@ -84,7 +84,7 @@ def prioriSamples(p: float, samples: list) -> float:
     """
     Berechnet eine empirische Prior-Verteilung auf Basis bisheriger Stichproben.
     
-    @param p: Wahrscheinlichkeit für einen Erfolg
+    @param p: Wahrscheinlichkeit fuer einen Erfolg
     @param samples: Liste von Stichproben zur Prior-Berechnung
     
     @return: Empirische Prior-Wahrscheinlichkeit
