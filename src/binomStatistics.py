@@ -4,30 +4,61 @@ from scipy.special import gamma
 from sys import argv
 import scipy.stats as stats
 
-# Binomialverteilung
-def likelihood(p, x, n):
+def likelihood(p: float, x: int, n: int) -> float:
+    """
+    Berechnet die Likelihood-Funktion fuer eine Binomialverteilung.
+    
+    @param p: Wahrscheinlichkeit fuer einen Erfolg
+    @param x: Anzahl der Erfolge
+    @param n: Gesamtanzahl der Versuche
+    
+    @return: Wahrscheinlichkeitswert der Binomialverteilung
+    """
     return (p**x) * ((1 - p)**(n - x))
 
-# Normalverteilung N(0.5, 0.1)
-def prior(p):
+def prior(p: float) -> float:
+    """
+    Berechnet die Prior-Wahrscheinlichkeit unter Annahme einer Normalverteilung mit Mittelwert 0.5 und Standardabweichung 0.1.
+    
+    @param p: Wahrscheinlichkeit fuer einen Erfolg
+    
+    @return: Wahrscheinlichkeitsdichte der Prior-Verteilung
+    """
     return stats.norm.pdf(p, 0.5, 0.1)
 
-# Posteriorverteilung ohne Normalisierungskonstante
-def posterior(p, x, n):
+def posterior(p: float, x: int, n: int) -> float:
+    """
+    Berechnet die unnormierte Posterior-Wahrscheinlichkeit basierend auf Likelihood und Prior.
+    
+    @param p: Wahrscheinlichkeit fuer einen Erfolg
+    @param x: Anzahl der Erfolge
+    @param n: Gesamtanzahl der Versuche
+    
+    @return: Unnormierte Posterior-Wahrscheinlichkeit
+    """
     return likelihood(p, x, n) * prior(p)
 
-# Metropolis-Hastings Algorithmus zum Sampling der Posteriorverteilung
-def metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1):
+def metropolis_hastings(x: int, n: int, n_samples: int, start: float = 0.5, proposal_width: float = 0.1) -> list:
+    """
+    Fuehrt den Metropolis-Hastings-Algorithmus aus, um Stichproben aus der Posterior-Verteilung zu ziehen.
     
-    samples = [] # Markov-Kette
-    current_p = start # Startwert - vorheriger Wert
+    @param x: Anzahl der Erfolge (z.B. gewonnene Spiele)
+    @param n: Gesamtanzahl der Versuche (z.B. gespielte Spiele)
+    @param n_samples: Anzahl der zu ziehenden Stichproben
+    @param start: Startwert fuer die Markov-Kette
+    @param proposal_width: Standardabweichung der Normalverteilung fuer die Vorschlagswerte
+    
+    @return: Liste der gezogenen Stichproben (ohne Burn-in-Phase)
+    """
+    samples = []  # Liste zur Speicherung der Stichproben (Markov-Kette)
+    current_p = start  # Startwert fuer die Markov-Kette
     
     for _ in range(n_samples):
         
-        # Vorschlag fuer einen neuen Wert aus der Normalverteilung um den vorherigen Wert
+        # Vorschlag fuer einen neuen Wert basierend auf einer Normalverteilung um den aktuellen Wert
         proposed_p = np.random.normal(current_p, proposal_width)
         
-        # Ablehnung, wenn der Vorschlag ausserhalb des Wertebereichs liegt
+        # Ablehnung des Vorschlags, falls er ausserhalb des Wertebereichs [0,1] liegt
         if proposed_p < 0 or proposed_p > 1:
             continue
         
@@ -35,27 +66,29 @@ def metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1):
         current_posterior = posterior(current_p, x, n)
         proposed_posterior = posterior(proposed_p, x, n)
         acceptance_ratio = proposed_posterior / current_posterior
-        if np.random.rand() < acceptance_ratio:
-            current_p = proposed_p  # Akzeptiere den Vorschlag
         
-        samples.append(current_p)
+        # Akzeptiere den neuen Vorschlag mit der berechneten Wahrscheinlichkeit
+        if np.random.rand() < acceptance_ratio:
+            current_p = proposed_p  # Aktualisiere den aktuellen Wert
+        
+        samples.append(current_p)  # Speichere den aktuellen Wert in der Stichprobenliste
     
-    return samples[1000:]  # Burn-in entfernen
+    return samples[1000:]  # Entferne die ersten 1000 Werte (Burn-in-Phase)
 
-# Parameter für das Problem
-x = int(argv[2])
-n = int(argv[1])
-sp_p = x / n
-n_samples = 100_00
+# Einlesen der Parameter von der Kommandozeile
+x = int(argv[2])  # Anzahl der Erfolge (z.B. gewonnene Spiele)
+n = int(argv[1])  # Gesamtanzahl der Versuche (z.B. gespielte Spiele)
+sp_p = x / n  # Haeufigkeitsbasierte Schaetzung von p
+n_samples = 100_00  # Anzahl der Stichproben aus der Posterior-Verteilung
 
-# Sampling aus der Posteriorverteilung
+# Ziehung von Stichproben aus der Posterior-Verteilung
 samples = metropolis_hastings(x, n, n_samples, start=0.5, proposal_width=0.1)
 
-#Bayes'sche Schaetzung und Konfidenzintervall fuer p
+# Berechnung der Bayes'schen Schaetzung und des 95%-Konfidenzintervalls
 mean_bayes = np.mean(samples)
 konf_bayes_low, konf_bayes_high = np.percentile(samples, [2.5, 97.5])
 
-#Klassische Schaetzung und Konfidenzintervall fuer p
+# Berechnung der klassischen Schaetzung und des Konfidenzintervalls auf Basis der F-Verteilung
 mean_classical = x / n
 sn = x
 f1 = stats.f.ppf(0.025, 2*sn, 2*(n-sn+1))
@@ -63,6 +96,7 @@ f2 = stats.f.ppf(0.975, 2*(sn+1), 2*(n-sn))
 konf_classical_low = (sn*f1)/(n-sn+1+sn*f1)
 konf_classical_high = ((sn+1)*f2)/(n-sn+(sn+1)*f2)
 
+# Ausgabe der Ergebnisse
 print()
 print("----Bayes'sche Schätzung und Konfidenzintervall für p----")
 print(f"Bayes'sche Schätzung für p: {mean_bayes:.3f}")
@@ -73,6 +107,7 @@ print(f"Klassische Schätzung für p: {mean_classical:.3f}")
 print(f"Konfidenzintervall für p: [{konf_classical_low:.3f}, {konf_classical_high:.3f}]")
 print()
 
+# Visualisierung der Prior- und Posterior-Verteilung
 p_values = np.linspace(0, 1, 100)
 priori = [prior(p) for p in p_values]
 plt.plot(p_values, priori, label='Prior', color='green')
