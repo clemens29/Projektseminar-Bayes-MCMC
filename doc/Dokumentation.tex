@@ -113,7 +113,7 @@ Problem der bayesianischen Statistik ist jedoch, dass die Berechnung der Posteri
 Das Bayes'sche Theorem ist ein fundamentales Konzept der bayesianischen Statistik.Es beschreibt, wie man vorhandenes Vorwissen durch neue Daten aktualisiert. \\\\
 Die \textbf{Prioriverteilung} beschreibt die anfänglichen Annahmen oder das Vorwissen über einen 
 Parameter oder ein Ereignis, bevor neue Daten berücksichtigt werden.
-Dabei ``enthält die Priorverteilung eines Parameters $\theta$, ausgedrückt durch f ($ \theta $), 
+Dabei ``enthält die Priorverteilung eines Parameters $\theta$, ausgedrückt durch $f (\theta) $, 
 was man vor Auswertung der Stichprobe über $\theta$ weiß.'' \parencite[90]{StatistikKlassischOderBayes}. \\
 Als Priori-Wahrscheinlichkeit wird somit die Wahrscheinlichkeit $ P(A) $ bezeichnet. \\\\
 Die \textbf{Posterioriverteilung} beschreibt das Wissen über einen Parameter oder ein Ereignis, nachdem alle 
@@ -266,12 +266,12 @@ Die Wahl zwischen den Schätzern hängt so von der Problemstellung ab.
 
 \subsection*{\underline{Konfidenzintervalle}}
 Um Unsicherheiten bei Schätzungen zu quantifizieren werden oftmals \textbf{Konfidenzintervall} verwendet. Konfidenzintervalle geben einen Bereich an, in dem ein unbekannter Parameter mit einer bestimmten Wahrscheinlichkeit liegt. In der Bayes Statistik kann eine Bereichschätzung unmittelbar aus der Posterioriverteilung abgeleitet werden. \parencite[71]{EinfBayesStatistik} \\\\
-Wenn P(x$|$y) die Posterioridichte für den Parameter x ist, ist das Konfidenzintervall mit Konfidenzniveau 1-$\alpha$ definiert als:
+Wenn $P(x | y)$ die Posterioridichte für den Parameter x ist, ist das Konfidenzintervall mit Konfidenzniveau 1-$\alpha$ definiert als:
 \begin{equation}
   P(x \in X_u|y) = \int_{X_u} P(x|y) dx = 1-\alpha
 \end{equation}
 Wobei für alle $x_1 \in X_u, x_2 \not\in X_u$ gilt $P(x_1|y) \geq P(x_2|y)$; Xu ist dabei ein Unterraum auf dem Parameterraum \parencite[71]{EinfBayesStatistik}. Meist wird für $\alpha$ 0.1, 0.05 oder 0.01 gewählt. Höhere Konfidenzniveaus führen zu größeren Intervallen, da mehr Unsicherheit abgedeckt wird, während niedrigere Konfidenzniveaus kleinere Intervalle liefern, die jedoch ein höheres Risiko haben, den wahren Parameter nicht einzuschließen. \\\\
-Falls die Posterioriverteilung P(x$|$y) beispielsweise der Normalverteilung N($\mu,\sigma^2$) ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} \cdot \sigma$ und $\mu + z_{1-\alpha/2} \cdot \sigma$ bestimmen.\\\\
+Falls die Posterioriverteilung $P(x | y)$ beispielsweise der Normalverteilung $N(\mu,\sigma^2)$ ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} \cdot \sigma$ und $\mu + z_{1-\alpha/2} \cdot \sigma$ bestimmen.\\\\
 Da die Konfidenzintervalle in der bayesianischen Statistik auf der Posterioriverteilung basieren, unterscheiden sich die Ergebnisse von denen der klassischen Statistik, da diese auf einer anderen Grundlage definiert sind.
 
 \newpage
@@ -306,17 +306,17 @@ Im folgenden wird der Metropolis-Hastings-Algorithmus erläutert, der eine der b
 \newpage
 
 \subsubsection{Der Metropolis-Hastings-Algorithmus}
-Der Metropolis-Hastings-Algorithmus erstellt eine Markov-Kette, die eine Posterioriverteilung f(x) approximiert. f(x) besteht aus einer bekannten Funktion p(x), die sich aus der Likelihood-Funktion und der Prioriverteilung zusammensetzt und aus einer unbekannten Normierungskonstante. Für die Berechnung wird eine Hilfsfunktion q(y$|$x) benötigt, welche die Übergangswahrscheinlichkeit von einem Zustand $x_t$ zum nächsten Zustand $x_{\text{t+1}}$ angibt und ähnlich wie die Posterioriverteilung ist. Oftmals wird dafür die Normalverteilung gewählt sodass q(y$|$x) = N(x,$\sigma^2$), wobei $\sigma$ beeinflusst dabei die Schrittweite, die die Markov-Kette macht. \parencite[226f.]{HandbookMonteCarloMethods} \\\\ 
+Der Metropolis-Hastings-Algorithmus erstellt eine Markov-Kette, die eine Posterioriverteilung $f(x)$ approximiert. $f(x)$ besteht aus einer bekannten Funktion $p(x)$, die sich aus der Likelihood-Funktion und der Prioriverteilung zusammensetzt und aus einer unbekannten Normierungskonstante. Für die Berechnung wird eine Hilfsfunktion q(y$|$x) benötigt, welche die Übergangswahrscheinlichkeit von einem Zustand $x_t$ zum nächsten Zustand $x_{\text{t+1}}$ angibt und ähnlich wie die Posterioriverteilung ist. Oftmals wird dafür die Normalverteilung gewählt sodass $q(y|x) = N(x,\sigma^2)$, wobei $\sigma$ beeinflusst dabei die Schrittweite, die die Markov-Kette macht. \parencite[226f.]{HandbookMonteCarloMethods} \\\\ 
 Der Algorithmus besteht aus folgenden Schritten:
 \begin{enumerate}
   \item Wähle einen Startwert $x_0$
-  \item Wähle einen neuen Wert y aus der Hilfsfunktion q(y$|x_t$) im Fall einer Normalverteilung N($x_t$,$\sigma^2$) wird ein zufälliger Wert aus der Normalverteilung gezogen
+  \item Wähle einen neuen Wert y aus der Hilfsfunktion $q(y|x_t)$ im Fall einer Normalverteilung $N(x_t,\sigma^2)$ wird ein zufälliger Wert aus der Normalverteilung gezogen
   \item Berechne die Akzeptanzwahrscheinlichkeit $\alpha$:
   \begin{equation}
     \alpha = min{\{1,\frac{p(y) \cdot q(x_t|y)}{p(x_t) \cdot q(y|x_t)}\}}
   \end{equation}
   Diese gibt an, wie wahrscheinlich der neue Wert $x_{\text{t+1}}$ akzeptiert wird.
-  \item Ziehe eine Zufallszahl u aus einer Gleichverteilung U(0,1)
+  \item Ziehe eine Zufallszahl u aus einer Gleichverteilung $U(0,1)$
   \item Wähle den nächsten Wert $x_{\text{t+1}}$:
   \begin{equation}
     x_{t+1} = 
@@ -327,10 +327,9 @@ Der Algorithmus besteht aus folgenden Schritten:
   \end{equation}
   \item Wiederhole die Schritte 2-5 bis die Stichprobe die gewünschte Verteilung genau genug approximiert
 \end{enumerate}
-Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen q(y$|$x) funktioniert. Bei einer symmetrischen Hilfsfunktion ist q(y$|x_t$) = q($x_t|$y) und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
+Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen $q(y|x)$ funktioniert. Bei einer symmetrischen Hilfsfunktion ist $q(y|x_t) = q(x_t|y)$ und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welche verworfen wird, weil sich die Kette erst an die Zielverteilung anpassen muss. Der restliche Teil wird als \textbf{Sampling-Phase} bezeichnet, welche dann die Verteilung simuliert. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 
-\subsubsection{Konvergenzkriterien für MCMC-Simulationen}
 \newpage
 
 \section{Praktischer Teil}
@@ -404,21 +403,43 @@ Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropol
   \label{fig:mainfig}
 \end{figure}
 
-\noindent Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik vergleichen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
+\noindent Der Einfluss der Prioriverteilung auf die Posterioriverteilung nimmt mit steigender Stichprobengröße somit immer weiter ab. Das kann man auch gut in folgender Grafik erkennen, in welcher die Gleichverteilung auf [0,1] als Prioriverteilung verwendet wird. Es ist zu erkennen, dass die Posterioriverteilung sich immer weiter der oben abgebildeten Posterioriverteilung annähert also normalverteilt wird, obwohl die Prioriverteilung eine Gleichverteilung ist.
+\newpage
+\begin{figure}[h]
+  \centering
+  % Erste Zeile mit zwei Bildern
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSizeUniform/frame1.png}
+      \caption{n=2}
+      \label{fig:bild1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+      \includegraphics[width=\textwidth]{../images/framesAnimatedSampleSizeUniform/frame2.png}
+      \caption{n=200}
+      \label{fig:bild2}
+  \end{subfigure}
+  \caption{Posterioriverteilung für verschiedene Stichprobengrößen mit Gleichverteilung als Prioriverteilung}
+\end{figure}
+
+\newpage
+\subsubsection{Statistische Auswertung der Ergebnisse}
+
+Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik vergleichen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
 \begin{equation}
   I_e = \left[\frac{S_nF_1}{n-S_n+1+S_nF_1} , \frac{(S_n+1)F_2}{n-S_n+(S_n+1)F_2}\right]
 \end{equation}
 wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden $2S_n$ und $2(n-S_n+1)$ ist und $F_2$ das Quantil der F-Verteilung mit 1-$\alpha/2$ und den Freiheitsgraden $2(S_n+1)$ und $2(n-S_n)$ ist. Sn ist dabei die Anzahl der gewonnenen Spiele. Für die Berechnung haben wir das folgende Python-Programm geschrieben:
-\newpage
 \lstinputlisting[firstline=87,lastline=97]{../src/binomStatistics.py}
 
 \noindent Dieses liefert den Punktschätzer 0.617 und das Konfidenzintervall [0.532, 0.7] mit der bayesianischen Statistik und 0.643 und [0.547,731] für die klassische Statistik. \\\\
 Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
 
+\newpage
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
+
 Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posterioriverteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prioiriverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
 \lstinputlisting[linerange={83-83,92-95}]{../src/showcases/binomStatisticsRecursiv.py}
-\newpage
 \noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
 \begin{figure}[h]
   \begin{subfigure}[b]{0.45\textwidth}
