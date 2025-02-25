@@ -459,7 +459,7 @@ Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen untersc
 \end{figure}
 \newpage
 
-\subsubsection{Berechnungen für den Vergleich der Siegesrate gegen europäische und nicht-europäische Teams}
+\subsection{Berechnungen für den Vergleich der Siegesrate gegen europäische und nicht-europäische Teams}
 Nachfolgend wollen wir die Siegesrate der deutschen Nationalmannschaft gegen europäische Teams mit der gegen nicht-europäische Teams vergleichen.
 Insbesondere wollen wir die Frage beantworten, ob die Siegesrate gegen europäische Teams signifikant niedriger ist als gegen nicht-europäische Teams.
 Für die nachfolgenden Berechnungen definieren wir somit:
@@ -478,7 +478,7 @@ Daten:
   \item Insgesamt wurden 112 Spiele gespielt, davon 72 gewonnen.
 \end{itemize}
 
-\paragraph{Berechnung mit klassischer Statistik}\leavevmode\newline
+\subsubsection{Berechnung mit klassischer Statistik}
 
 \textbf{Punktschätzer:}
 \[
@@ -533,7 +533,7 @@ z_{\text{kritisch}} = -1.645
 Da der berechnete z-Wert von \(-2.31\) kleiner als der kritische z-Wert von \(-1.645\) ist, können wir die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) ablehnen.\\
 Interpretation: Die Siegrate der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
 
-\paragraph{Berechnung mit bayesianischer Statistik}\leavevmode\newline
+\subsubsection{Berechnung mit bayesianischer Statistik}
 
 \textbf{Vorwissen:}
 Für die bayesianische Analyse nehmen wir als Prior-Verteilungen Beta-Verteilungen für die Siegquote der deutschen Nationalmannschaft gegen europäische und nicht-europäische Teams an. Die Parameter dieser Verteilungen basieren auf den beobachteten Daten.
@@ -621,190 +621,11 @@ Da \( P(H_1) > P(H_0) \), wird die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E
 Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäische Teams ist signifikant niedriger als gegen nicht-europäische Teams.
 \newpage
 
-\subsection{Vergleich von klassischer vs. bayesianischer Statistik}
-Semmelweis' Vermutung zum Kindbettfieber basiert auf seiner Beobachtung, dass der Sterberate von Frauen bei der Geburt 
-in einer Klinik stark variierte, je nachdem, ob die Geburtshelfer ihre Hände vor der Entbindung in einer Chlorlösung wuschen. 
-Er vermutete, dass das Kindbettfieber, das häufig tödlich endete, durch eine Infektion verursacht wurde, 
-die durch nicht desinfizierte Hände von Ärzten übertragen wurde. Diese Vermutung führte zu einer 
-drastischen Senkung der Sterblichkeit in den Kliniken, in denen sie umgesetzt wurde.
-\parencite[3]{StatistikKlassischOderBayes}
 
-Der Datensatz, den Semmelweis zur Untermauerung seiner Theorie verwendete, umfasst zwei Zeiträume: 
-\begin{itemize}
-    \item Vor Einführung der Chlorwaschung: In den 6 Jahren vor der Einführung der Chlorwaschung in der Klinik starben 1.989 von 20.042 Frauen.
-    \item Nach Einführung der Chlorwaschung: In den 14 Jahren nach der Einführung starben nur 1.883 von 56.104 Frauen.
-    \item $x = 1989, n_x = 20.042, y = 1883, n_y = 56.104$
-\end{itemize}
-
-\subsubsection{Berechnung mit klassischer Statistik}
-\textbf{Punktschätzer:} 
-\begin{align}
-  \hat{\delta} &= \hat{\pi}_X - \hat{\pi}_Y \\
-  &= \frac{x}{n_x} - \frac{y}{n_y} \\
-  &= \frac{1989}{20.042} - \frac{1883}{56.104} \\
-  &= 0.0992 - 0.0336 \\
-  &= 0.0656
-\end{align}
-
-\textbf{Konfidenzintervall:} \\
-Für $\alpha = 0.01$ beidseitige Konfidenzintervalle für $\pi_X$ und $\pi_Y$: \\
-$x = 1989, n_x = 20.042, y = 1883, n_y = 56.104$, $z_{\alpha/2} = 2.576$ \\
-
-\begin{equation}
-  I_X = \left[\hat{\pi}_X - z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x}}, \, 
-  \hat{\pi}_X + z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x}}\right]
-\end{equation}
-
-\begin{equation}
-  I_X = \left[0.0992 - 2.576 \cdot \sqrt{\frac{0.0992 \cdot (1-0.0992)}{20.042}}, \, 
-  0.0992 + 2.576 \cdot \sqrt{\frac{0.0992 \cdot (1-0.0992)}{20.042}}\right]
-\end{equation}
-
-\[
-I_X = [0.0938, 0.1046]
-\]
-
-\begin{equation}
-  I_Y = \left[\hat{\pi}_Y - z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}, \, 
-  \hat{\pi}_Y + z_{\alpha/2} \cdot \sqrt{\frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}\right]
-\end{equation}
-
-\begin{equation}
-  I_Y = \left[0.0336 - 2.576 \cdot \sqrt{\frac{0.0336 \cdot (1-0.0336)}{56.104}}, \, 
-  0.0336 + 2.576 \cdot \sqrt{\frac{0.0336 \cdot (1-0.0336)}{56.104}}\right]
-\end{equation}
-
-\[
-I_Y = [0.0316, 0.0356]
-\]
-
-\textbf{Hypothesentest:} \\
-Es wird $H_0 : \pi_X \leq \pi_Y $ oder auch $H_0 : \pi_X - \pi_Y \leq 0$ gegen $H_1 : \pi_X - \pi_Y > 0$ getestet\\
-Dafür wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
-\begin{equation}
-  \delta_+ = z_{\alpha} \cdot \sqrt{\frac{\hat{\pi}_X \cdot (1-\hat{\pi}_X)}{n_x} + \frac{\hat{\pi}_Y \cdot (1-\hat{\pi}_Y)}{n_y}}
-\end{equation}
-Für $\alpha = 0.01$ ergibt sich $z_{\alpha} = 2.33$.
-\begin{equation}
-  \delta_+ = 2.33 \cdot \sqrt{\frac{0.0992 \cdot (1-0.0992)}{20042} + \frac{0.0336 \cdot (1-0.0336)}{56104}}
-\end{equation}
-\begin{equation}
-  \delta_+ = 0.0052
-\end{equation}
-
-Da $\hat{\delta} = 0.0656 > \delta_+ = 0.0052$ können wir die Nullhypothese $H_0$ ablehnen und die Vermutung von Semmelweis annehmen.
+\section{Vergleich und Fazit}
 
 
-\subsubsection{Berechnung mit bayesianischer Statistik}
-Bei der bayesianischen Statistik können wir Priors definieren und die Wahrscheinlichkeit der 
-Sterblichkeitsraten unter Berücksichtigung von Vorwissen berechnen. \\
-Es werden die Wahrscheinlichkeiten für $\Pi_X > \Pi_Y$ und $\Pi_X \leq \Pi_Y$ ermittelt. \\\\
-Vorwissen für Sterblichkeitsrate mit und ohne Chlorwaschung:
-\begin{itemize}
-    \item wahrscheinlichste Sterblichkeitsrate: 0.021
-    \item halb so wahrscheinlich: 0.030
-\end{itemize}
-
-Parameter $a'$ und $b'$ für die Beta-Verteilung:\\
-\begin{equation}
-  m = 0.021
-\end{equation}
-\begin{equation}
-  \pi_v = 0.03
-\end{equation}
-\begin{equation}
-  \frac{f(v)}{f(m)} = 0.5
-\end{equation}
-
-Die Beta-Verteilung hat die Dichtefunktion:
-\[
-f(p; a', b') = \frac{1}{B(a', b')} p^{a'-1} (1-p)^{b'-1},
-\]
-wobei \( B(a', b') \) die Beta-Funktion ist:
-\[
-B(a', b') = \frac{\Gamma(a') \Gamma(b')}{\Gamma(a' + b')}.
-\]
-
-Der Modus \( m \) der Verteilung ist definiert als:
-\[
-m = \frac{a'-1}{a' + b' - 2}.
-\]
-
-Das Verhältnis der Wahrscheinlichkeiten bei \( \pi_v \) und \( m \) ist:
-\[
-\frac{f(\pi_v)}{f(m)} = \frac{\frac{1}{B(a', b')} \pi_v^{a'-1} (1-\pi_v)^{b'-1}}{\frac{1}{B(a', b')} m^{a'-1} (1-m)^{b'-1}} = \left( \frac{\pi_v}{m} \right)^{a'-1} \left( \frac{1-\pi_v}{1-m} \right)^{b'-1}.
-\]
-
-Daraus ergibt sich:
-\[
-\frac{f(\pi_v)}{f(m)} = \left( \frac{\pi_v}{m} \right)^{a'-1} \left( \frac{1-\pi_v}{1-m} \right)^{b'-1}.
-\]
-
-Umstellen führt zu den folgenden Formeln für die Parameter \( a' \) und \( b' \):
-\[
-a' = \frac{\ln \frac{f(\pi_v)}{f(m)}}{\ln \frac{\pi_v}{m} + \frac{1-m}{m} \ln \frac{1-\pi_v}{1-m}} + 1,
-\]
-\[
-b' = \frac{\ln \frac{f(\pi_v)}{f(m)}}{\ln \frac{\pi_v}{m} + \frac{1-m}{m} \ln \frac{1-\pi_v}{1-m}} \cdot \frac{1-m}{m} + 1.
-\]
-
-Setzen wir die bekannten Werte ein:
-\[
-m = 0.021, \quad \pi_v = 0.03, \quad \ln \frac{f(\pi_v)}{f(m)} = \ln(0.5) \approx -0.693,
-\]
-
-erhalten wir:
-\[
-a' = \frac{-0.693}{\ln \frac{0.03}{0.021} + \frac{1-0.021}{0.021} \ln \frac{1-0.03}{1-0.021}} + 1 = 9.38 + 1 \approx 10,
-\]
-\[
-b' = \frac{-0.693}{\ln \frac{0.03}{0.021} + \frac{1-0.021}{0.021} \ln \frac{1-0.03}{1-0.021}} \cdot \frac{1-0.021}{0.021} + 1 = 9.38 \cdot 46.62 + 1 \approx 438.
-\]
-
-Parameter der Posterioriverteilungen von $\Pi_X$ und $\Pi_Y$:
-\begin{equation}
-  a_X = a' + x = 10 + 1989 = 1999
-\end{equation}
-\begin{equation}
-  b_X = b' + n_x - x = 438 + 20042 - 1989 = 18491
-\end{equation}
-\begin{equation}
-  a_Y = a' + y = 10 + 1883 = 1893
-\end{equation}
-\begin{equation}
-  b_Y = b' + n_y - y = 438 + 56104 - 1883 = 54659
-\end{equation}
-
-\textbf{Median der Posterioriverteilung:}
-
-\begin{equation}
-  \hat{\pi}_X = \frac{a_X - 1/3}{a_X + b_X - 2/3} = \frac{1999 - 1/3}{1999 + 18491 - 2/3} = 0.0975
-\end{equation}
-\begin{equation}
-  \hat{\pi}_Y = \frac{a_Y - 1/3}{a_Y + b_Y - 2/3} = \frac{1893 - 1/3}{1893 + 54659 - 2/3} = 0.0335
-\end{equation} 
-
-\textbf{Intervallschätzung:}
-
-Die Posteriors für $\Pi_X$ und $\Pi_Y$ sind Beta-verteilte Zufallsvariablen:
-\begin{equation}
-  \Pi_X \sim Beta(1999, 18491)
-\end{equation}
-\begin{equation}
-  \Pi_Y \sim Beta(1893, 54659)
-\end{equation}
-
-\begin{center}
-  \includegraphics[width=0.85\textwidth]{../images/semmelweis.png}
-\end{center}
-
-Für $\alpha = 0.01$ beidseitige Konfidenzintervalle für $\Pi_X$ und $\Pi_Y$:
-\begin{equation}
-  I_X = [0.0927, 0.1034] \\
-  I_Y = [0.0316, 0.0355]
-\end{equation}
-
-\subsubsection{Vergleich der klassischen und bayesianischen Statistik}
+\subsection{Vergleich der klassischen und bayesianischen Statistik}
 
 \begin{table}[h!]
   \centering
@@ -866,7 +687,7 @@ Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert
 
 \newpage
 
-\section{Zusammenfassung und Ausblick}
+\subsection{Fazit}
 
 \newpage
 
@@ -876,5 +697,10 @@ Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert
 \newpage
 
 \section{Selbstständigkeitserklärung}
+Hiermit erklären wir, dass wir die vorgelegte Arbeit
+selbstständig verfasst, keine anderen als die angegebenen Quellen und Hilfsmittel
+benutzt sowie alle wörtlich oder sinngemäß übernommenen Stellen in der Arbeit als
+solche und durch Angabe der Quelle gekennzeichnet habe. Dies gilt auch für Zeichnungen, 
+Skizzen, bildliche Darstellungen sowie für Quellen aus dem Internet.
 
 \end{document}
