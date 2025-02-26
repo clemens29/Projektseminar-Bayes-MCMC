@@ -105,12 +105,12 @@ Anschließend wird im zweiten Teil der Arbeit die praktische Anwendung der bayes
 
 Die bayesianische Statistik ist ein Zweig der Statistik. Sie unterscheidet sich im wesentlichen in der Interpretation der Wahrscheinlichkeit von der klassischen Statistik. Die klassische Statistik definiert die Wahrscheinlichkeit als die \textbf{relative Häufigkeit} in einem Zufallsexperiment \parencite[2]{StatistikKlassischOderBayes}. In der bayesianischen Statistik hingegen wird die Wahrscheinlichkeit als Grad des Glaubens respektiv als \textbf{Plausibilität} eines Ereignisses oder einer Aussage interpretiert \parencite[1]{EinfBayesStatistik}. \\\\
 Kern der bayesianischen Statistik ist es Wissen über ein Ereignis zu verfeinern, sobald neue Informationen vorliegen. Dazu nutzt man hauptsächlich das \textbf{Bayes'sche Theorem}, welches erlaubt das Vorwissen (Prior) mit neuen Daten (Likelihood) zu kombinieren und daraus eine aktualisierte Wahrscheinlichkeit (Posterior) zu berechnen. \\\\
-Mit Hilfe des Bayes'schen Theorems kann man unbekannte Parameter schätzen, ein Konfidenzintervall für diese Parameter angeben und Hypothesen prüfen. Die klassische Statistik benötigt hingegen dafür Testgrößen, weshalb die bayesianische Statistik als flexibler und intuitiver gilt. \parencite[1]{EinfBayesStatistik}. \\\\
-Problem der bayesianischen Statistik ist jedoch, dass die Berechnung der Posterioriverteilung analytisch oft nicht möglich ist. Da es nun aber gute numerische Methoden wie die \textbf{Markov Chain Monte Carlo (MCMC)} Methoden gibt, findet die bayesianische Statistik immer mehr Anwendungen. So zum Beispiel in der Medizin oder für künstliche Intelligenzen. \parencite[1]{StatistikKlassischOderBayes}.
+Mit Hilfe des Bayes'schen Theorems kann man unbekannte Parameter schätzen, ein Konfidenzintervall für diese Parameter angeben und Hypothesen prüfen. Die klassi-sche Statistik benötigt hingegen dafür Testgrößen, weshalb die bayesianische Statistik als flexibler und intuitiver gilt. \parencite[1]{EinfBayesStatistik}. \\\\
+Problem der bayesianischen Statistik ist jedoch, dass die Berechnung der Posterioriverteilung analytisch oft nicht möglich ist. Da es nun aber gute numerische Methoden wie die \textbf{Markov Chain Monte Carlo (MCMC)} Methoden gibt, findet die bayes-ianische Statistik immer mehr Anwendungen. So zum Beispiel in der Medizin oder für künstliche Intelligenzen. \parencite[1]{StatistikKlassischOderBayes}.
 
 \subsubsection{Das Bayes'sche Theorem und seine Bestandteile}
 
-Das Bayes'sche Theorem ist ein fundamentales Konzept der bayesianischen Statistik.Es beschreibt, wie man vorhandenes Vorwissen durch neue Daten aktualisiert. \\\\
+Das Bayes'sche Theorem ist ein fundamentales Konzept der bayesianischen Statistik. Es beschreibt, wie man vorhandenes Vorwissen durch neue Daten aktualisiert. \\\\
 Die \textbf{Prioriverteilung} beschreibt die anfänglichen Annahmen oder das Vorwissen über einen 
 Parameter oder ein Ereignis, bevor neue Daten berücksichtigt werden.
 Dabei ``enthält die Priorverteilung eines Parameters $\theta$, ausgedrückt durch $f (\theta) $, 
@@ -235,7 +235,7 @@ P(p|10,4,20,6) = 931 395 465p^{10} \cdot (1-p)^{20}
 \end{equation}
 
 \subsubsection{Punktschätzer, Konfidenzintervalle und Hypothesenprüfung in der bayesianischen Statistik}
-\subsection*{\underline{Punktschätzer}}
+\paragraph{Punktschätzer} \mbox{}\\\\
 Im folgenden wird die Schätzung eines Parameters mithilfe der Bayes-Strategie erläutert. \\
 Die möglichen Schätzwerte der Parameter $x$ werden als $\hat{x}$ bezeichnet. Die wahren Parameter werden als $x$ bezeichnet. \\
 Es wird eine Kostenfunktion $L(\hat{x},x)$ definiert, die die Kosten für die Schätzung $\hat{x}$ des wahren Parameters $x$ angibt.
@@ -264,7 +264,7 @@ Es ist so ersichtlich, dass es verschiedene Punktschätzer in der bayesianischen
 \end{itemize}
 Die Wahl zwischen den Schätzern hängt so von der Problemstellung ab.
 
-\subsection*{\underline{Konfidenzintervalle}}
+\paragraph{Konfidenzintervalle} \mbox{}\\\\
 Um Unsicherheiten bei Schätzungen zu quantifizieren werden oftmals \textbf{Konfidenzintervall} verwendet. Konfidenzintervalle geben einen Bereich an, in dem ein unbekannter Parameter mit einer bestimmten Wahrscheinlichkeit liegt. In der Bayes Statistik kann eine Bereichschätzung unmittelbar aus der Posterioriverteilung abgeleitet werden. \parencite[71]{EinfBayesStatistik} \\\\
 Wenn $P(x | y)$ die Posterioridichte für den Parameter x ist, ist das Konfidenzintervall mit Konfidenzniveau 1-$\alpha$ definiert als:
 \begin{equation}
@@ -275,24 +275,24 @@ Falls die Posterioriverteilung $P(x | y)$ beispielsweise der Normalverteilung $N
 Da die Konfidenzintervalle in der bayesianischen Statistik auf der Posterioriverteilung basieren, unterscheiden sich die Ergebnisse von denen der klassischen Statistik, da diese auf einer anderen Grundlage definiert sind.
 
 \newpage
-\subsection*{\underline{Hypothesenprüfung}}
-Hypothesenprüfung ist eine Methode, mit der man Annahmen über unbekannte Parameter überprüft. Dabei wird entschieden, ob solche Annahmen akzeptiert oder abgelehnt werden sollen. \parencite[74]{EinfBayesStatistik}. Man unterscheidet zwischen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$. Die Nullhypothese ist die Annahme, die überprüft wird, während die Alternativhypothese die Annahme ist, die akzeptiert wird, wenn die Nullhypothese abgelehnt wird. \\\\
+\paragraph{Hypothesenprüfung} \mbox{}\\\\
+Hypothesenprüfung ist eine Methode, mit der man Annahmen über unbekannte Para-meter überprüft. Dabei wird entschieden, ob solche Annahmen akzeptiert oder abgelehnt werden sollen. \parencite[74]{EinfBayesStatistik}. Man unterscheidet zwischen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$. Die Nullhypothese ist die Annahme, die überprüft wird, während die Alternativhypothese die Annahme ist, die akzeptiert wird, wenn die Nullhypothese abgelehnt wird. \\\\
 In der bayesianischen Statistik werden Hypothesen durch Unterräume des Parameterraums definiert. Seien $X_1$ und $X_2$ disjunkte Unterräume des Parameterraums, so lauten die Hypothesen $H_0: x \in X_1$ und $H_1: x \in X_2$. Die Wahrscheinlichkeiten für diese Hypothesen ergeben sich direkt aus der Posterior-Dichte. Die Wahrscheinlichkeit, dass die Nullhypothese wahr ist, lautet:
 \begin{equation}
   P(H_0|y) = \int_{X_1} P(x|y) dx
 \end{equation}
 Analog gilt dies für $P(H_1|y)$ \parencite[74]{EinfBayesStatistik}. Ist jetzt $P(H_0|y) > P(H_1|y)$ rsp. $\frac{P(H_0|y)}{P(H_1|y)}>1$, so wird die Nullhypothese akzeptiert, andernfalls die Alternativhypothese. \parencite[77]{EinfBayesStatistik}. \\\\
 Bei einer Punkthypothese $H_0: x = x_0$ ergibt sich $P(H_0|y) = 0$, da die Posterior-Dichte kontinuierlich ist und ein einzelner Punkt daher keine Wahrscheinlichkeit besitzt. In solchen Fällen greift man beispielsweise auf Konfidenzintervalle zurück: Liegt der Wert $x_0$ innerhalb des Konfidenzintervalls, wird die Nullhypothese akzeptiert, andernfalls abgelehnt \parencite[84]{EinfBayesStatistik}. \\\\
-Ein wesentlicher Unterschied zur klassischen Statistik besteht darin, dass in der traditionellen Hypothesenprüfung die Nullhypothese solange als gültig angesehen wird, bis genügend Beweise dagegen vorliegen (Prinzip des Zweifelns). In der bayesianischen Statistik hingegen werden die Wahrscheinlichkeiten beider Hypothesen direkt geschätzt, wodurch beide Hypothesen von Anfang an gleichberechtigt betrachtet werden. \parencite[83]{EinfBayesStatistik}.
+Ein wesentlicher Unterschied zur klassischen Statistik besteht darin, dass in der traditionellen Hypothesenprüfung die Nullhypothese solange als gültig angesehen wird, bis genügend Beweise dagegen vorliegen (Prinzip des Zweifelns). In der bayesiani-schen Statistik hingegen werden die Wahrscheinlichkeiten beider Hypothesen direkt geschätzt, wodurch beide Hypothesen von Anfang an gleichberechtigt betrachtet werden. \parencite[83]{EinfBayesStatistik}.
 
 
 \newpage
 
 \subsection{Markov Chain Monte Carlo (MCMC) Methoden}
 \subsubsection{Einführung in MCMC-Methoden}
-Bei einer direkten Simulation wird vorrausgesetzt, dass die Verteilung der Zufallsvariablen bekannt ist.
+Bei einer direkten Simulation wird vorrausgesetzt, dass die Verteilung der Zufallsvaria-blen bekannt ist.
 Dies ist jedoch in der Praxis nicht immer gegeben.
-Die Berechnung der Posterioriverteilung ist analytisch oft nicht möglich, vor allem bei komplexen Modellen oder hohen Dimensionen. \\\\
+Die Berechnung der Posterioriverteilung ist analytisch oft nicht möglich, vor allem bei komplexen Mo-dellen oder hohen Dimensionen. \\\\
 Die Markov Chain Monte Carlo (MCMC) Methoden sind eine Klasse von Algorithmen, die es ermöglichen, eine Stichprobe aus einer Verteilung zu ziehen, ohne die Verteilung zu kennen. \parencite[179]{MonteCarloAlgorithmen} \\
 Diese Methoden verwenden zwei Konzepte: Markov-Ketten und Monte Carlo-Methoden. \\
 Eine Markov-Kette ist eine Folge von Zufallsvariablen, die die Markov-Eigenschaft erfüllen. 
@@ -302,11 +302,11 @@ Die Übergangswahrscheinlichkeit zwischen den Zuständen kann in einer Übergang
 Die Monte Carlo-Methoden sind eine Gruppe von Algorithmen, die es ermöglichen, Zufallsvariablen zu schätzen, indem Zufallszahlen generiert werden. 
 Sie erzeugen zufällige Stichproben, um eine Näherung der Verteilung zu erhalten. \parencite[14f.]{MonteCarloAlgorithmen} \\\\
 Die MCMC-Methoden nutzen die Monte Carlo-Methoden, um eine Markov-Kette zu simulieren. Diese Technik ist besonders nützlich, um eine Posterioriverteilung zu schätzen, wenn direkte Berechnungen nicht möglich sind. \parencite[179]{MonteCarloAlgorithmen} \\
-Im folgenden wird der Metropolis-Hastings-Algorithmus erläutert, der eine der bekanntesten MCMC-Methoden ist.
+Im folgenden wird der Metropolis-Hastings-Algorithmus erläutert, eine der bekann-testen MCMC-Methoden.
 \newpage
 
 \subsubsection{Der Metropolis-Hastings-Algorithmus}
-Der Metropolis-Hastings-Algorithmus erstellt eine Markov-Kette, die eine Posterioriverteilung $f(x)$ approximiert. $f(x)$ besteht aus einer bekannten Funktion $p(x)$, die sich aus der Likelihood-Funktion und der Prioriverteilung zusammensetzt und aus einer unbekannten Normierungskonstante. Für die Berechnung wird eine Hilfsfunktion q(y$|$x) benötigt, welche die Übergangswahrscheinlichkeit von einem Zustand $x_t$ zum nächsten Zustand $x_{\text{t+1}}$ angibt und ähnlich wie die Posterioriverteilung ist. Oftmals wird dafür die Normalverteilung gewählt sodass $q(y|x) = N(x,\sigma^2)$, wobei $\sigma$ beeinflusst dabei die Schrittweite, die die Markov-Kette macht. \parencite[226f.]{HandbookMonteCarloMethods} \\\\ 
+Der Metropolis-Hastings-Algorithmus erstellt eine Markov-Kette, die eine Posteriori-verteilung $f(x)$ approximiert. $f(x)$ besteht aus einer bekannten Funktion $p(x)$, die sich aus der Likelihood-Funktion und der Prioriverteilung zusammensetzt und aus einer unbekannten Normierungskonstante. Für die Berechnung wird eine Hilfsfunktion q(y$|$x) benötigt, welche die Übergangswahrscheinlichkeit von einem Zustand $x_t$ zum nächsten Zustand $x_{\text{t+1}}$ angibt und ähnlich wie die Posterioriverteilung ist. Oftmals wird dafür die Normalverteilung gewählt sodass $q(y|x) = N(x,\sigma^2)$, wobei $\sigma$ beeinflusst dabei die Schrittweite, die die Markov-Kette macht. \parencite[226f.]{HandbookMonteCarloMethods} \\\\ 
 Der Algorithmus besteht aus folgenden Schritten:
 \begin{enumerate}
   \item Wähle einen Startwert $x_0$
@@ -327,7 +327,7 @@ Der Algorithmus besteht aus folgenden Schritten:
   \end{equation}
   \item Wiederhole die Schritte 2-5 bis die Stichprobe die gewünschte Verteilung genau genug approximiert
 \end{enumerate}
-Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algorithmus, der nur für symmetrische Hilfsfunktionen $q(y|x)$ funktioniert. Bei einer symmetrischen Hilfsfunktion ist $q(y|x_t) = q(x_t|y)$ und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
+Der Metropolis-Hastings-Algorithmus ist ein Verallgemeinerung des Metropolis-Algo-rithmus, der nur für symmetrische Hilfsfunktionen $q(y|x)$ funktioniert. Bei einer symmetrischen Hilfsfunktion ist $q(y|x_t) = q(x_t|y)$ und deswegen kürzt sich die Akzeptanzwahrscheinlichkeit zu $\alpha = min{\{1,\frac{p(y)}{p(x_t)}\}}$. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 Der erste Teil der Markov-Kette wird als \textbf{Burn-in-Phase} bezeichnet, welche verworfen wird, weil sich die Kette erst an die Zielverteilung anpassen muss. Der restliche Teil wird als \textbf{Sampling-Phase} bezeichnet, welche dann die Verteilung simuliert. \parencite[226f.]{HandbookMonteCarloMethods} \\\\
 
 \newpage
@@ -425,7 +425,7 @@ Da dieses Integral analytisch schwer zu lösen ist, können wir unseren Metropol
 \newpage
 \subsubsection{Statistische Auswertung der Ergebnisse}
 
-Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik vergleichen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
+Im weiteren Wollen wir nun noch die Konfidenzintervalle und den Punktschätzer der Markovkette berechnen und diese mit den Ergebnissen der klassischen Statistik verglei-chen. Wir gehen dabei wieder von der Stichprobengröße n=112 aus. Für das Konfidenzintervall in der klassischen Statistik nutzen wir das exakte Konfidenzintervall für eine unbekannte Wahrscheinlichkeit p. Dieses ist definiert als:
 \begin{equation}
   I_e = \left[\frac{S_nF_1}{n-S_n+1+S_nF_1} , \frac{(S_n+1)F_2}{n-S_n+(S_n+1)F_2}\right]
 \end{equation}
@@ -433,12 +433,12 @@ wobei $F_1$ das Quantil der F-Verteilung mit $\alpha/2$ und den Freiheitsgraden 
 \lstinputlisting[firstline=87,lastline=97]{../src/binomStatistics.py}
 
 \noindent Dieses liefert den Punktschätzer 0.617 und das Konfidenzintervall [0.532, 0.7] mit der bayesianischen Statistik und 0.643 und [0.547,731] für die klassische Statistik. \\\\
-Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posterioriverteilung erhält.
+Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p höher sind als mit der Bayes'schen Statistik. Das liegt ganz einfach daran, dass die Verteilung in der bayesianischen Statistik durch die Prioriverteilung noch leicht nach in Richtung 0.5 gezogen wird. Man kann somit gut sehen, dass sich die Werte je nach Berechnung unterscheiden können und die Ergebnisse mit klassischer und bayesianischer Statistik nicht die gleichen sein müssen. Der große Vorteil der bayesianischen Statistik ist aber, dass man viel mehr Informationen über die Schätzung von p in Form der Posteriori-verteilung erhält.
 
 \newpage
 \subsubsection{Rekursives Einbeziehen von neuen Daten}
 
-Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posterioriverteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prioiriverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
+Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posteriori-verteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prio-riverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
 \lstinputlisting[linerange={83-83,92-95}]{../src/showcases/binomStatisticsRecursiv.py}
 \noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
 \begin{figure}[h]
@@ -490,7 +490,6 @@ Daten:
 \[
 \hat{\pi}_G = \frac{72}{112} = 0.6429
 \]
-
 \textbf{Konfidenzintervall:}
 Für \(\alpha = 0.05\) beidseitige Konfidenzintervalle:
 
@@ -514,7 +513,6 @@ I_G = \left[ 0.6429 - 1.96 \cdot \sqrt{\frac{0.6429 \cdot (1-0.6429)}{112}}, \, 
 \[
 I_G = [0.5542, 0.7316]
 \]
-
 \textbf{Hypothesentest:} \\
 Es wird ein einseitiger z-Test der Differenz der Anteile durchgeführt. \\
 
@@ -549,19 +547,16 @@ Für die bayesianische Analyse nehmen wir als Prior-Verteilungen Beta-Verteilung
     \[
     \alpha_{\neg E} = 36 + 1 = 37, \quad \beta_{\neg E} = 11 + 1 = 12
     \]
-    Somit ist die Prior-Verteilung: \( \text{Beta}(37, 12) \).
 \end{itemize}
-
+Somit ist die Prior-Verteilung: \( \text{Beta}(37, 12) \).\\\\
 \textbf{Likelihood-Verteilung:} \\
 Für die gesamte Siegquote (Likelihood) wird ebenfalls eine Beta-Verteilung verwendet, basierend auf den gesamten Spielen der deutschen Nationalmannschaft:
 \[
 \alpha_{\text{total}} = 72 + 1 = 73, \quad \beta_{\text{total}} = 40 + 1 = 41
 \]
-Die Likelihood-Verteilung ist daher: \( \text{Beta}(73, 41) \).
-
-Die Posterior-Verteilung kann als Produkt von Prior und Likelihood berechnet werden. Sie wird durch Normierung auf den gesamten Bereich der Siegquote \( p \) bestimmt.
-
+Die Likelihood-Verteilung ist daher: \( \text{Beta}(73, 41) \).\\\\
 \textbf{Posterior-Verteilung:} \\
+Die Posterior-Verteilung kann als Produkt von Prior und Likelihood berechnet werden. Sie wird durch Normierung auf den gesamten Bereich der Siegquote \( p \) bestimmt. \\\\
 Die Verteilungen für die Prior-, Likelihood- und Posterior-Verteilungen werden wie folgt dargestellt:
 
 \begin{itemize}
@@ -569,7 +564,6 @@ Die Verteilungen für die Prior-, Likelihood- und Posterior-Verteilungen werden 
   \item Prior für nicht-europäische Teams: \( \text{Beta}(37, 12) \)
   \item Likelihood für alle Spiele: \( \text{Beta}(73, 41) \)
 \end{itemize}
-
 Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden durch das Produkt der Prior- und Likelihood-Verteilungen berechnet.
 
 \begin{figure}[htbp]
@@ -577,7 +571,7 @@ Die Posterior-Verteilungen für europäische und nicht-europäische Teams werden
   \includegraphics[width=0.8\textwidth]{../images/world_cup.png}
   \caption{Prior-, Likelihood- und Posterior-Verteilungen der Siegquote der deutschen Nationalmannschaft}
 \end{figure}
-
+\noindent
 \textbf{Punktschätzer:} \\
 Der Erwartungswert der Posterior-Verteilung ist der Mittelwert der Beta-Verteilung, der mit folgender Formel berechnet wird:
 \[
@@ -591,7 +585,6 @@ Für nicht-europäische Teams ist der Erwartungswert:
 \[
 E_{\neg E}= \frac{37 + 73}{37 + 36 + 12 + 41} = \frac{110}{163} \approx 0.6748
 \]
-
 \textbf{Konfidenzintervall:} \\
 Das 95\%-Konfidenzintervall für die Posterior-Verteilung wird durch die Quantilfunktion der Beta-Verteilung berechnet. Wir verwenden das 2.5\%- und 97.5\%-Quantil.
 Dies wurde mithilfe des Programms \texttt{world\_cup\_bayes.py} durchgeführt. \\
@@ -604,7 +597,6 @@ Für nicht-europäische Teams:
 \[
 I_{\neg E} = [0.6012, 0.7444]
 \]
-
 \textbf{Hypothesentest:} \\
 Um die Hypothese \(H_0\) zu testen, dass die Siegquote gegen europäische Teams niedriger ist als gegen nicht-europäische Teams, wurden Monte-Carlo-Simulationen verwendet:
 
@@ -614,7 +606,6 @@ Um die Hypothese \(H_0\) zu testen, dass die Siegquote gegen europäische Teams 
     \item Die Wahrscheinlichkeit \( P(H_0) = 1 - P(H_1) \) wurde ebenfalls berechnet.
     \item Je nachdem, welche Wahrscheinlichkeit größer ist, wurde entschieden, ob \( H_0 \) (Nullhypothese) oder \( H_1 \) (Alternativhypothese) akzeptiert wird.
 \end{itemize}
-
 \textbf{Ergebnisse:} \\
 \( P(H_0) = 0.0972 \) und \( P(H_1) = 0.9028 \) \\
 Da \( P(H_1) > P(H_0) \), wird die Nullhypothese \( H_0 : \pi_E \geq \pi_{\neg E} \) abgelehnt. \\
@@ -638,12 +629,29 @@ Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäisch
     \hline
     \textbf{Ergebnis beim Schätzen} & Punkt- oder Intervallschätzer, z. B. Konfidenzintervall & Wahrscheinlichkeitsverteilung für den Parameter (Posterior) 
     \\ \hline
-  \textbf{Ergebnis beim Testen} & \(p\)-Wert; Entscheidung basierend auf Signifikanzniveau, wird angenommen oder abgelehnt & Posterior-Wahrscheinlichkeit für Hypothesen; Bayes-Faktor \\ 
+  \textbf{Ergebnis beim Testen} & \(p\)-Wert; Entscheidung basierend auf Signifikanzniveau, wird angenommen oder abgelehnt & Posterior-Wahrscheinlichkeit für Hypothesen \\ 
   \hline
   \end{tabular}
   \caption{Vergleich der klassischen und bayesianischen Statistik}
   \label{tab:vergleich_verwendung}
 \end{table}
+\noindent
+Die klassische Statistik und die bayesianische Statistik sind zwei unterschiedliche Ansätze zur Analyse
+von Daten und zur Entscheidungsfindung. Während die klassische Statistik vor allem in den Human- und 
+Sozialwissenschaften sowie in der Wirtschaftswissenschaft und Biologie weit verbreitet ist, wird die 
+bayesianische Statistik häufig in der Technik und im Bereich der Künstlichen Intelligenz eingesetzt.\\\\
+Ein wesentlicher Unterschied zwischen den beiden Methoden liegt in der Art und Weise, wie Parameter 
+geschätzt und Hypothesen getestet werden. Die klassische Statistik betrachtet dabei ausschließlich 
+die vorliegende Stichprobe, während die bayesianische Statistik sowohl die Stichprobe als 
+auch vorheriges Wissen in die Analyse einbezieht. \\\\
+Auch die Ergebnisse unterscheiden sich: In der klassischen Statistik erfolgt die Schätzung von 
+Parametern durch Punkt- oder Intervallschätzer, beispielsweise in Form eines Konfidenzintervalls. 
+Die bayesianische Statistik hingegen liefert eine Wahrscheinlichkeits-verteilung für den 
+gesuchten Parameter, die sogenannte Posterior-Verteilung. \\\\
+Beim Testen von Hypothesen arbeitet die klassische Statistik mit dem p-Wert und einer Entscheidungsregel 
+basierend auf einem festgelegten Signifikanzniveau. Eine Hypothese wird entweder angenommen oder abgelehnt. 
+Die bayesianische Statistik hingegen bewertet Hypothesen anhand der Posterior-Wahrscheinlichkeit und verwendet 
+den Bayes-Faktor zur Entscheidungsfindung, wodurch ein flexiblerer und probabilistischerer Ansatz ermöglicht wird.
 
 \newpage
 \begin{table}[h!]
@@ -653,41 +661,46 @@ Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäisch
   \textbf{Statistikmethode} & \textbf{Vorteile} & \textbf{Nachteile} \\ \hline
   \textbf{Klassische Statistik} & 
   \begin{itemize}
-      \item Einfachheit und breite Akzeptanz in der Wissenschaft.
-      \item Gut für große Datensätze und standardisierte Testverfahren.
-      \item Benötigt keine subjektiven Annahmen über Wahrscheinlichkeiten.
+      \item Einfachheit
+      \item Gut für große Datensätze
+      \item keine subjektiven Annahmen
   \end{itemize} & 
   \begin{itemize}
-      \item Abhängig von großen Stichproben.
-      \item Unflexibel gegenüber neuen Daten und Modellen.
-      \item Ergebnisse oft schwer zu interpretieren bei komplexen Datenstrukturen.
+      \item abhängig von großen Stichproben
+      \item unflexibel gegenüber neuen Daten oder komplexen Datenstrukturen
   \end{itemize} \\ \hline
   \textbf{Bayesianische Statistik} & 
   \begin{itemize}
-      \item Flexibel und anpassbar an komplexe Modelle.
-      \item Ermöglicht die Einbeziehung von Vorwissen (Priors).
-      \item Liefert direkte Wahrscheinlichkeiten für Parameter und Modelle.
+      \item flexibel und anpassbar an komplexe Modelle.
+      \item ermöglicht die Einbeziehung von Vorwissen
+      \item liefert direkte Wahrscheinlichkeiten für Parameter und Modelle
   \end{itemize} & 
   \begin{itemize}
       \item Subjektivität bei der Wahl der Priors.
-      \item Rechenintensiv, besonders bei großen Datensätzen.
-      \item Oft weniger bekannt und akzeptiert in konservativen Disziplinen.
+      \item rechenintensiv, besonders bei großen Datensätzen.
   \end{itemize} \\ \hline
   \end{tabular}
   \caption{Vergleich der Vor- und Nachteile der klassischen und bayesianischen Statistik.}
   \label{tab:vergleich_vor_nachteile}
 \end{table}
-
-Der Vergleich der klassischen Statistik mit der bayesianischen Statistik liefert uns unterschiedliche Perspektiven:
-
-\begin{itemize}
-  \item Die klassische Statistik ermöglicht direkte Berechnungen und Vergleiche basierend auf Stichprobendaten, ohne dass Vorwissen berücksichtigt werden muss. Dies führt zu klaren und standardisierten Ergebnissen.
-  \item Die bayesianische Statistik bietet durch die Einbeziehung von Vorwissen (Priors) eine flexiblere Modellierung. Sie liefert Wahrscheinlichkeitsverteilungen (Posterior) für Parameter und berücksichtigt Unsicherheiten umfassender.
-\end{itemize}
-
-\newpage
-
-\subsection{Fazit}
+\noindent
+Die klassische (frequentistische) Statistik ist einfach anzuwenden und weit verbreitet, da 
+sie auf standardisierten Testverfahren basiert. Im Gegensatz dazu ist die bayesianische Statistik 
+komplexer und erfordert einen höheren Rechenaufwand, insbesondere bei großen Datensätzen. \\\\
+Ein Vorteil der bayesianischen Statistik ist ihre Flexibilität und die Möglichkeit, Vorwissen 
+in Form von Priors einzubeziehen. Dagegen ist die klassische Statistik unflexibel gegenüber 
+neuen Daten und Modellen, da sie stark von großen Stichproben abhängt. \\\\
+Die klassische Statistik benötigt keine subjektiven Annahmen über Wahrscheinlichkeiten, wodurch 
+sie als objektiver gilt. Demgegenüber steht die bayesianische Statistik, bei der die Wahl der 
+Priors subjektiv sein kann und dadurch die Ergebnisse beeinflusst. \\\\
+Während die klassische Statistik gut für große Datensätze geeignet ist, können ihre Ergebnisse 
+bei komplexen Datenstrukturen schwer interpretierbar sein. Die bayesianische Statistik hingegen 
+liefert direkte Wahrscheinlichkeiten für Parameter und Modelle, 
+was eine intuitivere Interpretation ermöglicht. \\\\
+Zusammenfassend bietet die klassische Statistik eine einfache und weithin akzeptierte Methode 
+zur Datenanalyse, ist aber in ihrer Anpassungsfähigkeit begrenzt. Die bayesianische Statistik 
+ist flexibler und anpassungsfähiger, erfordert jedoch mehr Rechenleistung und die sorgfältige 
+Wahl von Priors. Die Entscheidung für eine Methode sollte daher je nach Anwendungsfall getroffen werden.
 
 \newpage
 
