@@ -644,7 +644,7 @@ Interpretation: Die Siegquote der deutschen Nationalmannschaft gegen europäisch
 Die klassische Statistik und die bayesianische Statistik sind zwei unterschiedliche Ansätze zur Analyse
 von Daten und zur Entscheidungsfindung. Während die klassische Statistik vor allem in den Human- und 
 Sozialwissenschaften sowie in der Wirtschaftswissenschaft und Biologie weit verbreitet ist, wird die 
-bayesianische Statistik häufig in der Technik und im Bereich der Künstlichen Intelligenz eingesetzt.\\\\
+bayesianische Statistik häufig in der Technik und im Bereich der Künstlichen Intelligenz eingesetzt.\parencite[2]{StatistikKlassischOderBayes}\\\\
 Ein wesentlicher Unterschied zwischen den beiden Methoden liegt in der Art und Weise, wie Parameter 
 geschätzt und Hypothesen getestet werden. Die klassische Statistik betrachtet dabei ausschließlich 
 die vorliegende Stichprobe, während die bayesianische Statistik sowohl die Stichprobe als 
@@ -654,9 +654,11 @@ Parametern durch Punkt- oder Intervallschätzer, beispielsweise in Form eines Ko
 Die bayesianische Statistik hingegen liefert eine Wahrscheinlichkeits-verteilung für den 
 gesuchten Parameter, die sogenannte Posterior-Verteilung. \\\\
 Beim Testen von Hypothesen arbeitet die klassische Statistik mit dem p-Wert und einer Entscheidungsregel 
-basierend auf einem festgelegten Signifikanzniveau. Eine Hypothese wird entweder angenommen oder abgelehnt. 
+basierend auf einem festgelegten Signifikanzniveau. Eine Hypothese wird entweder ganz angenommen oder abgelehnt. \parencite[2]{StatistikKlassischOderBayes}
 Die bayesianische Statistik hingegen bewertet Hypothesen anhand der Posterior-Wahrscheinlichkeit und verwendet 
-den Bayes-Faktor zur Entscheidungsfindung, wodurch ein flexiblerer und probabilistischerer Ansatz ermöglicht wird.
+den Bayes-Faktor zur Entscheidungsfindung, wodurch ein flexiblerer und probabilistischerer Ansatz ermöglicht wird.\\\\
+Diese Unterschiede wurden in der vorliegenden Arbeit besonders anhand der 
+Berechnung der Fußball-WM im \autoref{subsec:analyse} deutlich.
 
 \newpage
 \begin{table}[h!]
@@ -691,16 +693,22 @@ den Bayes-Faktor zur Entscheidungsfindung, wodurch ein flexiblerer und probabili
 \noindent
 Die klassische (frequentistische) Statistik ist einfach anzuwenden und weit verbreitet, da 
 sie auf standardisierten Testverfahren basiert. Im Gegensatz dazu ist die bayesianische Statistik 
-komplexer und erfordert einen höheren Rechenaufwand, insbesondere bei großen Datensätzen. \\\\
+komplexer und erfordert einen höheren Rechenaufwand, insbesondere bei großen Datensätzen.
+Dies wurde deutlich in der vorliegenden Arbeit, da aus dem gewählten Datensatz die 
+Siegesquoten ermittelt werden mussten. \\\\
 Ein Vorteil der bayesianischen Statistik ist ihre Flexibilität und die Möglichkeit, Vorwissen 
-in Form von Priors einzubeziehen. Dagegen ist die klassische Statistik unflexibel gegenüber 
+in Form von Priors einzubeziehen. Hier konnten wir z.B. das Vorwissen
+einmal in Form einer Normalverteilung und einmal in Form einer Gleichverteilung einbeziehen.
+Dagegen ist die klassische Statistik unflexibel gegenüber 
 neuen Daten und Modellen, da sie stark von großen Stichproben abhängt. \\\\
 Die klassische Statistik benötigt keine subjektiven Annahmen über Wahrscheinlichkeiten, wodurch 
 sie als objektiver gilt. Demgegenüber steht die bayesianische Statistik, bei der die Wahl der 
-Priors subjektiv sein kann und dadurch die Ergebnisse beeinflusst. \\\\
+Priors subjektiv sein kann und dadurch die Ergebnisse beeinflusst. So kann allerdings mit der Wahl von 
+viel Vorwissen die Schätzung verbessert werden. \parencite[127]{StatistikKlassischOderBayes} \\\\
 Während die klassische Statistik gut für große Datensätze geeignet ist, können ihre Ergebnisse 
-bei komplexen Datenstrukturen schwer interpretierbar sein. Die bayesianische Statistik hingegen 
-liefert direkte Wahrscheinlichkeiten für Parameter und Modelle, 
+bei komplexen Datenstrukturen schwer interpretierbar sein. Besonders bei sehr wenigen vorliegenden Daten
+ist die klassische Statistik kaum aussagekräftig.
+Die bayesianische Statistik hingegen liefert direkte Wahrscheinlichkeiten für Parameter und Modelle, 
 was eine intuitivere Interpretation ermöglicht. \\\\
 Zusammenfassend bietet die klassische Statistik eine einfache und weithin akzeptierte Methode 
 zur Datenanalyse, ist aber in ihrer Anpassungsfähigkeit begrenzt. Die bayesianische Statistik 
@@ -737,6 +745,7 @@ Dieses Programm analysiert die bereitgestellten CSV-Daten und berechnet die Anza
 
 \paragraph{worldCupBayes.py} \mbox{}\\\\
 Dieses Programm führt die in \autoref{subsec:analyse} beschriebenen Berechnungen durch.
+Es wird mit folgendem Befehl gestartet:
 \begin{lstlisting}
   python worldCupBayes.py
 \end{lstlisting}
