@@ -16,6 +16,8 @@
 \usepackage{mhchem}
 \usepackage{subcaption}
 \usepackage{comment}
+\usepackage[german]{babel}
+\renewcommand{\subsectionautorefname}{Abschnitt}
 
 \usepackage{biblatex} % Verwende BibLaTeX
 \addbibresource{bibliography.bib} % Deine .bib-Datei
@@ -341,7 +343,9 @@ Der Metropolis-Hasting-Algorithmus erstellt mit Hilfe der Posteriorifunktion ein
 
 \subsection{Anwendung der bayesianischen Statistik am Beispiel}
 \subsubsection{Überblick und Aufbereitung des Datensatzes}
-Für den praktischen Teil der Arbeit nutzen wir einen CSV-Datensatz mit detatailierten Informationen zu Weltmeisterschaft-Fußballspielen. Der Datensatz enthält alle WM-Spiele zwischen 1930 und 2022 mit Informationen über die Manschaften, Ergebnisse, Austragungsorte, Spielereignisse (Auswächslungen etc.), Schiedrichterdaten und so weiter. Im ersten Teil wollen wir aber nur die Siegesquote der deutschen Nationalmannschaft analysieren. Dafür haben wir in \url{../src/world_cup_wins_germany.py} berechnet, wie viele Spiele die deutsche Nationalmannschaft gespielt und wie viele davon gewonnen hat. Die Anzahl gewonnener Spiele beträgt dabei 72 von insgesamt 112 Spielen. \\\\
+Für den praktischen Teil der Arbeit nutzen wir einen CSV-Datensatz mit detatailierten Informationen zu Weltmeisterschaft-Fußballspielen. 
+Dieser Datensatz wurde von der Plattform Kaggle heruntergeladen und ist unter folgendem Link zu finden: \url{https://www.kaggle.com/datasets/piterfm/fifa-football-world-cup}\parencite{FIFAWorldCupData}. \\\\
+Der Datensatz enthält alle WM-Spiele zwischen 1930 und 2022 mit Informationen über die Manschaften, Ergebnisse, Austragungsorte, Spielereignisse (Auswechslungen etc.), Schiedrichterdaten und so weiter. Im ersten Teil wollen wir aber nur die Siegesquote der deutschen Nationalmannschaft analysieren. Dafür haben wir in \url{../src/world_cup_wins_germany.py} berechnet, wie viele Spiele die deutsche Nationalmannschaft gespielt und wie viele davon gewonnen hat. Die Anzahl gewonnener Spiele beträgt dabei 72 von insgesamt 112 Spielen. \\\\
 Im späteren Verlauf unserer Untersuchungen wollen wir auch die Siegesquoten gegen europäische Teams mit denen gegen nicht-europäische Teams vergleichen. Dafür haben wir auch die Anzahl der gewonnenen Spiele gegen europäische und nicht-europäische Teams berechnet. Die Anzahl der gewonnenen Spiele gegen europäische Teams beträgt dabei 36 von insgesamt 65 Spielen und die Anzahl der gewonnenen Spiele gegen nicht-europäische Teams beträgt 36 von insgesamt 47 Spielen. \\\\
 
 \subsubsection{Anwendung der bayesianischen Statistik}
@@ -460,6 +464,7 @@ Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen untersc
 \newpage
 
 \subsection{Berechnungen für den Vergleich der Siegesrate gegen europäische und nicht-europäische Teams}
+\label{subsec:analyse}
 Nachfolgend wollen wir die Siegesrate der deutschen Nationalmannschaft gegen europäische Teams mit der gegen nicht-europäische Teams vergleichen.
 Insbesondere wollen wir die Frage beantworten, ob die Siegesrate gegen europäische Teams signifikant niedriger ist als gegen nicht-europäische Teams.
 Für die nachfolgenden Berechnungen definieren wir somit:
@@ -721,7 +726,7 @@ Zum Ausführen der Programme muss man sich im richtigen Verzeichnis befinden. Di
 \paragraph{binomStatistics.py} \mbox{}\\\\
 Dieses Programm ist unserer Hauptprogramm, welches mit Eingabe einer Stichprobe die Posterioriverteilung berechnet und weitere Auswertungen ausgibt. Als Priorverteilung wird die Normalverteilung mit $\mu = 0.5$ und $\sigma^2 = 0.1$ verwendet. Die Ausführung erfolgt mit folgendem Befehl:
 \begin{lstlisting}
-  python binomStatistics.py <Anzahl Erfolge> <Anzahl der Versuche>
+  python binomStatistics.py <Anzahl der Versuche> <Anzahl Erfolge>
 \end{lstlisting}
 
 \paragraph{worldCupWinsGermany.py} \mbox{}\\\\
@@ -731,7 +736,10 @@ Dieses Programm analysiert die bereitgestellten CSV-Daten und berechnet die Anza
 \end{lstlisting}
 
 \paragraph{worldCupBayes.py} \mbox{}\\\\
-----------Clemens----------
+Dieses Programm führt die in \autoref{subsec:analyse} beschriebenen Berechnungen durch.
+\begin{lstlisting}
+  python worldCupBayes.py
+\end{lstlisting}
 
 \paragraph{binomStatisticsUniform.py/binomStatisticsAnimated.py} \mbox{}\\\\
 Diese beiden Programme demonstrieren den Einfluss der Stichprobengröße auf die Posteriorverteilung:
