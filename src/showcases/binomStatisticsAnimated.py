@@ -121,8 +121,5 @@ def update(frame):
 # Erstelle die Animation
 ani = FuncAnimation(fig, update, frames=len(n_values), interval=1000, repeat=True)
 
-# Speichern der Animation als GIF
-ani.save('binomStatisticsAnimated.gif', writer='ffmpeg', fps=1)
-
 # Animation anzeigen
 plt.show()

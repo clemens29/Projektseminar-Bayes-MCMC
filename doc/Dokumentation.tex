@@ -704,16 +704,58 @@ Wahl von Priors. Die Entscheidung für eine Methode sollte daher je nach Anwendu
 
 \newpage
 
-\section{Literaturverzeichnis} 
+\section{Benutzerdokumentation}
+\subsection{Voraussetzungen}
+Für die Ausführung der Python-Programme wurde Version 3.12 verwendet. Zusätzlich sind die folgenden Bibliotheken erforderlich:
+\begin{itemize}
+  \item numpy
+  \item matplotlib
+  \item scipy
+  \item sys
+  \item csv
+\end{itemize}
 
-\printbibliography 
+\subsection{Starten der Programme}
+Zum Ausführen der Programme muss man sich im richtigen Verzeichnis befinden. Die Programme \texttt{binomStatistics.py}, \texttt{worldCupWinsGermany.py} und \texttt{worldCupBayes.py} befinden sich im Verzeichnis \texttt{src}. Alle übrigen Programme müssen aus dem Verzeichnis \texttt{src/showcases} ausgeführt werden. Die Programme werden über die Konsole mit den folgenden Befehlen gestartet.
+
+\paragraph{binomStatistics.py} \mbox{}\\\\
+Dieses Programm ist unserer Hauptprogramm, welches mit Eingabe einer Stichprobe die Posterioriverteilung berechnet und weitere Auswertungen ausgibt. Als Priorverteilung wird die Normalverteilung mit $\mu = 0.5$ und $\sigma^2 = 0.1$ verwendet. Die Ausführung erfolgt mit folgendem Befehl:
+\begin{lstlisting}
+  python binomStatistics.py <Anzahl Erfolge> <Anzahl der Versuche>
+\end{lstlisting}
+
+\paragraph{worldCupWinsGermany.py} \mbox{}\\\\
+Dieses Programm analysiert die bereitgestellten CSV-Daten und berechnet die Anzahl der von der deutschen Nationalmannschaft gewonnenen Spiele. Es wird mit folgendem Befehl gestartet:
+\begin{lstlisting}
+  python worldCupWinsGermany.py
+\end{lstlisting}
+
+\paragraph{worldCupBayes.py} \mbox{}\\\\
+----------Clemens----------
+
+\paragraph{binomStatisticsUniform.py/binomStatisticsAnimated.py} \mbox{}\\\\
+Diese beiden Programme demonstrieren den Einfluss der Stichprobengröße auf die Posteriorverteilung:
+
+\begin{itemize}
+\item \texttt{binomStatisticsUniform.py} verwendet eine Gleichverteilung als Priorverteilung.
+\item \texttt{binomStatisticsAnimated.py} nutzt eine Normalverteilung als Priorverteilung.
+\end{itemize}
+
+Die Programme werden mit folgendem Befehl gestartet:
+\begin{lstlisting}
+  python binomStatisticsUniform.py <Ratio der Erfolge zu Gesamtversuchen>
+\end{lstlisting}
+
+\paragraph{binomStatisticsRecursiv.py} \mbox{}\\\\
+Dieses Programm demonstriert das rekursive Einbeziehen neuer Daten in die Analyse. Die Posteriorverteilung der ersten Stichprobe wird als Priorverteilung für die Berechnung der Posteriorverteilung der nächsten Stichprobe genutzt. Anschließend wird diese resultierende Posteriorverteilung mit einer Posteriorverteilung verglichen, die beide Stichproben zusammenfasst. Die Ausführung erfolgt durch den Befehl:
+\begin{lstlisting}
+  python binomStatisticsRecursiv.py
+\end{lstlisting}
+
 \newpage
 
-\section{Selbstständigkeitserklärung}
-Hiermit erklären wir, dass wir die vorgelegte Arbeit
-selbstständig verfasst, keine anderen als die angegebenen Quellen und Hilfsmittel
-benutzt sowie alle wörtlich oder sinngemäß übernommenen Stellen in der Arbeit als
-solche und durch Angabe der Quelle gekennzeichnet habe. Dies gilt auch für Zeichnungen, 
-Skizzen, bildliche Darstellungen sowie für Quellen aus dem Internet.
+\section{Literaturverzeichnis} 
+
+\printbibliography
 
 \end{document}
