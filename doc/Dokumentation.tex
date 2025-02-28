@@ -272,7 +272,7 @@ Wenn $P(x | y)$ die Posterioridichte für den Parameter x ist, ist das Konfidenz
 \begin{equation}
   P(x \in X_u|y) = \int_{X_u} P(x|y) dx = 1-\alpha
 \end{equation}
-Wobei für alle $x_1 \in X_u, x_2 \not\in X_u$ gilt $P(x_1|y) \geq P(x_2|y)$; Xu ist dabei ein Unterraum auf dem Parameterraum \parencite[71]{EinfBayesStatistik}. Meist wird für $\alpha$ 0.1, 0.05 oder 0.01 gewählt. Höhere Konfidenzniveaus führen zu größeren Intervallen, da mehr Unsicherheit abgedeckt wird, während niedrigere Konfidenzniveaus kleinere Intervalle liefern, die jedoch ein höheres Risiko haben, den wahren Parameter nicht einzuschließen. \\\\
+Wobei für alle $x_1 \in X_u, x_2 \not\in X_u$ gilt $P(x_1|y) \geq P(x_2|y)$; Xu ist dabei ein Unterraum auf dem Parameterraum \parencite[71]{EinfBayesStatistik}. Meist wird 0.1, 0.05 oder 0.01 für $\alpha$ gewählt. Höhere Konfidenzniveaus führen zu größeren Intervallen, da mehr Unsicherheit abgedeckt wird, während niedrigere Konfidenzniveaus kleinere Intervalle liefern, die jedoch ein höheres Risiko haben, den wahren Parameter nicht einzuschließen. \\\\
 Falls die Posterioriverteilung $P(x | y)$ beispielsweise der Normalverteilung $N(\mu,\sigma^2)$ ent- spricht, ist das Konfidenzintervall symmetrisch um den Mittelwert und die Grenzen lassen sich einfach durch die Quantile der Standardnormalverteilung z über $\mu - z_{1-\alpha/2} \cdot \sigma$ und $\mu + z_{1-\alpha/2} \cdot \sigma$ bestimmen.\\\\
 Da die Konfidenzintervalle in der bayesianischen Statistik auf der Posterioriverteilung basieren, unterscheiden sich die Ergebnisse von denen der klassischen Statistik, da diese auf einer anderen Grundlage definiert sind.
 
@@ -444,7 +444,7 @@ Es fällt auf, dass in der klassischen Statistik die geschätzen Werte für p h�
 
 Weiter wollen wir überprüfen, wie sehr sich die Posterioriverteilungen unterscheiden, wenn man immer wieder neue Daten erhält. Die erste Möglichkeit wäre, dass man seine Posterioriverteilung als Prioiriverteilung verwendet und so eine neue Posteriori-verteilung mit den neuen Daten als Likelihood berechnen kann. Eine weitere Möglichkeit ist es nochmal eine neue Posterioriverteilung zu berechnen mit der schon davor verwendeten Prioiriverteilung und der aktualisierten Stichprobe als Likelihood. Dafür haben wir das Python-Programm \url{../src/showcases/binomStatisticsRecursiv.py} erstellt, welche die beiden Varianten darstellt. Folgende Funktion simuliert die Prio-riverteilung mit der Stichprobe der vorherigen Posterioriverteilung:
 \lstinputlisting[linerange={83-83,92-95}]{../src/showcases/binomStatisticsRecursiv.py}
-\noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennst. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
+\noindent Da es sich um eine Stichprobe handelt wird die Schätzung pro Iteration immer ungenauer, da man nicht die genaue Verteilung kennt. Ansonsten sieht man aber nicht so große Unterschiede zwischen den beiden Varianten, wie in der folgenden Grafik zu sehen ist:
 \begin{figure}[h]
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{../images/framesAnimatedRecursive/frame1.png}
